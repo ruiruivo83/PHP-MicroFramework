@@ -1,2 +1,24 @@
+#################################################################
+###################### ARCHITECTURE LOGIC #######################
+#################################################################
 1 - FRONT CONTROLLER (/public/index.php)
 2 - ROUTER (/core/router.php) - with routing table ("public function add")
+3 - POSTS CLASS or any other
+
+#################################################################
+####################### ACTION FILTERS  #########################
+#################################################################
+The logic is to be able to execute code before and after any method.
+For example to verify if the user is logged in, the language, etc.
+
+For that we change the methods name to "sometingAction" but we only
+call on the "something", this will force an error that
+forces the "__call" method.
+
+This "__call" method forces the execution of the "Before" method, 
+the right methode itself adding the "Action" word, and the "After" method.
+
+This way we can execute something before and after any method we call.  
+
+IF - If the "before" method returns false then the main method "sometingAction" is not called.
+For example if the user is not logged in.
