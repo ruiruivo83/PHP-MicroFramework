@@ -1,0 +1,2 @@
+1 - FRONT CONTROLLER (/public/index.php)
+2 - ROUTER (/core/router.php) - with routing table ("public function add")
