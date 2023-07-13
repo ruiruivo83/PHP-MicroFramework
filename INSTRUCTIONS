@@ -1,4 +1,13 @@
 #################################################################
+###################### NEW INSTALL with COMPOSER #######################
+#################################################################
+composer.json - Lists all dependencies in one file
+[Commands]
+Composer update - Install all dependencies from composer.json
+Composer require packageName - Adds package and updates composer.json
+composer dump-autoload - after updating composer.json for updating the autoload
+
+#################################################################
 ###################### ARCHITECTURE LOGIC #######################
 #################################################################
 1 - FRONT CONTROLLER (/public/index.php)
@@ -6,7 +15,19 @@
 3 - POSTS CLASS or any other
 
 #################################################################
-##################### FOLDER ARCHIOTECTURE  #####################
+##################### File Sequence  #####################
+#################################################################
+composer.json
+public\index - FRONT CONTROLLER and routing table
+core\router - Router reads and separates the dinamic URL into diferent variables
+core\controller - Call for the appropriate controller and action from the variables from the URL
+controllers\???.php (Runs whatever controller and action you call in the URL)
+
+[CONTROLLER Method]
+View::RenderTemplate ???.html - Renders whatever html file for this controller\action. One page for each action
+
+#################################################################
+##################### FOLDER ARCHITECTURE  #####################
 #################################################################
 Folder structure in App\Controllers and App\Views must be the same
 
@@ -27,8 +48,3 @@ This way we can execute something before and after any method we call.
 
 IF - If the "before" method returns false then the main method "sometingAction" is not called.
 For example if the user is not logged in.
-
-#################################################################
-##################### TWIG TEMPLATE ENGINE  #####################
-#################################################################
-Learn TWIG

@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use \core\View;
+use \Core\View;
 
 /**
  * Posts Controller
