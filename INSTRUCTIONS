@@ -6,6 +6,11 @@
 3 - POSTS CLASS or any other
 
 #################################################################
+##################### FOLDER ARCHIOTECTURE  #####################
+#################################################################
+Folder structure in App\Controllers and App\Views must be the same
+
+#################################################################
 ####################### ACTION FILTERS  #########################
 #################################################################
 The logic is to be able to execute code before and after any method.
@@ -22,3 +27,8 @@ This way we can execute something before and after any method we call.
 
 IF - If the "before" method returns false then the main method "sometingAction" is not called.
 For example if the user is not logged in.
+
+#################################################################
+##################### TWIG TEMPLATE ENGINE  #####################
+#################################################################
+Learn TWIG

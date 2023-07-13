@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use \core\View;
+
 /**
  * Posts Controller
  * 
@@ -18,8 +20,8 @@ class Posts extends \Core\Controller
      */
     protected function Before()
     {
-        echo " (before)";
-        return false; // Will stop the execution
+        echo " (before in \Controllers\Posts)";
+        // return false; // Will stop the execution
     }
 
     /**
@@ -29,7 +31,7 @@ class Posts extends \Core\Controller
      */
     protected function After()
     {
-        echo " (after)";
+        echo " (after in \Controllers\Posts)";
     }
 
 
@@ -40,8 +42,9 @@ class Posts extends \Core\Controller
      */
     public function indexAction()
     {
-        echo 'Hello from the index action in the Posts controller!';
+        // echo 'Hello from the index action in the Posts controller!';
         // echo '<p>Query string parameters: <pre>' . htmlspecialchars(print_r($_GET, true)) . '</pre></p>';
+        View::renderTemplate(('Posts/index.html'));
     }
 
     /**

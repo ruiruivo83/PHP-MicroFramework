@@ -46,8 +46,7 @@ abstract class Controller
             echo "Method $method not found in controller " . get_class($this);
         }
     }
-
-
+    
     /**
      * Before filter - called before an action method.
      * 
@@ -55,8 +54,8 @@ abstract class Controller
      */
     protected function Before()
     {
-        echo " (before)";
-        return false; // Will stop the execution
+        echo " (before in Core\Controller)";
+        // return false; // Will stop the execution
     }
 
     /**
@@ -66,6 +65,7 @@ abstract class Controller
      */
     protected function After()
     {
-        echo " (after)";
+        echo " (after in Core\Controller)";
     }
+
 }
