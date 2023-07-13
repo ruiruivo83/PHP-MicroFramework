@@ -16,12 +16,16 @@
  */
 require '../vendor/autoload.php';
 
+/** 
+ * Error and Exception handling
+ */
+error_reporting(E_ALL);
+set_error_handler('Core\Error::errorHandler');
+set_exception_handler('Core\Error::exceptionHandler');
 
 /**
  * Routing
  */
-// require '../Core/Router.php';
-
 $router = new Core\Router();
 
 // echo get_class($router);
@@ -39,18 +43,13 @@ echo '<pre>';
 var_dump($router->getRoutes());
 echo '</pre>';
 */
-
-// Match the requested route
-/*
-$url = $_SERVER['QUERY_STRING'];
-
-if ($router->match($url)) {
-    echo '<pre>';
-    var_dump($router->getParams());
-    echo '<pre>';
-} else {
-    echo "No route found for URL: '$url'";
-}
-*/
  
 $router->dispatch($_SERVER['QUERY_STRING']);
+
+// For debug
+// phpinfo();
+// phpinfo(INFO_MODULES);
+if (\App\Config::SHOW_ERRORS) {
+    var_dump(get_defined_vars());
+}
+

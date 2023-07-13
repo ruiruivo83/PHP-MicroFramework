@@ -121,13 +121,16 @@ class Router
                 if (is_callable([$controller_object, $action])) {
                     $controller_object->$action();
                 } else {
-                    echo "Method $action (in controller $controller) not found";
+                    // echo "Method $action (in controller $controller) not found";
+                    throw new \Exception("Method $action (in controller $controller) not found: " . get_class($this));
                 }
             } else {
-                echo "Controller class $controller not found";
+                // echo "Controller class $controller not found";
+                throw new \Exception("Controller class $controller not found: " . get_class($this));
             }
         } else {
-            echo 'No route matched.';
+            // echo 'No route matched.';
+            throw new \Exception("No route matched.: " . get_class($this), 404);
         }
     }
 

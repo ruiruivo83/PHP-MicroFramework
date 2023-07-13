@@ -1,0 +1,58 @@
+[13-Jul-2023 23:16:45 UTC] Uncaught exception: 'Exception' with message 'Controller class App\Controllers\Iii not found: Core\Router'
+Stack trace: #0 C:\Sources\RapidFire-PHP-MicroFramework\public\index.php(47): Core\Router->dispatch('iii')
+#1 {main}
+Thrown in 'C:\Sources\RapidFire-PHP-MicroFramework\Core\Router.php' on line 129
+[13-Jul-2023 23:24:25 UTC] Uncaught exception: 'Exception' with message 'Controller class App\Controllers\Aze not found: Core\Router'
+Stack trace: #0 C:\Sources\RapidFire-PHP-MicroFramework\public\index.php(47): Core\Router->dispatch('aze')
+#1 {main}
+Thrown in 'C:\Sources\RapidFire-PHP-MicroFramework\Core\Router.php' on line 129
+[13-Jul-2023 23:24:29 UTC] Uncaught exception: 'Exception' with message 'Controller class App\Controllers\Aze not found: Core\Router'
+Stack trace: #0 C:\Sources\RapidFire-PHP-MicroFramework\public\index.php(47): Core\Router->dispatch('aze')
+#1 {main}
+Thrown in 'C:\Sources\RapidFire-PHP-MicroFramework\Core\Router.php' on line 129
+[13-Jul-2023 23:28:14 UTC] Uncaught exception: 'Exception' with message 'Controller class App\Controllers\Sdfg not found: Core\Router'
+Stack trace: #0 C:\Sources\RapidFire-PHP-MicroFramework\public\index.php(47): Core\Router->dispatch('sdfg')
+#1 {main}
+Thrown in 'C:\Sources\RapidFire-PHP-MicroFramework\Core\Router.php' on line 129
+[13-Jul-2023 23:28:35 UTC] Uncaught exception: 'Exception' with message 'Controller class App\Controllers\Sdfg not found: Core\Router'
+Stack trace: #0 C:\Sources\RapidFire-PHP-MicroFramework\public\index.php(47): Core\Router->dispatch('sdfg')
+#1 {main}
+Thrown in 'C:\Sources\RapidFire-PHP-MicroFramework\Core\Router.php' on line 129
+[13-Jul-2023 23:36:00 UTC] Uncaught exception: 'Exception' with message 'Controller class App\Controllers\Sdfg not found: Core\Router'
+Stack trace: #0 C:\Sources\RapidFire-PHP-MicroFramework\public\index.php(47): Core\Router->dispatch('sdfg')
+#1 {main}
+Thrown in 'C:\Sources\RapidFire-PHP-MicroFramework\Core\Router.php' on line 129
+[13-Jul-2023 23:36:08 UTC] Uncaught exception: 'Exception' with message 'Controller class App\Controllers\Zert not found: Core\Router'
+Stack trace: #0 C:\Sources\RapidFire-PHP-MicroFramework\public\index.php(47): Core\Router->dispatch('zert')
+#1 {main}
+Thrown in 'C:\Sources\RapidFire-PHP-MicroFramework\Core\Router.php' on line 129
+[13-Jul-2023 23:37:31 UTC] Uncaught exception: 'Exception' with message 'Controller class App\Controllers\Dh not found: Core\Router'
+Stack trace: #0 C:\Sources\RapidFire-PHP-MicroFramework\public\index.php(47): Core\Router->dispatch('dh')
+#1 {main}
+Thrown in 'C:\Sources\RapidFire-PHP-MicroFramework\Core\Router.php' on line 129
+[13-Jul-2023 23:37:39 UTC] Uncaught exception: 'Exception' with message 'Controller class App\Controllers\Dh not found: Core\Router'
+Stack trace: #0 C:\Sources\RapidFire-PHP-MicroFramework\public\index.php(47): Core\Router->dispatch('dh')
+#1 {main}
+Thrown in 'C:\Sources\RapidFire-PHP-MicroFramework\Core\Router.php' on line 129
+[13-Jul-2023 23:37:39 UTC] PHP Fatal error:  Uncaught Twig\Error\LoaderError: Unable to find template "500.html" (looked into: C:\Sources\RapidFire-PHP-MicroFramework/App/Views). in C:\Sources\RapidFire-PHP-MicroFramework\vendor\twig\twig\src\Loader\FilesystemLoader.php:227
+Stack trace:
+#0 C:\Sources\RapidFire-PHP-MicroFramework\vendor\twig\twig\src\Loader\FilesystemLoader.php(131): Twig\Loader\FilesystemLoader->findTemplate('500.html')
+#1 C:\Sources\RapidFire-PHP-MicroFramework\vendor\twig\twig\src\Environment.php(261): Twig\Loader\FilesystemLoader->getCacheKey('500.html')
+#2 C:\Sources\RapidFire-PHP-MicroFramework\vendor\twig\twig\src\Environment.php(309): Twig\Environment->getTemplateClass('500.html')
+#3 C:\Sources\RapidFire-PHP-MicroFramework\vendor\twig\twig\src\Environment.php(277): Twig\Environment->load('500.html')
+#4 C:\Sources\RapidFire-PHP-MicroFramework\Core\View.php(51): Twig\Environment->render('500.html', Array)
+#5 C:\Sources\RapidFire-PHP-MicroFramework\Core\Error.php(71): Core\View::renderTemplate('500.html')
+#6 [internal function]: Cor in C:\Sources\RapidFire-PHP-MicroFramework\vendor\twig\twig\src\Loader\FilesystemLoader.php on line 227
+[13-Jul-2023 23:37:47 UTC] Uncaught exception: 'Exception' with message 'Controller class App\Controllers\Dh not found: Core\Router'
+Stack trace: #0 C:\Sources\RapidFire-PHP-MicroFramework\public\index.php(47): Core\Router->dispatch('dh')
+#1 {main}
+Thrown in 'C:\Sources\RapidFire-PHP-MicroFramework\Core\Router.php' on line 129
+[13-Jul-2023 23:38:06 UTC] Uncaught exception: 'Exception' with message 'Method indexfghAction not found in controllerApp\Controllers\Posts'
+Stack trace: #0 C:\Sources\RapidFire-PHP-MicroFramework\Core\Router.php(122): Core\Controller->__call('indexfgh', Array)
+#1 C:\Sources\RapidFire-PHP-MicroFramework\public\index.php(47): Core\Router->dispatch('posts/indexfgh')
+#2 {main}
+Thrown in 'C:\Sources\RapidFire-PHP-MicroFramework\Core\Controller.php' on line 47
+[13-Jul-2023 23:38:17 UTC] Uncaught exception: 'Exception' with message 'Controller class App\Controllers\Juhyg not found: Core\Router'
+Stack trace: #0 C:\Sources\RapidFire-PHP-MicroFramework\public\index.php(47): Core\Router->dispatch('juhyg')
+#1 {main}
+Thrown in 'C:\Sources\RapidFire-PHP-MicroFramework\Core\Router.php' on line 129
