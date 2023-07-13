@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use \Core\View;
+use \App\Models\PostModel;
 
 /**
  * Posts Controller
@@ -12,7 +13,7 @@ use \Core\View;
 class Posts extends \Core\Controller
 {
 
-    
+
     /**
      * Before filter - called before an action method.
      * 
@@ -42,9 +43,12 @@ class Posts extends \Core\Controller
      */
     public function indexAction()
     {
-        // echo 'Hello from the index action in the Posts controller!';
-        // echo '<p>Query string parameters: <pre>' . htmlspecialchars(print_r($_GET, true)) . '</pre></p>';
-        View::renderTemplate(('Posts/index.html'));
+
+        $posts = PostModel::getAll();
+
+        View::renderTemplate('Posts/index.html', [
+            'posts' => $posts
+        ]);
     }
 
     /**
