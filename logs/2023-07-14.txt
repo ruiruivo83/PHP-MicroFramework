@@ -1,0 +1,13 @@
+[14-Jul-2023 00:00:27 UTC] Uncaught exception: 'Twig\Error\LoaderError' with message 'Unable to find template "Posts/index.html" (looked into: C:\Sources\RapidFire-PHP-MicroFramework/App/Views).'
+Stack trace: #0 C:\Sources\RapidFire-PHP-MicroFramework\vendor\twig\twig\src\Loader\FilesystemLoader.php(131): Twig\Loader\FilesystemLoader->findTemplate('Posts/index.htm...')
+#1 C:\Sources\RapidFire-PHP-MicroFramework\vendor\twig\twig\src\Environment.php(261): Twig\Loader\FilesystemLoader->getCacheKey('Posts/index.htm...')
+#2 C:\Sources\RapidFire-PHP-MicroFramework\vendor\twig\twig\src\Environment.php(309): Twig\Environment->getTemplateClass('Posts/index.htm...')
+#3 C:\Sources\RapidFire-PHP-MicroFramework\vendor\twig\twig\src\Environment.php(277): Twig\Environment->load('Posts/index.htm...')
+#4 C:\Sources\RapidFire-PHP-MicroFramework\Core\View.php(51): Twig\Environment->render('Posts/index.htm...', Array)
+#5 C:\Sources\RapidFire-PHP-MicroFramework\App\Controllers\Posts.php(50): Core\View::renderTemplate('Posts/index.htm...', Array)
+#6 [internal function]: App\Controllers\Posts->indexAction()
+#7 C:\Sources\RapidFire-PHP-MicroFramework\Core\Controller.php(42): call_user_func_array(Array, Array)
+#8 C:\Sources\RapidFire-PHP-MicroFramework\Core\Router.php(122): Core\Controller->__call('index', Array)
+#9 C:\Sources\RapidFire-PHP-MicroFramework\public\index.php(47): Core\Router->dispatch('posts/index')
+#10 {main}
+Thrown in 'C:\Sources\RapidFire-PHP-MicroFramework\vendor\twig\twig\src\Loader\FilesystemLoader.php' on line 227

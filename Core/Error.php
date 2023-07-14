@@ -68,7 +68,7 @@ class Error
                 echo "<h1>An error occured</h1>";
             }
             */
-            View::renderTemplate("$code.html.twig");
+            View::renderTemplate("$code.html.Twig");
         }
 
         if (\App\Config::SHOW_ERRORS) {
