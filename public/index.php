@@ -6,11 +6,6 @@
  * PHP version 7.4
  */
 
-// echo 'Requested URL = "' . $_SERVER['QUERY_STRING'] . '"';
-
-// Require the controller class
-// require '../App/Controllers/Posts.php';
-
 /**
  * Autoload
  */
