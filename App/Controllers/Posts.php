@@ -19,21 +19,25 @@ class Posts extends \Core\Controller
      * 
      * @return void
      */
+    /*
     protected function Before()
     {
         echo " (before in \Controllers\Posts)";
         // return false; // Will stop the execution
     }
+    */
 
     /**
      * After filter - called after an action method.
      * 
      * @return void
      */
+    /*
     protected function After()
     {
         echo " (after in \Controllers\Posts)";
     }
+    */
 
 
     /**

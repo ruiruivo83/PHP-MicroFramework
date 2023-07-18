@@ -1,0 +1,45 @@
+{% extends 'base.html.Twig' %}
+
+{% block title %}
+  Signup
+{% endblock %}
+
+{% block body %}
+
+  <h1>Signup</h1>
+
+  {% if userModel.errors is not empty %}
+    <p>Errors:</p>
+    <ul>
+        {% for error in userModel.errors %}
+          <li style="background-color: brown;">{{ error }}</li>
+        {% endfor %}
+    </ul>
+  {% endif %}
+
+  <!-- HTML form/action points to PHP controller/action -->
+  <form method="post" action="/signup/create">
+    <div>
+      <!-- HTML Label/for points to HTML input/id -->
+      <label for="inputName">Name</label>
+      <!-- HTML "name" are used as keys for variable creation on the PHP server side -->
+      <input type="text" id="inputName" name="name" placeholder="Name" autofocus value="{{userModel.name}}"/>
+    </div>
+    <div>
+      <label for="">Email address</label>
+      <!-- HTML "name" are used as keys for variable creation on the PHP server side -->
+      <input type="text" id="inputEmail" name="email" placeholder="email address"  value="{{userModel.email}}"/>
+    </div>
+    <div>
+      <label for="inputPassword">Password</label>
+      <!-- HTML "name" are used as keys for variable creation on the PHP server side -->
+      <input type="password" id="inputPassword" name="password" placeholder="Password" />
+    </div>
+    <div>
+      <label for="inputPasswordConfirmation">Repeat password</label>
+      <!-- HTML "name" are used as keys for variable creation on the PHP server side -->
+      <input type="password" id="inputPasswordConfirmation" name="password_confirmation" placeholder="Repeat password" />
+    </div>
+    <button type="submit">Sign up</button>
+  </form>
+{% endblock %}
