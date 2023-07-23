@@ -18,7 +18,7 @@
   {% endif %}
 
   <!-- HTML form/action points to PHP controller/action -->
-  <form method="post" action="/signup/create">
+  <form action="/signup/create" method="post" >
     <div>
       <!-- HTML Label/for points to HTML input/id -->
       <label for="inputName">Name</label>
@@ -33,12 +33,12 @@
     <div>
       <label for="inputPassword">Password</label>
       <!-- HTML "name" are used as keys for variable creation on the PHP server side -->
-      <input type="password" id="inputPassword" name="password" placeholder="Password" required pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$" title="Minimum 6 chars, at least one letter and number"/>
+      <input type="password" id="inputPassword" name="password" placeholder="Password" required />
     </div>
     <div>
       <label for="inputPasswordConfirmation">Repeat password</label>
       <!-- HTML "name" are used as keys for variable creation on the PHP server side -->
-      <input type="password" id="inputPasswordConfirmation" name="password_confirmation" placeholder="Repeat password" required pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$"/>
+      <input type="password" id="inputPasswordConfirmation" name="password_confirmation" placeholder="Repeat password" required/>
     </div>
     <button type="submit">Sign up</button>
   </form>

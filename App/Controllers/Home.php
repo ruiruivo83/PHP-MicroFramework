@@ -43,11 +43,7 @@ class Home extends \Core\Controller
      * @return void
      */
     public function indexAction()
-    {
-       
-        View::renderTemplate('Home/index.html.twig', [
-            'name' => 'Dave',
-            'colours' => ['red', 'green', 'blue']
-        ]);
+    {       
+        View::renderTemplate('Home/index.html.twig');
     }
 }

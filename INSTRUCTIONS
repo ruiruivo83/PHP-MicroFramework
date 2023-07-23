@@ -1,5 +1,5 @@
 #################################################################
-###################### NEW INSTALL with COMPOSER #######################
+################### NEW INSTALL with COMPOSER ###################
 #################################################################
 composer.json - Lists all dependencies in one file
 [Commands]
@@ -17,7 +17,7 @@ composer dump-autoload - after updating composer.json for updating the autoload
 5 - Reteurn VIEW with DATA in it, replaced with TWIG engine
 
 #################################################################
-##################### File Sequence  #####################
+######################## File Sequence  #########################
 #################################################################
 composer.json
 Config.php - Reads all configurations first
@@ -30,7 +30,7 @@ controllers\???.php (Runs whatever controller and action you call in the URL)
 View::RenderTemplate ???.html - Renders whatever html file for this controller\action. One page for each action
 
 #################################################################
-##################### FOLDER ARCHITECTURE  #####################
+##################### FOLDER ARCHITECTURE  ######################
 #################################################################
 Folder structure in App\Controllers and App\Views must be the same
 
@@ -51,3 +51,7 @@ This way we can execute something before and after any method we call.
 
 IF - If the "before" method returns false then the main method "sometingAction" is not called.
 For example if the user is not logged in.
+
+#################################################################
+####################### ACTION FILTERS  #########################
+#################################################################

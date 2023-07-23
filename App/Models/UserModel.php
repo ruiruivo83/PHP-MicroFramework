@@ -27,7 +27,7 @@ class UserModel extends \Core\Model
      * 
      * @return void
      */
-    public function __construct($data)
+    public function __construct($data = [])
     {
         // VARIABLE AUTO CREATION - Variable declaration based on the theys inside the parameters, one variables with the same name for each key.
         foreach ($data as $key => $value) {
@@ -55,6 +55,8 @@ class UserModel extends \Core\Model
             $pdo = static::getDB();
 
             $stmt = $pdo->prepare($sql);
+
+            var_dump($this->name . ' ' . $this->email .  ' ' . $password_hash);
 
             $stmt->bindValue(':name', $this->name, PDO::PARAM_STR);
             $stmt->bindValue(':email', $this->email, PDO::PARAM_STR);
@@ -113,10 +115,9 @@ class UserModel extends \Core\Model
      * 
      * @return boolean True if a record already exists with the specified email, false otherwise
      */
-
     protected function emailExists($email)
     {
-        $sql = 'SELECT * FROM users WHERE email = :email';
+        $sql = 'SELECT email FROM users WHERE email = :email';
 
         $db = static::getDB();
         $stmt = $db->prepare($sql);
@@ -126,5 +127,51 @@ class UserModel extends \Core\Model
 
         return $stmt->fetch() !== false;
     }
+
+
+    /**
+     * See if a user record already exists with the specified email
+     * 
+     * @param string $email email address to search for
+     * 
+     * @return object Return an object with all the informations of the fetch from the database as an object
+     */
+    public static function findByEmail($email)
+    {
+        $sql = 'SELECT * FROM users WHERE email = :email';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+
+        // Return an object based on the model called, in this case the 'get_called_class()' will automaticly detect the self class, in this case USerModel, 
+        // and fill it with the values returned from the database in the construct, when the class is runed the construct creates variables of the data as parameters.
+        $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+
+        $stmt->execute();
+
+        return $stmt->fetch();
+    }
+
+    /**
+     * Authenticate a user by email and password
+     * 
+     * @param string $email email address
+     * @param string $password password
+     * 
+     * @return mixed Return the user object or false if authentication fails
+     */
+    public static function authenticate($email, $password)
+    {
+        $user = static::findByEmail($email);
+
+        if ($user) {
+            if (password_verify($password, $user->password_hash)) {
+                return $user;
+            }
+        }
+    }
+
+    
 
 }
