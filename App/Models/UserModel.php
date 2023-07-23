@@ -56,7 +56,7 @@ class UserModel extends \Core\Model
 
             $stmt = $pdo->prepare($sql);
 
-            var_dump($this->name . ' ' . $this->email .  ' ' . $password_hash);
+            var_dump($this->name . ' ' . $this->email . ' ' . $password_hash);
 
             $stmt->bindValue(':name', $this->name, PDO::PARAM_STR);
             $stmt->bindValue(':email', $this->email, PDO::PARAM_STR);
@@ -144,8 +144,33 @@ class UserModel extends \Core\Model
         $stmt = $db->prepare($sql);
         $stmt->bindParam(':email', $email, PDO::PARAM_STR);
 
-        // Return an object based on the model called, in this case the 'get_called_class()' will automaticly detect the self class, in this case USerModel, 
+        // Return an object based on the model called, in this case the 'get_called_class()' will automaticly detect the self class, in this case UserModel, 
         // and fill it with the values returned from the database in the construct, when the class is runed the construct creates variables of the data as parameters.
+        $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+
+        $stmt->execute();
+
+        return $stmt->fetch();
+    }
+
+    /**
+     * Find a user model by ID
+     * 
+     * @param string $id The user ID
+     * 
+     * @return object Return an object with all the informations of the fetch from the database as an object
+     */
+    public static function findByID($id)
+    {
+        $sql = 'SELECT * FROM users WHERE id = :id';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+        // Return an object based on the model called, in this case the 'get_called_class()' will automaticly detect the self class, in this case UserModel, 
+        // and fill it with the values returned from the database in the construct, when the class is runed the construct creates variables of the data as
+        // parameters with the names from the keys and its values, from the value..
         $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
 
         $stmt->execute();
@@ -172,6 +197,6 @@ class UserModel extends \Core\Model
         }
     }
 
-    
+
 
 }

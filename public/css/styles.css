@@ -1,0 +1,16 @@
+.alert {
+    border: 1px solid #ccc;
+    padding: 6px;
+}
+
+.alert-info {
+background-color: cadetblue;
+}
+
+.alert-success {
+    background-color: rgb(72, 160, 79);
+}
+
+.alert-warning {
+    background-color: rgb(189, 103, 103);
+}
