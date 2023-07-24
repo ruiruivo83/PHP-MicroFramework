@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Token;
 use Error;
 use PDO;
 
@@ -117,15 +118,7 @@ class UserModel extends \Core\Model
      */
     protected function emailExists($email)
     {
-        $sql = 'SELECT email FROM users WHERE email = :email';
-
-        $db = static::getDB();
-        $stmt = $db->prepare($sql);
-        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
-
-        $stmt->execute();
-
-        return $stmt->fetch() !== false;
+       return static::findByEmail($email) != false;
     }
 
 
@@ -134,7 +127,7 @@ class UserModel extends \Core\Model
      * 
      * @param string $email email address to search for
      * 
-     * @return object Return an object with all the informations of the fetch from the database as an object
+     * @return mixed User object if found, false otherwise
      */
     public static function findByEmail($email)
     {
@@ -142,7 +135,7 @@ class UserModel extends \Core\Model
 
         $db = static::getDB();
         $stmt = $db->prepare($sql);
-        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+        $stmt->bindValue(':email', $email, PDO::PARAM_STR);
 
         // Return an object based on the model called, in this case the 'get_called_class()' will automaticly detect the self class, in this case UserModel, 
         // and fill it with the values returned from the database in the construct, when the class is runed the construct creates variables of the data as parameters.
@@ -153,30 +146,6 @@ class UserModel extends \Core\Model
         return $stmt->fetch();
     }
 
-    /**
-     * Find a user model by ID
-     * 
-     * @param string $id The user ID
-     * 
-     * @return object Return an object with all the informations of the fetch from the database as an object
-     */
-    public static function findByID($id)
-    {
-        $sql = 'SELECT * FROM users WHERE id = :id';
-
-        $db = static::getDB();
-        $stmt = $db->prepare($sql);
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-
-        // Return an object based on the model called, in this case the 'get_called_class()' will automaticly detect the self class, in this case UserModel, 
-        // and fill it with the values returned from the database in the construct, when the class is runed the construct creates variables of the data as
-        // parameters with the names from the keys and its values, from the value..
-        $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
-
-        $stmt->execute();
-
-        return $stmt->fetch();
-    }
 
     /**
      * Authenticate a user by email and password
@@ -197,6 +166,57 @@ class UserModel extends \Core\Model
         }
     }
 
+    /**
+     * Find a user model by ID
+     * 
+     * @param string $id The user ID
+     * 
+     * @return mixed User object if found, false otherwise
+     */
+    public static function findByID($id)
+    {
+        $sql = 'SELECT * FROM users WHERE id = :id';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+        // Return an object based on the model called, in this case the 'get_called_class()' will automaticly detect the self class, in this case UserModel, 
+        // and fill it with the values returned from the database in the construct, when the class is runed the construct creates variables of the data as
+        // parameters with the names from the keys and its values, from the value..
+        $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+
+        $stmt->execute();
+
+        return $stmt->fetch();
+    }
+
+    /**
+     * Remember the login by inserting a new unique token into the remembered_logins table
+     * for this user record
+     * 
+     * @return boolean True if the login was remembered successfully, false otherwise
+     */
+    public function rememberLogin()
+    {
+        $token = new Token();
+        $hashed_token = $token->getHash();
+        $this->remember_token = $token->getValue();
+
+        $this->expiry_timestamp = time() + 60 * 60 * 24 * 30; // 30 days from now
+
+        $sql = 'INSERT INTO remembered_logins (token_hash, user_id, expires_at) VALUES (:token_hash, :user_id, :expires_at)';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+
+        $stmt->bindValue(':token_hash', $hashed_token, PDO::PARAM_STR);
+        $stmt->bindValue(':user_id', $this->id, PDO::PARAM_INT);
+        $stmt->bindValue(':expires_at', date('Y-m-d H:i:s', $this->expiry_timestamp), PDO::PARAM_STR);
+
+        return $stmt->execute();
+
+    }
 
 
 }

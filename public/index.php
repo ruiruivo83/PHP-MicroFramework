@@ -7,7 +7,7 @@
  */
 
 /**
- * Autoload
+ * Composer - Autoload
  */
 require '../vendor/autoload.php';
 

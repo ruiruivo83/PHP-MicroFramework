@@ -34,9 +34,14 @@ class Login extends \Core\Controller
     {
         $user = UserModel::authenticate($_POST['email'], $_POST['password']);
 
+        $remember_me = isset($_POST['remember_me']);
+
         if ($user) {
 
-            Auth::login($user);
+            Auth::login($user, $remember_me);
+
+            // Remember the login here
+            // ...
 
             Flash::addMessage('Login successful', Flash::SUCCESS);
 
@@ -48,6 +53,7 @@ class Login extends \Core\Controller
 
             View::renderTemplate('Login/new.html.twig', [
                 'email' => $_POST['email'],
+                'remember_me' => $remember_me
             ]);
 
         }
