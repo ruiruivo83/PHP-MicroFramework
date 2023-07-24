@@ -46,4 +46,25 @@ class Config
      */
     const SECRET_KEY = 'tsDiAwgwoxA0e8Y6kN2t9DTKxGocNdH9';
 
+      /**
+     * SMTP CLIENT - SMTP ADRESS
+     * 
+     * @var string
+     */
+    const smtpAdminClient = "smtp-relay.sendinblue.com";
+
+    /**
+     * SMTP CLIENT - ADMIN EMAIL
+     * 
+     * @var string
+     */
+    const smtpAdminEMail = "ruivo.rui@gmail.com";
+
+    /**
+     * SMTP CLIENT - ADMIN EMAIL PASSWORD
+     * 
+     * @var string
+     */
+    const smtpAdminEMailPassword = "3AL5a0QTJKzYhy6B";
+
 }
