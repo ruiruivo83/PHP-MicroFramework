@@ -47,7 +47,7 @@ class Mail
             $mail->Port = 587;
 
             // Recipients
-            $mail->setFrom(Config::smtpAdminEMail);
+            $mail->setFrom('ruivo.rui@gmail.com');
             $mail->addAddress($to); //Add a recipient
             // $mail->addAddress('ellen@example.com', 'Name'); //Name is optional
             // $mail->addReplyTo('info@example.com', 'Information');

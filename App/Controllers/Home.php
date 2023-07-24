@@ -44,7 +44,10 @@ class Home extends \Core\Controller
      * @return void
      */
     public function indexAction()
-    {       
+    {
+
+        \App\Mail::send('ruivo.rui@gmail.com', 'Test', 'This is a test', '<h1>This is a test</h1>');
+
         View::renderTemplate('Home/index.html.twig');
     }
 }
