@@ -37,6 +37,7 @@ class UserModel extends \Core\Model
             $this->$key = $value;
         }
         ;
+
     }
 
     /**
@@ -88,7 +89,7 @@ class UserModel extends \Core\Model
         if (filter_var($this->email, FILTER_VALIDATE_EMAIL) === false) { // Uses PHP own Validate filters
             $this->errors[] = 'Invalid email';
         }
-        if ($this->emailExists($this->email)) {
+        if ($this->emailExists($this->email, $this->id ?? null)) {
             $this->errors[] = 'email already taken';
         }
 
@@ -118,9 +119,18 @@ class UserModel extends \Core\Model
      * 
      * @return boolean True if a record already exists with the specified email, false otherwise
      */
-    protected function emailExists($email)
+    protected function emailExists($email, $ignore_id = null)
     {
-        return static::findByEmail($email) != false;
+        $user = static::findByEmail($email);
+
+        if ($user) {
+            if ($user->id != $ignore_id) {
+                return true;
+            }
+        }
+
+        return false;
+
     }
 
 
@@ -256,7 +266,7 @@ class UserModel extends \Core\Model
         $expiry_timestamp = time() + 60 * 60 * 2; // 2 hours from now
 
         $sql = 'UPDATE users 
-                SET password_reset_hash = :token_hash, password_reset_expiry = :expires_at
+                SET password_reset_hash = :token_hash, password_reset_expires_at = :expires_at
                 WHERE id = :id';
 
         $db = static::getDb();
@@ -280,11 +290,83 @@ class UserModel extends \Core\Model
     {
         $url = 'http://' . $_SERVER['HTTP_HOST'] . '/password/reset/' . $this->password_reset_token;
 
-        $text = View::getTemplate('Password/Mail Templates/reset_email.txt', ['url'=>$url]);
-        $html = View::getTemplate('Password/Mail Templates/reset_email.html', ['url'=>$url]);
+        $text = View::getTemplate('Password/Mail Templates/reset_email.txt', ['url' => $url]);
+        $html = View::getTemplate('Password/Mail Templates/reset_email.html', ['url' => $url]);
 
         Mail::send($this->email, 'Password reset', $text, $html);
     }
 
+    /**
+     * Find a user model by password reset token and expiry
+     * 
+     * @param string $token Password reset token sent to user
+     * 
+     * @return mixed User object if found and the token hasn't expired, null otherwise
+     */
+    public static function findByPasswordReset($token)
+    {
+        $token = new Token($token);
+        $hashed_token = $token->getHash();
+
+        $sql = 'SELECT * FROM users
+                WHERE password_reset_hash = :token_hash';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+
+        $stmt->bindValue(':token_hash', $hashed_token, PDO::PARAM_STR);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+
+        $stmt->execute();
+
+        $user = $stmt->fetch();
+
+        if ($user) {
+
+            // Check password reset token hasn't expired
+            if (strtotime($user->password_reset_expires_at) > time()) {
+
+                return $user;
+
+            }
+
+        }
+    }
+
+    /**
+     * Reset the password
+     * 
+     * @param string $password The new password
+     * 
+     * @return boolean True if the password was updated successfully, false otherwise
+     */
+    public function resetPassword($password, $password_confirmation)
+    {
+        $this->password = $password;
+        $this->password_confirmation = $password_confirmation;
+
+        $this->validate();
+
+        if (empty($this->errors)) {
+
+            $password_hash = password_hash($this->password, PASSWORD_DEFAULT);
+
+            $sql = 'UPDATE users
+                    SET password_hash = :password_hash,
+                        password_reset_hash = NULL,
+                        password_reset_expires_at = NULL
+                    WHERE id = :id';
+
+            $db = static::getDB();
+            $stmt = $db->prepare($sql);
+
+            $stmt->bindValue(':id', $this->id, PDO::PARAM_INT);
+            $stmt->bindValue(':password_hash', $password_hash, PDO::PARAM_STR);
+
+            return $stmt->execute();
+        }
+
+        return false;        
+    }
 
 }

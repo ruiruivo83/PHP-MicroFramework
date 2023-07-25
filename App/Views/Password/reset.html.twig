@@ -1,0 +1,38 @@
+{% extends 'base.html.Twig' %}
+
+{% block title %}
+  Reset password
+{% endblock %}
+
+{% block body %}
+  <h1>Reset password</h1>
+
+  {% if userModel.errors is not empty %}
+    <p>Errors:</p>
+    <ul>
+      {% for error in userModel.errors %}
+        <li style="background-color: brown;">{{ error }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  <!-- HTML form/action points to PHP controller/action -->
+  <form method="post" id="formPassword" action="/password/reset-password">
+  
+    <input type="hidden" name="token" value="{{ token }}" />
+
+    <div>
+      <label for="inputPassword">Password</label>
+      <!-- HTML "name" are used as keys for variable creation on the PHP server side -->
+      <input type="password" id="inputPassword" name="password" placeholder="Password" required />
+    </div>
+
+    <div>
+      <label for="inputPasswordConfirmation">Repeat password</label>
+      <!-- HTML "name" are used as keys for variable creation on the PHP server side -->
+      <input type="password" id="inputPasswordConfirmation" name="password_confirmation" placeholder="Repeat password" required />
+    </div>
+
+    <button type="submit">Reset password</button>
+  </form>
+{% endblock %}
