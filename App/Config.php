@@ -35,12 +35,6 @@ class Config
     const DB_PASSWORD = '*Ycvms74b';
 
     /**
-     * Show or hide error messages on screen
-     * @var boolean
-     */
-    const SHOW_ERRORS = true;
-
-    /**
      * Secret key for hashing
      * @var boolean
      */
@@ -66,5 +60,11 @@ class Config
      * @var string
      */
     const smtpAdminEMailPassword = "3AL5a0QTJKzYhy6B";
+    
+    /**
+     * Show or hide error messages on screen
+     * @var boolean
+     */
+    const SHOW_ERRORS = true;
 
 }
