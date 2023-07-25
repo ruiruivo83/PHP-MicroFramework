@@ -13,6 +13,7 @@ use App\Models\UserModel;
 
 class Signup extends \Core\Controller
 {
+
     /**
      * Show the signup page
      * 
@@ -35,6 +36,8 @@ class Signup extends \Core\Controller
 
         if ($userModel->save()) {
 
+            $userModel->sendActivationEmail();
+
             $this->redirect('/signup/success');
 
         } else {
@@ -54,5 +57,29 @@ class Signup extends \Core\Controller
     {
         View::renderTemplate('Signup/success.html.twig');
     }
+
+    /**
+     * Activate a new account
+     * 
+     * @return void
+     */
+    public function activateAction()
+    {
+        UserModel::activate($this->route_params['token']);
+
+        $this->redirect('/signup/activated');
+
+    }
+
+    /**
+     * Show the activation success page
+     * 
+     * @return void
+     */
+    public function activatedAction()
+    {
+        View::renderTemplate('Signup/activated.html.twig');
+    }
+
 
 }
