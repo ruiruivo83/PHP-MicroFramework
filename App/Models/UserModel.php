@@ -96,21 +96,23 @@ class UserModel extends \Core\Model
             $this->errors[] = 'email already taken';
         }
 
-        // Password
-        if ($this->password != $this->password_confirmation) {
-            $this->errors[] = 'Password must match confirmation';
-        }
+        // Password - We only validate if isset
+        if (isset($this->password)) {
+            if ($this->password != $this->password_confirmation) {
+                $this->errors[] = 'Password must match confirmation';
+            }
 
-        if (strlen($this->password) < 6) {
-            $this->errors[] = 'Please enter at least 6 characters for the password';
-        }
+            if (strlen($this->password) < 6) {
+                $this->errors[] = 'Please enter at least 6 characters for the password';
+            }
 
-        if (preg_match('/.*[a-z]+.*/i', $this->password) == 0) {
-            $this->errors[] = 'Password need at least one letter';
-        }
+            if (preg_match('/.*[a-z]+.*/i', $this->password) == 0) {
+                $this->errors[] = 'Password need at least one letter';
+            }
 
-        if (preg_match('/.*\d+.*/i', $this->password) == 0) {
-            $this->errors[] = 'Passwords needs at least one number';
+            if (preg_match('/.*\d+.*/i', $this->password) == 0) {
+                $this->errors[] = 'Passwords needs at least one number';
+            }
         }
 
     }
@@ -417,5 +419,60 @@ class UserModel extends \Core\Model
 
     }
 
+    /**
+     * update the user's profile
+     * 
+     * @param array $data Data from the edit profile form
+     * 
+     * @return boolean True if the data was updated, false otherwise
+     */
+    public function updateProfile($data)
+    {
+        $this->name = $data['name'];
+        $this->email = $data['email'];
+
+
+        // Only validate and updatethe password if a value provided
+        if ($data['password'] != '') {
+            $this->password = $data['password'];
+            $this->password_confirmation = $data['password_confirmation'];
+        }
+
+        $this->validate();
+
+        if (empty($this->errors)) {
+
+            $sql = 'UPDATE users
+                    SET name = :name,
+                        email = :email';
+
+            if (isset($this->password)) {
+                $sql .= ', password_hash = :password_hash';
+            }
+
+            $sql .= ' WHERE id = :id';
+
+            $db = static::getDB();
+            $stmt = $db->prepare($sql);
+
+            $stmt->bindValue(':name', $this->name, PDO::PARAM_STR);
+            $stmt->bindValue(':email', $this->email, PDO::PARAM_STR);
+            $stmt->bindValue(':id', $this->id, PDO::PARAM_INT);
+
+
+            // Add password if it's set
+            if (isset($this->password)) {
+                $password_hash = password_hash($this->password, PASSWORD_DEFAULT);
+                $stmt->bindValue(':password_hash', $password_hash, PDO::PARAM_STR);
+            }
+
+
+            return $stmt->execute();
+
+        }
+
+        return false;
+
+    }
 
 }

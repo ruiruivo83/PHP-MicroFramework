@@ -1,0 +1,53 @@
+{% extends 'base.html.Twig' %}
+
+{% block title %}
+  Edit Profile
+{% endblock %}
+
+{% block body %}
+  <h1>Edit Profile</h1>
+
+  {% if userModel.errors is not empty %}
+    <p>Errors:</p>
+    <ul>
+      {% for error in userModel.errors %}
+        <li style="background-color: brown;">{{ error }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  <!-- HTML form/action points to PHP controller/action -->
+  <form method="post" id="formProfile" action="/profile/update">
+
+    <div>
+      <!-- HTML Label/for points to HTML input/id -->
+      <label for="inputName">Name</label>
+      <!-- HTML "name" are used as keys for variable creation on the PHP server side -->
+      <input type="text" id="inputName" name="name" placeholder="Name" value="{{ userModel.name }}" required />
+    </div>
+
+    <div>
+      <label for="">Email address</label>
+      <!-- HTML "name" are used as keys for variable creation on the PHP server side -->
+      <input type="email" id="inputEmail" name="email" placeholder="email address" value="{{ userModel.email }}" required />
+    </div>
+
+    <div>
+      <label for="inputPassword">Password</label>
+      <!-- HTML "name" are used as keys for variable creation on the PHP server side -->
+      <input type="password" id="inputPassword" name="password" placeholder="Password"  aria-describedby="helpBlock"/>
+      <span>Leave blank to keep current password</span>
+    </div>
+
+    <div>
+      <label for="inputPasswordConfirmation">Repeat password</label>
+      <!-- HTML "name" are used as keys for variable creation on the PHP server side -->
+      <input type="password" id="inputPasswordConfirmation" name="password_confirmation" placeholder="Repeat password"  aria-describedby="helpBlock"/>      
+    </div>
+
+    <button type="submit">Save</button>
+    <a href="/profile/show">Cancel</a>
+
+  </form>
+
+{% endblock %}

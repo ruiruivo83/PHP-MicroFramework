@@ -18,6 +18,17 @@ abstract class Authenticated extends \Core\Controller
     protected function Before()
     {
         $this->requireLogin();
+        echo "<div style=\"color:#f70202; border-style: solid;\"> ACTION FILTER - INSIDE AUTHENTICATED CONTROLLER </div>";
+    }
+
+       /**
+     * Before filter - called before an action method.
+     * 
+     * @return void
+     */
+    protected function After()
+    {        
+        echo "<div style=\"color:#f70202; border-style: solid;\"> ACTION FILTER - INSIDE AUTHENTICATED CONTROLLER </div>";
     }
 
 }

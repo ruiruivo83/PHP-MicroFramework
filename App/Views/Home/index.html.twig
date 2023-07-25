@@ -7,14 +7,6 @@
 {% block body %}
   <h1>Welcome</h1>
 
-  {% if current_user %}
-    Hello {{ current_user.name }}   
-    <br><br><br>  
-    <a href="/logout">Log out</a>
-  {% else %}
-    <a href="/signup/new">Sign up</a> or <a href="/login">Log in</a>
-  {% endif %}
-
 <br><br><br><br>
   
 {% endblock %}

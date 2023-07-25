@@ -57,6 +57,7 @@ abstract class Controller
      */
     protected function Before()
     {
+       
         echo "<div style=\"color:#f70202; border-style: solid;\"> ACTION FILTER - (before in Core\Controller) </div>";
         // return false; // Will stop the execution
     }

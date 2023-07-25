@@ -12,13 +12,36 @@
   </head>
   <body>
     <nav>
-      <a href="/">Home</a>
-      <a href="/posts/index">Posts</a>
-      <a href="/signup/new">Signup</a>
+      <ul>
+        <li>
+          <a href="/">Home</a>
+        </li>
+
+        {% if not current_user %}
+
+          <li>
+            <a href="/signup/new">Signup</a>
+          </li>
+          <li>
+            <a href="/login">Login</a>
+          </li>
+        {% endif %}
+
+        {% if current_user %}
+                  <li>
+            <a href="/profile/show">Profile</a>
+          </li>
+          <li>
+            <a href="/logout">Log out</a>
+          </li>
+        {% endif %}
+
+      </ul>
     </nav>
 
+    <!-- FLASH MESSAGES -->
     {% for message in flash_messages %}
-      <div class="alert alert-{{ message.type }}" >{{ message.body }}</div>
+      <div class="alert alert-{{ message.type }}">{{ message.body }}</div>
     {% endfor %}
 
     {% block body %}
