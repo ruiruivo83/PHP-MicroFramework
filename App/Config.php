@@ -63,6 +63,9 @@ class Config
     
     /**
      * Show or hide error messages on screen
+     * 
+     * FOR DEBUG MODE
+     * 
      * @var boolean
      */
     const SHOW_ERRORS = true;
