@@ -7,13 +7,18 @@
 {% block body %}
   <h1>Reset password</h1>
 
+  <!-- ERRORS -->
   {% if userModel.errors is not empty %}
-    <p>Errors:</p>
-    <ul>
-      {% for error in userModel.errors %}
-        <li style="background-color: brown;">{{ error }}</li>
-      {% endfor %}
-    </ul>
+    <div class="card m-3" >
+      <div class="card-body">
+        <h5 class="card-title text-bg-danger p-1">Errors</h5>
+        <ul>
+          {% for error in userModel.errors %}
+            <li class="alert alert-danger" role="alert">{{ error }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
   {% endif %}
 
   <!-- HTML form/action points to PHP controller/action -->

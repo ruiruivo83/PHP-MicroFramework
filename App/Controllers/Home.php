@@ -45,6 +45,8 @@ class Home extends \Core\Controller
      */
     public function indexAction()
     {
-        View::renderTemplate('Home/index.html.twig');
+        View::renderTemplate('Home/index.html.twig', [
+            'userModel' => Auth::getUser()
+        ]);
     }
 }
