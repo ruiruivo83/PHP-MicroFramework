@@ -53,5 +53,7 @@ IF - If the "before" method returns false then the main method "sometingAction" 
 For example if the user is not logged in.
 
 #################################################################
-#######################                  ########################
+#######################  PHP UNIT        ########################
 #################################################################
+Add path to Environment Variables in Windows System
+C:\Sources\RapidFire-PHP-MicroFramework\vendor\bi
