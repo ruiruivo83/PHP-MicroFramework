@@ -1,6 +1,6 @@
 {
     "require": {
-        "twig/twig": "~1.0",
+        "twig/twig": "3.0",
         "phpmailer/phpmailer": "^6.8"
     },
     "require-dev": {
@@ -8,8 +8,8 @@
     },
     "autoload": {
         "psr-4": {
-             "Core\\": "Core/",
-             "App\\": "App/"
+            "Core\\": "Core/",
+            "App\\": "App/"
         }
     }
 }

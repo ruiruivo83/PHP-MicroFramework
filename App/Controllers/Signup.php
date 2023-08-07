@@ -21,7 +21,7 @@ class Signup extends \Core\Controller
      */
     public function newAction()
     {
-        View::renderTemplate('Signup/new.html.Twig');
+        View::renderTemplate('Signup/new.html');
     }
 
     /**
@@ -42,7 +42,7 @@ class Signup extends \Core\Controller
 
         } else {
 
-            View::renderTemplate('signup/new.html.twig', ['userModel' => $userModel]); // Render same form and pass the UserModel to it
+            View::renderTemplate('signup/new.html', ['userModel' => $userModel]); // Render same form and pass the UserModel to it
 
         }
 
@@ -55,7 +55,7 @@ class Signup extends \Core\Controller
      */
     public function successAction()
     {
-        View::renderTemplate('Signup/success.html.twig');
+        View::renderTemplate('Signup/success.html');
     }
 
     /**

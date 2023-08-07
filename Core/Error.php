@@ -61,7 +61,7 @@ class Error
 
             error_log($message);
                      
-            View::renderTemplate("$code.html.Twig");
+            View::renderTemplate("$code.html");
         }
 
         if (\App\Config::SHOW_ERRORS) {

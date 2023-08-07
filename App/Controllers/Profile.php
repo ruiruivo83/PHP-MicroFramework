@@ -21,7 +21,7 @@ class Profile extends Authenticated
      */
     public function showAction()
     {
-        View::renderTemplate('Profile/show.html.twig', [
+        View::renderTemplate('Profile/show.html', [
             'userModel' => Auth::getUser()]);
     }
 
@@ -32,7 +32,7 @@ class Profile extends Authenticated
      */
     public function editAction()
     {
-        View::renderTemplate('Profile/edit.html.twig', [
+        View::renderTemplate('Profile/edit.html', [
             'userModel' => Auth::getUser()
         ]);
     }
@@ -51,7 +51,7 @@ class Profile extends Authenticated
             $this->redirect('/profile/show');
         } else {
 
-            View::renderTemplate('Profile/edit.html.twig', ['userModel' => $user]);
+            View::renderTemplate('Profile/edit.html', ['userModel' => $user]);
 
         }
     }

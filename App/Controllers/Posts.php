@@ -50,7 +50,7 @@ class Posts extends \Core\Controller
 
         $posts = PostModel::getAll();
 
-        View::renderTemplate('Posts/index.html.twig', [
+        View::renderTemplate('Posts/index.html', [
             'posts' => $posts
         ]);
     }

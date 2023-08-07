@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Profile
+{% endblock %}
+
+{% block body %}
+<h1>Profile</h1>
+
+<a href="/profile/edit">Edit</a>
+
+<div class="mb-3">
+  <label for="exampleFormControlInput1" class="form-label">Name</label>
+  <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="{{ userModel.name }}" disabled />
+</div>
+<div class="mb-3">
+  <label for="exampleFormControlTextarea1" class="form-label">Email</label>
+  <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="{{ userModel.email }}" disabled />
+</div>
+
+{% endblock %}

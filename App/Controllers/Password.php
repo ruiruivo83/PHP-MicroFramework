@@ -20,7 +20,7 @@ class Password extends \Core\Controller
      */
     public function forgotAction()
     {
-        View::renderTemplate('Password/forgot.html.twig');
+        View::renderTemplate('Password/forgot.html');
     }
 
     /**
@@ -32,7 +32,7 @@ class Password extends \Core\Controller
     {
         UserModel::sendPasswordReset($_POST['email']);
 
-        View::renderTemplate('Password/reset_requested.html.twig');
+        View::renderTemplate('Password/reset_requested.html');
     }
 
     /**
@@ -49,7 +49,7 @@ class Password extends \Core\Controller
 
         $user = UserModel::findByPasswordReset($token);
 
-        View::renderTemplate('Password/reset.html.twig', [
+        View::renderTemplate('Password/reset.html', [
             'token' => $token
         ]);
 
@@ -68,11 +68,11 @@ class Password extends \Core\Controller
 
         if ($user->resetPassword($_POST['password'], $_POST['password_confirmation'])) {
 
-           View::renderTemplate('Password/reset_success.html.twig');
+           View::renderTemplate('Password/reset_success.html');
 
         } else {
 
-            View::renderTemplate('Password/reset.html.twig', [
+            View::renderTemplate('Password/reset.html', [
                 'token' => $token,
                 'userModel' => $user
             ]);
@@ -98,7 +98,7 @@ class Password extends \Core\Controller
 
         } else {
 
-            View::renderTemplate('Password/token_expired.html.twig');
+            View::renderTemplate('Password/token_expired.html');
             exit;
 
         }
