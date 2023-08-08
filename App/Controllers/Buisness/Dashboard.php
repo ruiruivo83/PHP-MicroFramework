@@ -10,7 +10,7 @@ use \Core\View;
  * 
  * PHP version 7.4
  */
-class Prospection extends \Core\Authenticated
+class Dashboard extends \Core\Authenticated
 {
 
     /**
@@ -45,7 +45,7 @@ class Prospection extends \Core\Authenticated
      */
     public function indexAction()
     {
-        View::renderTemplate('Buisness/Prospection/index.html', [
+        View::renderTemplate('Buisness/Dashboard/index.html', [
             'userModel' => Auth::getUser()
         ]);
     }
