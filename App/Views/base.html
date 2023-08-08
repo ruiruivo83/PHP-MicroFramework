@@ -6,8 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen" />
-
-  <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="/js/bootstrap.bundle.min.js"></script>
 
   <title>
     {% block title %}
@@ -18,59 +17,226 @@
 </head>
 
 <body>
-  <div class="container">
 
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="/">RAPIDFIRE - PHP Microframework</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
-            class="navbar-toggler-icon"></span></button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/">Home</a>
-            </li>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">HYPERWEB</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-            {% if not current_user %}
-            <li class="nav-item">
-              <a class="nav-link" href="/signup/new">Signup</a>
-            </li>
+
+        {% if current_user %}
+
+
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/Dashboard">Dashboard</a>
+          </li>
+
+          <!-- Marketing -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Marketing
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/Marketing">Marketing</a></li>
+              <li><a class="dropdown-item" href="/Prospection">Prospection</a></li>
+              <li><a class="dropdown-item" href="/Commerce">Commerce</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>
+
+          <!-- FINANCE -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Finance
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/Finances">Finances</a></li>
+              <li><a class="dropdown-item" href="/Invoices">Invoices</a></li>
+              <li><a class="dropdown-item" href="/Accounting">Accounting</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>
+
+          <!-- OPERATIONS -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Operations
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/Vendors">Vendors</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="/Products">Products</a></li>
+              <li><a class="dropdown-item" href="/Services">Services</a></li>
+              <li><a class="dropdown-item" href="/Stocks">Stocks</a></li>
+              <li><a class="dropdown-item" href="/Warehouses">Warehouses</a></li>
+              <li><a class="dropdown-item" href="/Logistics">Logistics</a></li>
+              <li><a class="dropdown-item" href="/OnlineMarketPlace">Online MarketPlace</a></li>
+              <li><a class="dropdown-item" href="/FrontStores">FrontStores</a></li>
+              <li><a class="dropdown-item" href="/POS">- POS</a></li>
+              <li><a class="dropdown-item" href="/Resellers">Resellers</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="/Clients">Clients</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="/Materials">Materials</a></li>
+              <li><a class="dropdown-item" href="/Blueprints">Blueprints</a></li>
+              <li><a class="dropdown-item" href="/ProductionLines">Production lines</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="/Assets">Assets</a></li>
+            </ul>
+          </li>
+
+          <!-- RESOURCES -->
+          <!-- A resource is a source or supply from which a benefit is produced and that has some utility. The word "Asset" is also a noun and means a useful or valuable thing, person, or quality. -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Resources
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Assets</a></li>
+              <li><a class="dropdown-item" href="#">Internal Procedures</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>
+
+          <!-- DOCUMENTATIONS -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Documentation
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">ToDo Lists</a></li>
+              <li><a class="dropdown-item" href="/Procedures">Procedures</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>
+
+          <!-- HUMAN RECOURCES -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Human Recources
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/RecruitmentSelection">Recruitment & selection</a></li>
+              <li><a class="dropdown-item" href="/PerformanceManagement">Performance management</a></li>
+              <li><a class="dropdown-item" href="/LearningDevelopment">Learning & development</a></li>
+
+              <li><a class="dropdown-item" href="SuccessionPlanning">Succession planning</a></li>
+              <li><a class="dropdown-item" href="/CompensationAndBenefits">Compensation and benefits</a></li>
+              <li><a class="dropdown-item" href="/InformationSystems">Information Systems</a></li>
+              <!-- Not sure this will be necessary -->
+              <li><a class="dropdown-item" href="/HR">HR data and analytics</a></li>
+
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>
+
+          <!-- IT -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              IT
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/UsersAdministration">Users Administration</a></li>
+              <li><a class="dropdown-item" href="/GroupsAdministration">Groups Administration</a></li>
+              <li><a class="dropdown-item" href="/Tickets">Tickets</a></li>
+              <li><a class="dropdown-item" href="/ITSM">ITSM</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>
+
+        </ul>
+        <form class="d-flex m-3 mt-0 mb-0" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+
+
+        {% endif %}
+
+
+        <!-- USER PROFILE MENU -->
+        {% if current_user %}
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            ruivo.rui@gmail.com
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/profile/show">Profile</a></li>
+            <li><a class="dropdown-item" href="/Settings">Settings</a></li>
+            <li><a class="dropdown-item" href="/Plans">Plans</a></li>
             <li>
-              <a class="nav-link" href="/login">Login</a>
+              <hr class="dropdown-divider">
             </li>
-            {% endif %}
-
-            {% if current_user %}
-            <li class="nav-item">
-              <a class="nav-link" href="/profile/show">Profile</a>
-            </li>
+            <li><a class="dropdown-item" href="/Messages">Messages</a></li>
+            <li><a class="dropdown-item" href="/Invitations">Invitations</a></li>
             <li>
-              <a class="nav-link" href="/logout">Log out</a>
+              <hr class="dropdown-divider">
             </li>
-            {% endif %}
-
+            <li><a class="dropdown-item" href="/Logout">Logout</a></li>
           </ul>
-
-          {% if current_user %}
-          <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-            <button class="btn btn-outline-success" type="submit">Search</button>
-          </form>
-          {% endif %}
         </div>
+        {% endif %}
+
+        <!-- LOGIN LOGOUT MENU -->
+        {% if not current_user %}
+        <div class="dropdown">
+          <button class="btn btn-secondary-light dropdown-toggle" type="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Login
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/login">Login</a></li>
+            <li><a class="dropdown-item" href="/signup/new">Signup</a></li>
+          </ul>
+        </div>
+        {% endif %}
+
       </div>
-    </nav>
+    </div>
+  </nav>
 
+  <div class="container"></div>
+  <!-- FLASH MESSAGES -->
+  {% for message in flash_messages %}
+  <div class="alert alert-{{ message.type }}">{{ message.body }}</div>
+  {% endfor %}
 
-    <!-- FLASH MESSAGES -->
-    {% for message in flash_messages %}
-    <div class="alert alert-{{ message.type }}">{{ message.body }}</div>
-    {% endfor %}
+  {% block body %}
 
-    {% block body %}
-
-    {% endblock %}
+  {% endblock %}
   </div> <!-- Container -->
 
   <!-- 

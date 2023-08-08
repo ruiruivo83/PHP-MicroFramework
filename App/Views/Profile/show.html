@@ -7,15 +7,35 @@ Profile
 {% block body %}
 <h1>Profile</h1>
 
-<a href="/profile/edit">Edit</a>
-
-<div class="mb-3">
-  <label for="exampleFormControlInput1" class="form-label">Name</label>
-  <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="{{ userModel.name }}" disabled />
+<!-- ERRORS -->
+{% if userModel.errors is not empty %}
+<div class="card m-3">
+  <div class="card-body">
+    <h5 class="card-title text-bg-danger p-1">Errors</h5>
+    <ul>
+      {% for error in userModel.errors %}
+      <li class="alert alert-danger" role="alert">{{ error }}</li>
+      {% endfor %}
+    </ul>
+  </div>
 </div>
-<div class="mb-3">
-  <label for="exampleFormControlTextarea1" class="form-label">Email</label>
-  <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="{{ userModel.email }}" disabled />
+{% endif %}
+
+<div class="container">
+
+  <a href="/profile/edit">Edit</a>
+
+  <div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label">Name</label>
+    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="{{ userModel.name }}"
+      disabled />
+  </div>
+  <div class="mb-3">
+    <label for="exampleFormControlTextarea1" class="form-label">Email</label>
+    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="{{ userModel.email }}"
+      disabled />
+  </div>
+
 </div>
 
 {% endblock %}

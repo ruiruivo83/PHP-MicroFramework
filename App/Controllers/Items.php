@@ -10,7 +10,7 @@ use \App\Auth;
  * 
  * PHP version 7.4
  */
-class Items extends Authenticated
+class Items extends \Core\Authenticated
 {
 
     /**

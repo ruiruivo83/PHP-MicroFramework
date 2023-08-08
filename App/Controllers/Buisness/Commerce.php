@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\Buisness;
 
 use App\Auth;
 use \Core\View;
@@ -10,7 +10,7 @@ use \Core\View;
  * 
  * PHP version 7.4
  */
-class Home extends \Core\Controller
+class Commerce extends \Core\Authenticated
 {
 
     /**
@@ -45,7 +45,7 @@ class Home extends \Core\Controller
      */
     public function indexAction()
     {
-        View::renderTemplate('Home/index.html', [
+        View::renderTemplate('Buisness/Commerce/index.html', [
             'userModel' => Auth::getUser()
         ]);
     }

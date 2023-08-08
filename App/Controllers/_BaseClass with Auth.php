@@ -10,7 +10,7 @@ use \Core\View;
  * 
  * PHP version 7.4
  */
-class Home extends \Core\Controller
+class Home extends \Core\Authenticated
 {
 
     /**

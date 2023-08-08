@@ -38,7 +38,14 @@ $router->add('logout', ['controller' => 'Login', 'action' => 'destroy']);
 
 $router->add('password/reset/{token:[\da-f]+}', ['controller' => 'Password', 'action' => 'reset']);
 $router->add('signup/activate/{token:[\da-f]+}', ['controller' => 'signup', 'action' => 'activate']);
+
 $router->add('{controller}/{action}');
+
+/**
+ * Buisness Namespace Controllers
+ */
+$router->add('buisness/{controller}/{action}', ['namespace' => 'Buisness']);
+
 
 // $router->add('{controller}/{id:\d+}/{action}');
 // $router->add('admin/{controller}/{action}', ['namespace' => 'Admin']);

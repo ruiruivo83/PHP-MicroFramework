@@ -5,6 +5,8 @@ namespace App\Controllers;
 use App\Auth;
 use App\Flash;
 use Core\View;
+use Core\Authenticated;
+
 
 /**
  * Profile controller
