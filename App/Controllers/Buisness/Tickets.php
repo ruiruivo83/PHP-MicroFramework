@@ -10,7 +10,7 @@ use \Core\View;
  * 
  * PHP version 7.4
  */
-class Users extends \Core\Authenticated
+class Tickets extends \Core\Authenticated
 {
 
     /**

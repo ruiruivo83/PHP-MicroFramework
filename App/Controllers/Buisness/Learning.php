@@ -10,7 +10,7 @@ use \Core\View;
  * 
  * PHP version 7.4
  */
-class Performance extends \Core\Authenticated
+class Learning extends \Core\Authenticated
 {
 
     /**
@@ -45,7 +45,7 @@ class Performance extends \Core\Authenticated
      */
     public function indexAction()
     {
-        View::renderTemplate('Buisness/Performance/index.html', [
+        View::renderTemplate('Buisness/Learning/index.html', [
             'userModel' => Auth::getUser()
         ]);
     }

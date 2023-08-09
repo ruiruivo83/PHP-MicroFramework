@@ -10,7 +10,7 @@ use \Core\View;
  * 
  * PHP version 7.4
  */
-class Compensation extends \Core\Authenticated
+class Compensations extends \Core\Authenticated
 {
 
     /**
@@ -45,7 +45,7 @@ class Compensation extends \Core\Authenticated
      */
     public function indexAction()
     {
-        View::renderTemplate('Buisness/Compensation/index.html', [
+        View::renderTemplate('Buisness/Compensations/index.html', [
             'userModel' => Auth::getUser()
         ]);
     }
