@@ -20,13 +20,13 @@ class Config
      * Database name
      * @var string
      */
-    const DB_NAME = 'mvclogin';
+    const DB_NAME = '01-php-microframework';
 
     /**
      * Database user
      * @var string
      */
-    const DB_USER = 'mvcuser';
+    const DB_USER = 'php-microframework_user';
 
     /**
      * Database password

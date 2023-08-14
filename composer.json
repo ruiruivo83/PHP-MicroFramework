@@ -11,5 +11,10 @@
             "Core\\": "Core/",
             "App\\": "App/"
         }
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
     }
 }
