@@ -6,6 +6,9 @@
  * PHP version 7.4
  */
 
+ ini_set('session.cookie_lifetime', '864000'); // Ten days in seconds
+
+
 /**
  * Composer - Autoload
  */
