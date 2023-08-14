@@ -78,7 +78,7 @@ class Signup extends \Core\Controller
      */
     public function activatedAction()
     {
-        View::renderTemplate('Signup/activated.html.twig');
+        View::renderTemplate('Signup/activated.html');
     }
 
 
