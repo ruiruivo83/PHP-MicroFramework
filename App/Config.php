@@ -26,7 +26,7 @@ class Config
      * Database user
      * @var string
      */
-    const DB_USER = 'php-microframework_user';
+    const DB_USER = 'php-microframework-user';
 
     /**
      * Database password
