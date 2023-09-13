@@ -11,7 +11,7 @@ CANNOT RUN "COMPOSER UPDATE" ON SERVER
 
 - MUST create table "_database_updates" manually:
 
-        CREATE TABLE [IF NOT EXISTS] _database_updates (
+        CREATE TABLE _database_updates (
             id INT AUTO_INCREMENT PRIMARY KEY,
             last_executed_version CHAR(255)
         );
