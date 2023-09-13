@@ -13,6 +13,7 @@ use App\Models\UserModel;
 class Auth
 {
 
+    
     /**
      * Login the user
      * 
@@ -36,6 +37,7 @@ class Auth
 
         }
     }
+
 
     /**
      * Logout the user
@@ -69,6 +71,7 @@ class Auth
         static::forgetLogin();
     }
 
+
     /**
      * Remember the originally-requested page in the session
      * 
@@ -79,6 +82,7 @@ class Auth
         $_SESSION['return_to'] = $_SERVER['REQUEST_URI'];
     }
 
+
     /**
      * Get the originally-requested page to return to after requiring login, or default to the homepage
      * 
@@ -88,6 +92,7 @@ class Auth
     {
         return $_SESSION['return_to'] ?? '/';
     }
+
 
     /**
      * Get the current logged-in user, from the session or the remember-me cookie

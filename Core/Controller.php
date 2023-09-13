@@ -1,7 +1,9 @@
 <?php
 
 namespace Core;
+
 use App\Auth;
+use App\Payment;
 use App\Flash;
 
 /**
@@ -101,6 +103,27 @@ abstract class Controller
             Auth::rememberRequestedPage();
 
             $this->redirect('/login');
+        }
+
+    }
+
+
+        /**
+     * Require the user to an active payment on the platforma to access this page.
+     * Remember the requested page for later, then redirect to the login page.
+     * 
+     * @return void
+     */
+    public function requirePayment()
+    {
+         // PAYMENTS - Protection d'une page
+         if (! Payment::hasPayment()) {
+
+            Flash::addMessage('Please activate your payment to access this page.');
+            
+            Auth::rememberRequestedPage();
+
+            $this->redirect('/Courses/index');
         }
 
     }
