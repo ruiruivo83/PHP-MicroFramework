@@ -1,7 +1,5 @@
-- REimplement Config PROD and all modifications in the code for debug.
-- Reimplement "Database Auto Update" from TicketTickle.
-
 
 - Implement Timezones in profile with dropdown.
 - Implement paiements.
 - Implement courses.
+- Implement Message System.
