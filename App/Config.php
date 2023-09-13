@@ -20,19 +20,19 @@ class Config
      * Database name
      * @var string
      */
-    const DB_NAME = '01-php-microframework';
+    const DB_NAME = 'microframework_db';
 
     /**
      * Database user
      * @var string
      */
-    const DB_USER = 'php-microframework-user';
+    const DB_USER = 'microframework-user';
 
     /**
      * Database password
      * @var string
      */
-    const DB_PASSWORD = '*Ycvms74b';
+    const DB_PASSWORD = 'secret';
 
     /**
      * Secret key for hashing
