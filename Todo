@@ -1,4 +1,8 @@
 - Implement Timezones in profile with dropdown.
-- Implement paiements.
+- Implement paiements CONTROL.
 - Implement courses.
 - Implement Message System.
+
+- Implement Adult_free control
+- Implement Adult_login CONTROL
+- Implement Adult_payment control
