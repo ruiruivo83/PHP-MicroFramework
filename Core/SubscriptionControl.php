@@ -9,7 +9,7 @@ use \Core\Authenticated;
  * 
  * PHP version 7.4
  */
-abstract class PaymentControl extends Authenticated
+abstract class SubscriptionControl extends Authenticated
 {
     
     /**
@@ -19,7 +19,7 @@ abstract class PaymentControl extends Authenticated
      */
     protected function Before()
     {        
-       $this->requirePayment();    
+       $this->requireSubscription();    
         echo "<div style=\"color:#f70202; border-style: solid;\"> ACTION FILTER - INSIDE AUTHENTICATED CONTROLLER </div>";
     }
 

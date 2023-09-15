@@ -1,8 +1,12 @@
-
-- Implement paiements CONTROL.
+OK - Implement Timezones in profile with dropdown.
+OK - Implement Subscription CONTROL.
 - Implement courses.
 - Implement Message System.
 
 - Implement Adult_free CONTROL
 - Implement Adult_login CONTROL
-- Implement Adult_payment CONTROL
+- Implement Adult_Subscription CONTROL
+
+- Modify to 
+    - Subscription courses.
+    - ADD - Purchased courses.

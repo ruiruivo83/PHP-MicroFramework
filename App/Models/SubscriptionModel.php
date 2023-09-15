@@ -14,25 +14,25 @@ use PDO;
  * 
  * PHP version 7.4
  */
-class PaymentModel extends \Core\Model
+class SubscriptionModel extends \Core\Model
 {
 
     /**
-     * Test if user has payment
+     * Test if user has Subscription
      * 
-     * @return boolean True if the user has payment, false otherwise
+     * @return boolean True if the user has Subscription, false otherwise
      */
-    public function testForActivePayment()
+    public function testForActiveSubscription()
     {
 
         $user = Auth::getUser();        
         $db = static::getDB();
 
-        $stmt = $db->query('SELECT payment_expires_at FROM `users` WHERE id = ' . $user->id);
+        $stmt = $db->query('SELECT Subscription_expires_at FROM `users` WHERE id = ' . $user->id);
 
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        // If current time > payment_expires_at return false
+        // If current time > Subscription_expires_at return false
 
         // FIX ME - Nust be a better way to return this properly
         if ($result = NULL) {

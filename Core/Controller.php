@@ -3,7 +3,7 @@
 namespace Core;
 
 use App\Auth;
-use App\Payment;
+use App\Subscription;
 use App\Flash;
 
 use App\Models\UserModel;
@@ -127,17 +127,17 @@ abstract class Controller
 
 
         /**
-     * Require the user to an active payment on the platforma to access this page.
+     * Require the user to an active Subscription on the platforma to access this page.
      * Remember the requested page for later, then redirect to the login page.
      * 
      * @return void
      */
-    public function requirePayment()
+    public function requireSubscription()
     {
-         // PAYMENTS - Protection d'une page
-         if (! Payment::hasPayment()) {
+         // SubscriptionS - Protection d'une page
+         if (! Subscription::hasSubscription()) {
 
-            Flash::addMessage('Please activate your payment to access this page.');
+            Flash::addMessage('Please activate your Subscription to access this page.');
             
             Auth::rememberRequestedPage();
 

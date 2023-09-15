@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use \Core\View;
-use \Core\PaymentControl;
+use \Core\SubscriptionControl;
 use \App\Auth;
 
 /**
@@ -11,7 +11,7 @@ use \App\Auth;
  * 
  * PHP version 7.4
  */
-class MyCourses extends PaymentControl
+class MyCourses extends SubscriptionControl
 {
 
     /**

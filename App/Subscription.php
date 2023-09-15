@@ -4,31 +4,31 @@ namespace App;
 
 use App\Models\RememberedLoginModel;
 use App\Models\UserModel;
-use App\Models\PaymentModel;
+use App\Models\SubscriptionModel;
 
 /**
  * Authentication
  * 
  * PHP version 7.4
  */
-class Payment
+class Subscription
 {
 
     
     /**
-     * Verifies if the user has an active payment plan
+     * Verifies if the user has an active Subscription plan
      * 
 
-     * @return boolean  Return true if payment for current user is active, false otherwise.
+     * @return boolean  Return true if Subscription for current user is active, false otherwise.
      */
-    public static function hasPayment()
+    public static function hasSubscription()
     {
        
         if (isset($_SESSION['user_id'])) {
 
-            $PaymentModel = new PaymentModel();
+            $SubscriptionModel = new SubscriptionModel();
 
-            if ($PaymentModel->testForActivePayment()) {
+            if ($SubscriptionModel->testForActiveSubscription()) {
                return true;
             } else {
               return false;
