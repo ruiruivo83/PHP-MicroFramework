@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use \Core\View;
-use \Core\PaymentValidator;
+use \Core\PaymentControl;
 use \App\Auth;
 
 /**
@@ -11,7 +11,7 @@ use \App\Auth;
  * 
  * PHP version 7.4
  */
-class MyCourses extends PaymentValidator
+class MyCourses extends PaymentControl
 {
 
     /**

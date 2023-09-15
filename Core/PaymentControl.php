@@ -9,7 +9,7 @@ use \Core\Authenticated;
  * 
  * PHP version 7.4
  */
-abstract class PaymentValidator extends Authenticated
+abstract class PaymentControl extends Authenticated
 {
     
     /**
