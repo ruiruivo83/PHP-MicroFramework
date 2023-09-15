@@ -61,7 +61,7 @@ class GroupModel extends \Core\Model
 
             $stmt = $db->prepare($sql);
 
-            date_default_timezone_set("Europe/Paris");
+      
 
             $stmt->bindValue(':group_admin_id', $user->id, PDO::PARAM_STR);
             $stmt->bindValue(':creation_date', date('Y-m-d H:i:s'), PDO::PARAM_STR);
@@ -101,8 +101,7 @@ class GroupModel extends \Core\Model
      */
     public function load()
     {
-        $user = Auth::getUser();
-        date_default_timezone_set("Europe/Paris");
+        $user = Auth::getUser();        
 
         $db = static::getDB();
 

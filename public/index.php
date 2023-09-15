@@ -30,6 +30,7 @@ set_exception_handler('Core\Error::exceptionHandler');
  */
 session_start();
 
+
 /**
  * ENVIRONMENT
  */
@@ -212,6 +213,8 @@ if (is_dir($folderPath)) {
 
 // Close the MySQL connection
 $conn->close();
+
+
 
 
 

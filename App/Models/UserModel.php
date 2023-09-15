@@ -475,4 +475,61 @@ class UserModel extends \Core\Model
 
     }
 
+  /**
+     * Get user timezone
+     * 
+     * @param $user_id The current user id logged in
+     * 
+     * @return string Array if found, false otherwise
+     */
+    public static function getUserTimeZone()
+    {
+
+        try {            
+
+            $db = static::getDB();
+
+    // Use prepared statement to avoid SQL injection
+    $stmt = $db->prepare('SELECT time_zone FROM users WHERE id = :user_id');
+    $stmt->bindParam(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
+    $stmt->execute();
+
+    // Fetch the result as an associative array
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            return $result['time_zone'];
+
+        } catch (PDOException $e) {
+
+            echo $e->getMessage();
+            
+        }
+        
+    }
+
+    
+    /**
+     * Set a specific time zone for user
+     * 
+     * @return void
+     */
+    public static function setTimeZone() {
+
+        $user_id = $_SESSION['user_id'];
+        $timeZone = $_GET["timezone"];
+    
+        $sql = 'UPDATE users 
+                SET time_zone = :timezone
+                WHERE id = :user_id';
+    
+        $db = static::getDb();
+        $stmt = $db->prepare($sql);
+    
+        $stmt->bindValue(':timezone', $timeZone, PDO::PARAM_STR);    
+        $stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+    
+        return $stmt->execute();
+    
+        }
+
 }

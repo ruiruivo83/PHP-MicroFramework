@@ -6,6 +6,9 @@ use App\Auth;
 use App\Payment;
 use App\Flash;
 
+use App\Models\UserModel;
+
+
 /**
  * Base controller
  * 
@@ -31,6 +34,21 @@ abstract class Controller
     public function __construct($route_params)
     {
         $this->route_params = $route_params;
+
+        // TIMEZONE
+        if (isset($_SESSION["user_id"])) {
+            $userModel = new UserModel();
+            $timeZone = $userModel->getUserTimeZone();
+            date_default_timezone_set($timeZone);
+
+            if (! $_SESSION["PROD"]) {
+                $timezone = date_default_timezone_get();
+                echo "<br>Current Time Zone: " . $timezone;
+            }
+
+        }
+
+
     }
 
     /**

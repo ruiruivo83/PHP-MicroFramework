@@ -7,6 +7,8 @@ use App\Flash;
 use Core\View;
 use Core\Authenticated;
 
+use App\Models\TimeZoneModel;
+
 
 /**
  * Profile controller
@@ -23,6 +25,7 @@ class Profile extends Authenticated
      */
     public function showAction()
     {
+
         View::renderTemplate('Profile/show.html', [
             'userModel' => Auth::getUser()]);
     }
@@ -34,8 +37,26 @@ class Profile extends Authenticated
      */
     public function editAction()
     {
+               
+
         View::renderTemplate('Profile/edit.html', [
             'userModel' => Auth::getUser()
+        ]);
+    }
+
+        /**
+     * Show the form for editing the profile
+     * 
+     * @return void
+     */
+    public function timezonesAction()
+    {
+        $timeZoneModel = new TimeZoneModel();
+        $timeZones = $timeZoneModel->getTimeZones();
+
+        View::renderTemplate('TimeZones/index.html', [
+            'userModel' => Auth::getUser(),
+            'TimeZoneJson' => $timeZones
         ]);
     }
 

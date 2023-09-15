@@ -23,10 +23,12 @@ Profile
 
 <div class="container">
 
-  <a href="/profile/edit">Edit</a>
+  <div><a href="/profile/edit">Edit Profile</a></div>
+  <br>
+
   <div class="mb-3">
-    <label for="exampleFormControlInput1" class="form-label">TimeZone</label>
-    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="{{ userModel.timezone }}"
+    <label for="exampleFormControlInput1" class="form-label">Time Zone&nbsp;&nbsp;<a href="/timezones/edit">(Edit)</a></label>
+    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="{{ userModel.time_zone }}"
       disabled />
   </div>
 
