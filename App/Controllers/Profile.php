@@ -9,7 +9,6 @@ use Core\Authenticated;
 
 use App\Models\TimeZoneModel;
 
-
 /**
  * Profile controller
  * 
@@ -44,7 +43,7 @@ class Profile extends Authenticated
         ]);
     }
 
-        /**
+    /**
      * Show the form for editing the profile
      * 
      * @return void
