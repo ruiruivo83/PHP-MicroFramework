@@ -43,6 +43,11 @@ else {
 }
 
 
+##########################################################################################
+##################################### PROD MESSAGES ######################################
+##########################################################################################
+echo '<span class="badge bg-danger">In Development - DO NOT USE</span>';
+
 
 /** ######################################################################################
  * #######################################################################################
@@ -69,11 +74,11 @@ $conn = new mysqli($servername, $username, $password);
 
 // Check if the connection was successful
 if ($conn->connect_error) {
-    echo "MySQL Server Connection failed. <br>";
-    die("MySQL Server Connection failed: " . $conn->connect_error . "<br>");
+    echo "<br>MySQL Server Connection failed. <br>". $conn->connect_error;
+    // die("<br>MySQL Server Connection failed: " . $conn->connect_error);
 } else {
     if (!$_SESSION["PROD"])
-        echo 'MySQL Server Connection <span class="badge rounded-pill text-bg-success">Success</span> <br>';
+        echo '<br>MySQL Server Connection <span class="badge rounded-pill text-bg-success">Success</span> <br>';
 }
 
 // Test DATABASE connection

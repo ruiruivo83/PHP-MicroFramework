@@ -5,20 +5,46 @@ Items
 {% endblock %}
 
 {% block body %}
-<h1>Courses</h1>
+<!-- MAIN ALIGNMENT -->
+<div class="p-5">
 
-<div class="container">
-    <div class="card" style="width: 18rem;">
-        <img src="..." class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">How to Play OCEAN - 25€ / Mo</h5>
-          <p class="card-text">Learn and master John Butler Ocean</p>
-          <a href="/courses/details" class="btn btn-primary">Details</a>
-        </div>
+  <!-- ERRORS -->
+  {% if userModel.errors is not empty %}
+  <div class="card m-3">
+    <div class="card-body">
+      <h5 class="card-title text-bg-danger p-1">Errors</h5>
+      <ul>
+        {% for error in userModel.errors %}
+        <li class="alert alert-danger" role="alert">{{ error }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- MAIN CARD -->
+  <div class="card shadow-lg p-3 mb-5  bg-body-tertiary rounded">
+    <!-- CARD BODY-->
+    <div class="card-body">
+      <h5 class="card-title">Courses</h5><!-- CARD TITLE -->
+      <h6 class="card-subtitle mb-2 text-body-secondary"></h6> <!-- CARD SUBTITLE -->
+
+      <!-- MAIN CONTENT -->
+      <div class="container">
+        <div class="card" style="width: 18rem;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">How to Play OCEAN - 25€ / Mo</h5>
+              <p class="card-text">Learn and master John Butler Ocean</p>
+              <a href="/courses/details" class="btn btn-primary">Details</a>
+            </div>
+          </div>
       </div>
-</div>
+      <!-- END MAIN CONTENT -->
 
+    </div><!-- CARD BODY -->    
+  </div><!-- END MAIN CARD -->   
+</div><!-- END MAIN ALIGNMENT -->
 
-<br><br><br><br>
-
+<br /><br /><br /><br />
 {% endblock %}

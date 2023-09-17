@@ -33,4 +33,6 @@ class Courses extends Controller
         View::renderTemplate('Courses/details.html');
     }
 
+
+
 }

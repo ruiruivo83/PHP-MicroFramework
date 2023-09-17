@@ -5,66 +5,60 @@ Time Zones
 {% endblock %}
 
 {% block body %}
-<h1>Time Zones</h1>
 
-<!-- ERRORS -->
-{% if userModel.errors is not empty %}
-<div class="card m-3">
-  <div class="card-body">
-    <h5 class="card-title text-bg-danger p-1">Errors</h5>
-    <ul>
-      {% for error in userModel.errors %}
-      <li class="alert alert-danger" role="alert">{{ error }}</li>
-      {% endfor %}
-    </ul>
+
+<!-- MAIN ALIGNMENT -->
+<div class="p-5">
+
+  <!-- ERRORS -->
+  {% if userModel.errors is not empty %}
+  <div class="card m-3">
+    <div class="card-body">
+      <h5 class="card-title text-bg-danger p-1">Errors</h5>
+      <ul>
+        {% for error in userModel.errors %}
+        <li class="alert alert-danger" role="alert">{{ error }}</li>
+        {% endfor %}
+      </ul>
+    </div>
   </div>
-</div>
-{% endif %}
+  {% endif %}
 
+  <!-- MAIN CARD -->
+  <div class="card shadow-lg p-3 mb-5  bg-body-tertiary rounded">
+    <div class="card-body">
+      <h5 class="card-title">Time Zones</h5>
+      <h6 class="card-subtitle mb-2 text-body-secondary"></h6>
 
-<div class="container">
+      <!-- MAIN CONTENT -->            
 
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col"></th>        
+          </tr>
+        </thead>
+        <tbody>
 
-    <div class="card" >
-        <div class="card-body">
-          <h5 class="card-title">Time Zones</h5>
-          <h6 class="card-subtitle mb-2 text-body-secondary">Select your Time Zone</h6>
-         
-          
+          {% for timezone in timezones %}
+          <tr>
+            <td>{{ timezone.timezone }}</td>
+            <td><a href="/timezones/makeactive?timezone={{ timezone.timezone }}">Make Active</a>
+          </tr>
+          {% endfor %}
+
+        </tbody>
+      </table>
+      
+      <!-- END MAIN CONTAINT -->        
+
+    </div>
     
-    
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col"></th>
-                <th scope="col"></th>        
-              </tr>
-            </thead>
-            <tbody>
-        
-              {% for timezone in timezones %}
-              <tr>
-                <td>{{ timezone.timezone }}</td>
-                <td><a href="/timezones/makeactive?timezone={{ timezone.timezone }}">Make Active</a>
-              </tr>
-              {% endfor %}
-             
-            </tbody>
-          </table>
-    
-          
-        </div>
-      </div>
+  </div><!-- END MAIN ALIGNMENT -->
+   
+</div> <!-- END MAIN CARD -->
 
-</div>
-
-
-
-
-
-
-
-
-
+<br /><br /><br /><br />
 
 {% endblock %}

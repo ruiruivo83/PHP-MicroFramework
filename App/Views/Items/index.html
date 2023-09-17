@@ -5,9 +5,38 @@ Items
 {% endblock %}
 
 {% block body %}
-<h1>Items</h1>
 
+<!-- MAIN ALIGNMENT -->
+<div class="p-5">
 
-<br><br><br><br>
+    <!-- ERRORS -->
+    {% if userModel.errors is not empty %}
+    <div class="card m-3">
+        <div class="card-body">
+            <h5 class="card-title text-bg-danger p-1">Errors</h5>
+            <ul>
+            {% for error in userModel.errors %}
+            <li class="alert alert-danger" role="alert">{{ error }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- MAIN CARD -->
+    <div class="card shadow-lg p-3 mb-5  bg-body-tertiary rounded">
+        <div class="card-body">
+            <h5 class="card-title">Items</h5>
+            <h6 class="card-subtitle mb-2 text-body-secondary"></h6>
+
+            <!-- MAIN CONTENT -->
+
+            <!-- END MAIN CONTENT -->
+
+        </div>
+    </div><!-- END MAIN CARD -->
+</div><!-- END MAIN ALIGNMENT -->
+
+<br /><br /><br /><br />
 
 {% endblock %}

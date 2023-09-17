@@ -22,10 +22,10 @@ class Profile extends Authenticated
      * 
      * @return void
      */
-    public function showAction()
+    public function indexAction()
     {
 
-        View::renderTemplate('Profile/show.html', [
+        View::renderTemplate('Profile/index.html', [
             'userModel' => Auth::getUser()]);
     }
 
@@ -70,7 +70,7 @@ class Profile extends Authenticated
 
         if ($user->updateProfile($_POST)) {
             Flash::addMessage('Changes saved');
-            $this->redirect('/profile/show');
+            $this->redirect('/profile/index');
         } else {
 
             View::renderTemplate('Profile/edit.html', ['userModel' => $user]);
