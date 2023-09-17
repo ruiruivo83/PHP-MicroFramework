@@ -13,7 +13,7 @@ use Core\Authenticated;
  * 
  * PHP version 7.4
  */
-class FileUpload
+class FileUpload extends Authenticated 
 {
 
     /** New file upload
