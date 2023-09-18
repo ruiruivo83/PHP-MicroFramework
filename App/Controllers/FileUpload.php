@@ -25,7 +25,7 @@ class FileUpload extends Authenticated
 
         // MODEL
         $phpFileUploadErrors = array(
-            0 => 'There is no error, the file uploaded with success',
+            0 => 'NO ERRORS',
             1 => 'The uploaded file exceeds the upload_max_filesize directive in php.ini',
             2 => 'The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form',
             3 => 'The uploaded file was only partially uploaded',
@@ -35,19 +35,28 @@ class FileUpload extends Authenticated
             8 => 'A PHP extension stopped the file upload.',
         );
 
+        // changing the upload limits
+        ini_set('upload_max_filesize', '5M');
+        ini_set('post_max_size', '5M');
+        ini_set('max_input_time', 300);
+        ini_set('max_execution_time', 300);
+
+        var_dump($_FILES);
+
         // UPLOAD
         $target_dir  = '../data/uploads/';
         $target_file  = $target_dir  . basename($_FILES['userfile']['name']);
 
-        echo 'file count=', count($_FILES),"\n";
-        echo "File Count: " . var_dump($_FILES);
+        echo 'File Count=' . count($_FILES) . "<br>";
+       
 
         $uploadOk = 1;
         $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
         // Check if image file is a actual image or fake image
         if(isset($_POST["submit"])) {
-        $check = getimagesize($_FILES["userfile"]["tmp_name"]);
+
+            $check = getimagesize($_FILES["userfile"]["tmp_name"]);
 
             if($check !== false) {
                 echo "File is an image - " . $check["mime"] . ".";
@@ -66,41 +75,30 @@ class FileUpload extends Authenticated
         }
 
         // Check file size
-        if ($_FILES["userfile"]["size"] > 500000) {
+        if ($_FILES["userfile"]["size"] > $_POST['MAX_FILE_SIZE']) { // 1 000 000 = 1Mb - 3000000 = 3MB etc
             echo "Sorry, your file is too large.";
             $uploadOk = 0;
         }
 
         // Allow certain file formats
-        if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" && $imageFileType != "sql" && $imageFileType != "pdf" && $imageFileType != "mov" && $imageFileType != "avi" && $imageFileType != "mp4") {
-            echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+        if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" && $imageFileType != "sql" && $imageFileType != "pdf" && $imageFileType != "mov" && $imageFileType != "avi" && $imageFileType != "mp4" && $imageFileType != "txt" && $imageFileType != "zip" && $imageFileType != "rar") {
+            echo "Sorry, only JPG, JPEG, PNG & GIF, sql, pdf, mov, avi, mp4, txt, zip, rar files are allowed.";
             $uploadOk = 0;
         }
 
         // Check if $uploadOk is set to 0 by an error
         if ($uploadOk == 0) {
-            echo "Sorry, your file was not uploaded.";
-            
+            echo "Sorry, your file was not uploaded.<br>";            
             // if everything is ok, try to upload file
         } else {
             if (move_uploaded_file($_FILES["userfile"]["tmp_name"], $target_file)) {
-                echo "The file ". htmlspecialchars( basename( $_FILES["userfile"]["name"])). " has been uploaded.";
+                echo "The file ". htmlspecialchars( basename( $_FILES["userfile"]["name"])). " has been uploaded.<br>";
             } else {
-                echo "Sorry, there was an error uploading your file.";
+                echo "Sorry, there was an error uploading your file.<br>";
             }
         }
 
-        // MODEL
-        var_dump($_POST);
-        var_dump($_FILES['userfile']['name']);
-        var_dump("File Size: " . $_FILES['userfile']['size']);
-        
-        // MODEL
-        echo 'Here is some more debugging info:';
-        print_r($_FILES);
-        echo "Error description: " . $phpFileUploadErrors[$_FILES['userfile']['error']]."\n";
-
-        print "</pre>";
+        echo "Error description: " . $phpFileUploadErrors[$_FILES['userfile']['error']]."<br>";
 
         View::renderTemplate('coursestudio/newchapter.html');
 
