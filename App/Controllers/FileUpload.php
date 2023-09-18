@@ -35,11 +35,7 @@ class FileUpload extends Authenticated
             8 => 'A PHP extension stopped the file upload.',
         );
 
-        // changing the upload limits
-        ini_set('upload_max_filesize', '5M');
-        ini_set('post_max_size', '5M');
-        ini_set('max_input_time', 300);
-        ini_set('max_execution_time', 300);
+
 
         var_dump($_FILES);
 
@@ -75,7 +71,7 @@ class FileUpload extends Authenticated
         }
 
         // Check file size
-        if ($_FILES["userfile"]["size"] > $_POST['MAX_FILE_SIZE']) { // 1 000 000 = 1Mb - 3000000 = 3MB etc
+        if ($_FILES["userfile"]["size"] > $_POST['MAX_FILE_SIZE']) { // 1 000 000 = 1Mb - 3000000 = 3MB - 5000000 = 5MB etc
             echo "Sorry, your file is too large.";
             $uploadOk = 0;
         }
