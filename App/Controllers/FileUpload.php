@@ -96,7 +96,7 @@ class FileUpload extends Authenticated
 
         echo "Error description: " . $phpFileUploadErrors[$_FILES['userfile']['error']]."<br>";
 
-        View::renderTemplate('coursestudio/newchapter.html');
+        View::renderTemplate('coursecreator/newchapter.html');
 
     }
 

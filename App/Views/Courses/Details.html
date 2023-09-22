@@ -5,15 +5,81 @@ Course Details
 {% endblock %}
 
 {% block body %}
-<h1>Course Details</h1>
-The course details and free presentation video
-<a href="/mycourses/index">Go to this course</a>
 
-<div>
-<h6>For test ONLY: </h6>
-<a href="">TEST - Pay 30 days</a>   <!--  $this->expiry_timestamp = time() + 60 * 60 * 24 * 30; // 30 days from now -->
+<!-- MAIN ALIGNMENT -->
+<div class="p-5">
+
+    <!-- ERRORS -->
+    {% if userModel.errors is not empty %}
+    <div class="card m-3">
+        <div class="card-body">
+            <h5 class="card-title text-bg-danger p-1">Errors</h5>
+            <ul>
+                {% for error in userModel.errors %}
+                <li class="alert alert-danger" role="alert">{{ error }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- MAIN CARD -->
+    <div class="card shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+        <!-- CARD BODY-->
+
+        <!-- MAIN CONTENT -->
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Course Details</h5>
+                <h6 class="card-subtitle mb-2 text-body-secondary"> Title: {{ courseDetails.title }}</h6>
+
+
+
+                <br><br>
+
+                <!-- Loop through each section in courseDetails -->
+                {% for section in SectionsAndChapters %}
+                <div class="mb-3">
+
+                    <h6 class="card-subtitle mb-2 text-muted">
+                        <p> <span class="align-baseline">Section: {{ section.title }}</p>
+                        </span>
+                    </h6>
+
+                    <!-- Loop through each chapter in the current section -->
+                    {% for chapter in section.chapters %}
+
+
+
+                    <div class="mb-3">
+
+                        <h6 class="card-subtitle mb-2 text-muted">
+                            <p> <span class="align-baseline">Chapter: {{ chapter.title }}</p>
+                            </span>
+                        </h6>
+
+                    </div>
+
+
+                    {% endfor %} <!-- End of chapters loop -->
+
+                </div>
+                {% endfor %} <!-- End of sections loop -->
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+    <br>
 
 </div>
+
+
 
 <br><br><br><br>
 

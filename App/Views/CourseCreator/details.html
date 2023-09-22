@@ -1,0 +1,161 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Course Details
+{% endblock %}
+
+{% block body %}
+
+<!-- MAIN ALIGNMENT -->
+<div class="p-5">
+
+    <!-- ERRORS -->
+    {% if userModel.errors is not empty %}
+    <div class="card m-3">
+        <div class="card-body">
+            <h5 class="card-title text-bg-danger p-1">Errors</h5>
+            <ul>
+                {% for error in userModel.errors %}
+                <li class="alert alert-danger" role="alert">{{ error }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- MAIN CARD -->
+    <div class="card shadow-lg p-3 mb-5  bg-body-tertiary rounded">
+        <!-- CARD BODY-->
+        <div class="card-body">
+            <h5 class="card-title">Course Creator Details</h5><a
+                href="/coursecreator/edit?course_id={{courseDetails.id}}">Edit Course</a>
+            <h6 class="card-subtitle mb-2 text-body-secondary"></h6>
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Course Title</label>
+                <input type="text" class="form-control" id="exampleFormControlInput1"
+                    placeholder="{{courseDetails.title}}" disabled>
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label">Course Description</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                    disabled>{{courseDetails.description}}</textarea>
+            </div>
+
+            <!-- SECTIONS -->
+            <h5 class="card-title">Sections</h5>
+            <h6 class="card-subtitle mb-2 text-body-secondary"><a
+                    href="/coursecreator/newSection?id={{courseDetails.id}}">New Section</a></h6>
+
+
+            {% for section in SectionsAndChapters %}
+            {% set section_token = "section" ~ loop.index %} {# Generate a unique token for this section #}
+
+            <div class="accordion" id="{{ section_token }}Accordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#{{ section_token }}Collapse" aria-expanded="true"
+                            aria-controls="{{ section_token }}Collapse">
+                            Section: {{ section.title }}
+                        </button>
+                    </h2>
+                    <div class="d-flex flex-row-reverse">
+                        <div class="p-2"> <a
+                                href="/coursecreator/editsection?course_id={{courseDetails.id}}&section_id={{ section.id }}">Edit
+                                Section</a></div>
+                    </div>
+
+                    <div id="{{ section_token }}Collapse" class="accordion-collapse collapse show">
+                        <div class="accordion-body">
+                            {{ section.description }}
+
+                            <!-- CHAPTERS -->
+                            <div class="accordion" id="{{ section_token }}ChapterAccordion">
+                                <br>
+                                <h5 class="card-title">Chapters</h5>
+                                <h6 class="card-subtitle mb-2 text-body-secondary"><a
+                                        href="/coursecreator/newChapter?course_id={{courseDetails.id}}&course_section_id={{ section.id }}">New
+                                        Chapter</a></h6>
+
+                                {% for chapter in section.chapters %}
+                                {% set chapter_token = section_token ~ "chapter" ~ loop.index %}
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#{{ chapter_token }}Collapse" aria-expanded="true"
+                                            aria-controls="{{ chapter_token }}Collapse">
+                                            Chapter: {{ chapter.title }}
+                                        </button>
+                                    </h2>
+                                    <div class="d-flex flex-row-reverse">
+                                        <div class="p-2"> &nbsp;<a
+                                                href="/coursecreator/editchapter?course_id={{courseDetails.id}}&section_id={{section.id}}&chapter_id={{chapter.id}}">Edit
+                                                Chapter</a></div>
+                                    </div>
+
+                                    <div id="{{ chapter_token }}Collapse" class="accordion-collapse collapse show">
+                                        <div class="accordion-body">
+                                            {{ chapter.description }}
+
+                                            <!-- Display VideoURL and FileURL -->
+
+                                            <div class="d-flex flex-row mb-3">
+                                                <div class="p-2"> {% if chapter.VideoURL %}
+                                                    <div class="card" style="width: 18rem;">
+                                                        <div class="card-body">
+                                                            <h5 class="card-title">Video URL</h5>
+                                                            <h6 class="card-subtitle mb-2 text-body-secondary">subtitle
+                                                            </h6>
+                                                            <p class="card-text"><a href="{{ chapter.VideoURL }}"
+                                                                    target="_blank">{{chapter.VideoURL }}</a></p>
+                                                            <!-- Embed YouTube Video -->
+                                                            <div class="embed-responsive embed-responsive-16by9">
+                                                                <iframe class="embed-responsive-item"
+                                                                    src="{{ chapter.videoURL }}"
+                                                                    allowfullscreen></iframe>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="p-2"> {% if chapter.FileURL %}
+                                                    <div class="card" style="width: 18rem;">
+                                                        <div class="card-body">
+                                                            <h5 class="card-title">File URL</h5>
+                                                            <h6 class="card-subtitle mb-2 text-body-secondary">subtitle
+                                                            </h6>
+                                                            <p>File URL: <a href="{{ chapter.FileURL }}"
+                                                                    target="_blank">{{chapter.FileURL }}</a></p>
+                                                        </div>
+                                                    </div>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            {% endfor %}
+
+
+        </div>
+    </div>
+
+</div>
+
+
+
+<br><br><br><br>
+
+{% endblock %}

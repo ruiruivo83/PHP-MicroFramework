@@ -31,19 +31,23 @@ Items
 
       <!-- MAIN CONTENT -->
       <div class="container">
+
+        {% for course in courses %}
         <div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">How to Play OCEAN - 25€ / Mo</h5>
-              <p class="card-text">Learn and master John Butler Ocean</p>
-              <a href="/courses/details" class="btn btn-primary">Details</a>
-            </div>
+          <img src="{{ course.image }}" class="card-img-top" alt="{{ course.title }}">
+          <div class="card-body">
+            <h5 class="card-title">{{ course.title }} - {{ course.price }} / Mo</h5>
+            <p class="card-text">{{ course.description }}</p>
+            <a href="/courses/details?id={{ course.id }}" class="btn btn-primary">Details</a>
           </div>
+        </div>
+        {% endfor %}
+
       </div>
       <!-- END MAIN CONTENT -->
 
-    </div><!-- CARD BODY -->    
-  </div><!-- END MAIN CARD -->   
+    </div><!-- CARD BODY -->
+  </div><!-- END MAIN CARD -->
 </div><!-- END MAIN ALIGNMENT -->
 
 <br /><br /><br /><br />

@@ -1,13 +1,17 @@
 OK - Implement Timezones in profile with dropdown.
 OK - Implement Subscription CONTROL.
 
-- Implement Admin CONTROL. (For the main user who wants to create a course).
+- Implement SysAdmin CONTROL. (For the main user who wants to create a course or access inside stats).
 - Implement System Admin CONTROL. (For DEV PURPOSES - STATS PROTECTION AND STUFF).
+
 - Implement System STATS.
 
 - Implement courses.
-- Implement File Upload.
+
+OK - Implement File Upload.
+
 - Implement My courses.
+- Implement Course Creator.
 
 - Implement Fil d'Ariane (breadcrumb)
 

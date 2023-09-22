@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block title %}
+New Section
+{% endblock %}
+
+{% block body %}
+
+<!-- MAIN ALIGNMENT -->
+<div class="p-5">
+
+    <!-- ERRORS -->
+    {% if userModel.errors is not empty %}
+    <div class="card m-3">
+        <div class="card-body">
+            <h5 class="card-title text-bg-danger p-1">Errors</h5>
+            <ul>
+                {% for error in userModel.errors %}
+                <li class="alert alert-danger" role="alert">{{ error }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- MAIN CARD -->
+    <div class="card shadow-lg p-3 mb-5  bg-body-tertiary rounded">
+        <div class="card-body">
+
+
+            <div>
+                <h6>{{ courseDetails.title }}</h6>
+                <h5 class="card-title"><a href="/coursecreator/index">Course Creator</a> - New Section
+                </h5>
+            </div>
+            <!-- CARD TITLE -->
+            <br>
+            <h6 class="card-subtitle mb-2 text-body-secondary"></h6><!-- CARD SECOND -->
+
+            <!-- MAIN CONTENT -->
+
+            <form action="/coursecreator/createSection" method="POST">
+
+                <div>
+
+                    <input type="text" class="form-control" id="courseId" name="courseId" placeholder=""
+                        value="{{ courseDetails.id }}" hidden />
+
+                    <label for="courseTitle" class="form-label">Section Title</label>
+                    <!-- Added "for" attribute to associate the label with the input field, and added the "id" attribute to the input field -->
+
+                    <input type="text" class="form-control" id="sectionTitle" name="sectionTitle" placeholder=""
+                        required />
+                </div>
+
+                <div>
+                    <label for="courseSection" class="form-label">Section Description</label>
+                    <!-- Added "for" attribute to associate the label with the textarea, and added the "id" attribute to the textarea -->
+                    <textarea class="form-control" id="sectionDescription" name="sectionDescription" placeholder=""
+                        required></textarea>
+                </div>
+                <br>
+                <!-- Removed one "class" attribute from the button element -->
+                <button type="submit" class="btn btn-primary">Create</button>
+
+            </form>
+
+
+
+            <br>
+
+
+
+
+            <!-- END MAIN CONTENT -->
+
+        </div> <!-- CARD BODY -->
+    </div><!-- END MAIN CARD -->
+</div><!-- END MAIN ALIGNMENT -->
+
+<br /><br /><br /><br />
+{% endblock %}

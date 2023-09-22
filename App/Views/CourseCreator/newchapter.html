@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %}
+New Chapter
+{% endblock %}
+
+{% block body %}
+<!-- MAIN CARD -->
+<div class="card shadow-lg p-3 mb-5  bg-body-tertiary rounded">
+    <div class="card-body">
+
+
+        <div>
+            <h6>{{ courseDetails.title }}</h6>
+            <h5 class="card-title"><a href="/coursecreator/index">Course Creator</a> - New chapter
+            </h5>
+        </div>
+        <!-- CARD TITLE -->
+        <br>
+        <h6 class="card-subtitle mb-2 text-body-secondary"></h6><!-- CARD SECOND -->
+
+        <!-- MAIN CONTENT -->
+
+        <form action="/coursecreator/createchapter" method="POST">
+
+            <div>
+                <label for="courseTitle" class="form-label">Chapter Title</label>
+                <!-- Added "for" attribute to associate the label with the input field, and added the "id" attribute to the input field -->
+                <input type="text" class="form-control" id="course_id" name="course_id" placeholder=""
+                    value="{{ course_id }}" hidden />
+
+                <input type="text" class="form-control" id="course_section_id" name="course_section_id" placeholder=""
+                    value="{{ course_section_id }}" hidden />
+
+                <input type="text" class="form-control" id="chapterTitle" name="chapterTitle" placeholder="" required />
+            </div>
+
+            <div>
+                <label for="coursechapter" class="form-label">Chapter Description</label>
+                <!-- Added "for" attribute to associate the label with the textarea, and added the "id" attribute to the textarea -->
+                <textarea class="form-control" id="chapterDescription" name="chapterDescription" placeholder=""
+                    required></textarea>
+            </div>
+
+            <div>
+                <label for="coursechapter" class="form-label">Video URL</label>
+                <!-- Added "for" attribute to associate the label with the textarea, and added the "id" attribute to the textarea -->
+                <input type="text" class="form-control" id="VideoURL" name="VideoURL" placeholder="" />
+            </div>
+
+            <div>
+                <label for="coursechapter" class="form-label">File URL</label>
+                <!-- Added "for" attribute to associate the label with the textarea, and added the "id" attribute to the textarea -->
+                <input type="text" class="form-control" id="FileURL" name="FileURL" placeholder="" />
+            </div>
+
+            <br>
+            <!-- Removed one "class" attribute from the button element -->
+            <button type="submit" class="btn btn-primary">Create</button>
+
+        </form>
+
+
+
+    </div> <!-- CARD BODY -->
+</div><!-- END MAIN CARD -->
+</div><!-- END MAIN ALIGNMENT -->
+
+<br /><br /><br /><br />
+{% endblock %}

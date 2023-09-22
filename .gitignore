@@ -263,7 +263,7 @@ GitHub.sublime-settings
 *.tmproject
 tmtags
 
-##### VisualStudioCode
+##### VisualCreatorCode
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
@@ -271,7 +271,7 @@ tmtags
 !.vscode/extensions.json
 *.code-workspace
 
-# Local History for Visual Studio Code
+# Local History for Visual Creator Code
 .history/
 
 ##### NetBeans
@@ -285,7 +285,7 @@ nbdist/
 .nb-gradle/
 
 ##### JetBrains
-# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Creator, WebStorm and Rider
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
 # User-specific stuff
@@ -345,7 +345,7 @@ atlassian-ide-plugin.xml
 # Cursive Clojure plugin
 .idea/replstate.xml
 
-# Crashlytics plugin (for Android Studio and IntelliJ)
+# Crashlytics plugin (for Android Creator and IntelliJ)
 com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
@@ -354,7 +354,7 @@ fabric.properties
 # Editor-based Rest Client
 .idea/httpRequests
 
-# Android studio 3.1+ serialized cache file
+# Android creator 3.1+ serialized cache file
 .idea/caches/build_file_checksums.ser
 
 ##### Eclipse

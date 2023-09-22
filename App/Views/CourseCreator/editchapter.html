@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Edit Chapter
+{% endblock %}
+
+{% block body %}
+<!-- MAIN CARD -->
+<div class="card shadow-lg p-3 mb-5  bg-body-tertiary rounded">
+    <div class="card-body">
+
+
+        <div>
+            <h6>{{ courseDetails.title }}</h6>
+            <h5 class="card-title"><a href="/coursecreator/index">Course Creator</a> - Edit chapter
+            </h5>
+        </div>
+        <!-- CARD TITLE -->
+        <br>
+        <h6 class="card-subtitle mb-2 text-body-secondary"></h6><!-- CARD SECOND -->
+
+        <!-- MAIN CONTENT -->
+
+        <form action="/coursecreator/updatechapter" method="POST">
+
+            <div>
+                <!-- HIDDEN -->
+                <input type="text" class="form-control" id="course_id" name="course_id" placeholder=""
+                    value="{{ courseChapterInfo.course_id }}" hidden />
+
+                <input type="text" class="form-control" id="section_id" name="section_id" placeholder=""
+                    value="{{ courseChapterInfo.section_id }}" hidden />
+
+                <input type="text" class="form-control" id="chapter_id" name="chapter_id" placeholder=""
+                    value="{{ courseChapterInfo.id }}" hidden />
+
+
+                <label for="chapterTitle" class="form-label">Chapter Title</label>
+                <!-- Added "for" attribute to associate the label with the input field, and added the "id" attribute to the input field -->
+
+                <input type="text" class="form-control" id="chapterTitle" name="chapterTitle"
+                    value="{{ courseChapterInfo.title }}" required />
+            </div>
+
+            <div>
+                <label for="coursechapter" class="form-label">Chapter Description</label>
+                <!-- Added "for" attribute to associate the label with the textarea, and added the "id" attribute to the textarea -->
+                <textarea class="form-control" id="chapterDescription" name="chapterDescription"
+                    required>{{ courseChapterInfo.description }}</textarea>
+            </div>
+
+            <div>
+                <label for="coursechapter" class="form-label">Video URL</label>
+                <!-- Added "for" attribute to associate the label with the textarea, and added the "id" attribute to the textarea -->
+                <input type="text" class="form-control" id="VideoURL" name="VideoURL"
+                    value="{{ courseChapterInfo.VideoURL }}" />
+            </div>
+
+            <div>
+                <label for="coursechapter" class="form-label">File URL</label>
+                <!-- Added "for" attribute to associate the label with the textarea, and added the "id" attribute to the textarea -->
+                <input type="text" class="form-control" id="FileURL" name="FileURL"
+                    value="{{ courseChapterInfo.FileURL }}" />
+            </div>
+
+            <br>
+            <!-- Removed one "class" attribute from the button element -->
+            <button type="submit" class="btn btn-primary">Update</button>
+
+        </form>
+
+
+
+    </div> <!-- CARD BODY -->
+</div><!-- END MAIN CARD -->
+</div><!-- END MAIN ALIGNMENT -->
+
+<br /><br /><br /><br />
+{% endblock %}

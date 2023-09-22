@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Course Creator
+{% endblock %}
+
+{% block body %}
+<!-- MAIN ALIGNMENT -->
+<div class="p-5">
+
+  <!-- ERRORS -->
+  {% if userModel.errors is not empty %}
+  <div class="card m-3">
+    <div class="card-body">
+      <h5 class="card-title text-bg-danger p-1">Errors</h5>
+      <ul>
+        {% for error in userModel.errors %}
+        <li class="alert alert-danger" role="alert">{{ error }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- MAIN CARD -->
+  <div class="card shadow-lg p-3 mb-5  bg-body-tertiary rounded">
+    <div class="card-body">
+      <h5 class="card-title">Course Creator</h5><!-- CARD TITLE -->
+      <h6 class="card-subtitle mb-2 text-body-secondary"></h6><!-- CARD SECOND -->
+      <br>
+      <!-- MAIN CONTENT -->
+      <a href="/coursecreator/new">New Course</a>
+      <br>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+
+          {% for course in courses %}
+          <tr>
+            <td>{{ course.title }}</td>
+            <td>{{ course.description }}</td>
+            <td><a href="/coursecreator/details?course_id={{ course.id }}">Details</a></td>
+          </tr>
+          {% endfor %}
+
+
+        </tbody>
+      </table>
+
+      <!-- END MAIN CONTENT -->
+
+    </div> <!-- CARD BODY -->
+  </div><!-- END MAIN CARD -->
+</div><!-- END MAIN ALIGNMENT -->
+
+<br /><br /><br /><br />
+{% endblock %}
