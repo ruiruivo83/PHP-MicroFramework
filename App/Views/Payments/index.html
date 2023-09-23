@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% block title %}Payments{% endblock %}
+
+{% block body %}
+<!-- MAIN ALIGNMENT -->
+<div class="p-5">
+
+
+    <!-- ERRORS -->
+    {% if userModel.errors is not empty %}
+    <div class="card m-3">
+        <div class="card-body">
+            <h5 class="card-title text-bg-danger p-1">Errors</h5>
+            <ul>
+                {% for error in userModel.errors %}
+                <li class="alert alert-danger" role="alert">{{ error }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- MAIN CARD -->
+    <div class="card shadow-lg p-3 mb-5  bg-body-tertiary rounded">
+        <div class="card-body">
+            <h5 class="card-title">Payments</h5>
+
+
+
+
+
+            {% set showButton = false %} {# Initial flag to not show the button #}
+
+            {% for Payment in Payments %}
+            {% if Payment.isActive == 'Active' %}
+            {% set showButton = true %}
+            {% endif %}
+            {% endfor %}
+
+            {% if showButton %}
+            <h6 class="card-subtitle mb-2 text-body-secondary"><span class="badge text-bg-success">Your Subscription is
+                    active</span></h6>
+            {% else %}
+            <a href="/Payments/NewPayment">New Payment</a>
+            {% endif %}
+
+
+
+
+            <!-- MAIN CONTENT -->
+
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Payment Date</th>
+                        <th scope="col">Payment Expiration Date</th>
+                        <th scope="col">Subscription is active</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {% for Payment in Payments %}
+
+                    <tr>
+                        <td>{{ Payment.PaymentDate }}</th>
+                        <td>{{ Payment.PaymentExpirationDate }}</td>
+                        <td>{{ Payment.isActive }}</td>
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+            </table>
+
+
+            <!-- END MAIN CONTAINT -->
+            </table>
+        </div>
+
+        <!-- END MAIN CARD -->
+    </div>
+
+    <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+
+        <span class="align-baseline"></span>
+
+    </div>
+
+    <!-- END MAIN ALIGNMENT -->
+</div>
+
+<br /><br /><br /><br />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

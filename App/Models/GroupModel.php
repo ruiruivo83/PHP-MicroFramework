@@ -101,7 +101,8 @@ class GroupModel extends \Core\Model
      */
     public function load()
     {
-        $user = Auth::getUser();        
+        $user = Auth::getUser();
+        
 
         $db = static::getDB();
 

@@ -6,6 +6,7 @@ My Courses
 
 {% block body %}
 
+
 <!-- MAIN ALIGNMENT -->
 <div class="p-5">
 
@@ -26,61 +27,39 @@ My Courses
   <!-- MAIN CARD -->
   <div class="card shadow-lg p-3 mb-5  bg-body-tertiary rounded">
     <div class="card-body">
-      <h5 class="card-title">My Courses</h5>
-      <h6 class="card-subtitle mb-2 text-body-secondary"></h6>
-
+      <h5 class="card-title">Course Creator</h5><!-- CARD TITLE -->
+      <h6 class="card-subtitle mb-2 text-body-secondary"></h6><!-- CARD SECOND -->
+      <br>
       <!-- MAIN CONTENT -->
-      <div class="container">
-        <div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">How to Play OCEAN - 25€ / Mo</h5>
-              <p class="card-text">Learn and master John Butler Ocean</p>
-              <a href="/mycourses/course" class="btn btn-primary">Enter Course</a>
-            </div>
-          </div>
-      </div>
+      <a href="/coursecreator/new">New Course</a>
+      <br>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
 
-      <div class="container">
-        <div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">How to Play OCEAN - 25€ / Mo</h5>
-              <p class="card-text">Learn and master John Butler Ocean</p>
-              <a href="/mycourses/course" class="btn btn-primary">Enter Course</a>
-            </div>
-          </div>
-      </div>
+          {% for course in courses %}
+          <tr>
+            <td>{{ course.title }}</td>
+            <td>{{ course.description }}</td>
+            <td><a href="/coursecreator/details?course_id={{ course.id }}">Details</a></td>
+          </tr>
+          {% endfor %}
 
-      <div class="container">
-        <div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">How to Play OCEAN - 25€ / Mo</h5>
-              <p class="card-text">Learn and master John Butler Ocean</p>
-              <a href="/mycourses/course" class="btn btn-primary">Enter Course</a>
-            </div>
-          </div>
-      </div>
 
-      <div class="container">
-        <div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">How to Play OCEAN - 25€ / Mo</h5>
-              <p class="card-text">Learn and master John Butler Ocean</p>
-              <a href="/mycourses/course" class="btn btn-primary">Enter Course</a>
-            </div>
-          </div>
-      </div>      
+        </tbody>
+      </table>
+
       <!-- END MAIN CONTENT -->
-      
-    </div>
-    
-  </div><!-- END MAIN ALIGNMENT -->
-   
-</div> <!-- END MAIN CARD -->
+
+    </div> <!-- CARD BODY -->
+  </div><!-- END MAIN CARD -->
+</div><!-- END MAIN ALIGNMENT -->
 
 <br /><br /><br /><br />
 {% endblock %}
-
