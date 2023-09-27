@@ -2,6 +2,8 @@
 
 namespace Core;
 
+use App\Models\UserModel;
+
 /**
  * Authenticated base controller
  * 

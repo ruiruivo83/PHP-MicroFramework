@@ -57,33 +57,40 @@ echo '<span class="badge bg-danger">In Development - DO NOT USE</span>';
 
 // Test if database exists - If not create
 if ($_SESSION["PROD"]) {
-    $servername = Config_prod::PROD_DB_HOST; // MySQL server hostname
-    $username = Config_prod::PROD_DB_USER; // MySQL username
-    $password = Config_prod::PROD_DB_PASSWORD; // MySQL password
-    $dbname_to_check = Config_prod::PROD_DB_NAME; // Database name to check
+    // $servername = Config_prod::PROD_DB_HOST; // MySQL server hostname
+    // $username = Config_prod::PROD_DB_USER; // MySQL username
+    // $password = Config_prod::PROD_DB_PASSWORD; // MySQL password
+    // $dbname_to_check = Config_prod::PROD_DB_NAME; // Database name to check
+    $_SESSION["db_servername"] = Config_prod::PROD_DB_HOST; // MySQL server hostname
+    $_SESSION["db_username"] = Config_prod::PROD_DB_USER; // MySQL username
+    $_SESSION["db_password"] = Config_prod::PROD_DB_PASSWORD; // MySQL password
+    $_SESSION["db_name"] = Config_prod::PROD_DB_NAME; // Database name to check
 } else {
-    $servername = Config::DB_HOST; // MySQL server hostname
-    $username = Config::DB_USER; // MySQL username
-    $password = Config::DB_PASSWORD; // MySQL password
-    $dbname_to_check = Config::DB_NAME; // Database name to check
+    // $servername = Config::DB_HOST; // MySQL server hostname
+    // $username = Config::DB_USER; // MySQL username
+    // $password = Config::DB_PASSWORD; // MySQL password
+    // $dbname_to_check = Config::DB_NAME; // Database name to check
+    $_SESSION["db_servername"] = Config::DB_HOST; // MySQL server hostname
+    $_SESSION["db_username"] = Config::DB_USER; // MySQL username
+    $_SESSION["db_password"] = Config::DB_PASSWORD; // MySQL password
+    $_SESSION["db_name"] = Config::DB_NAME; // Database name to check
 }
 
 // Test SERVER connection
 // Create a connection to the MySQL server
-$conn = new mysqli($servername, $username, $password);
+$conn = new mysqli($_SESSION["db_servername"], $_SESSION["db_username"] , $_SESSION["db_password"]);
 
 // Check if the connection was successful
 if ($conn->connect_error) {
     echo "<br>MySQL Server Connection failed. <br>". $conn->connect_error;
     // die("<br>MySQL Server Connection failed: " . $conn->connect_error);
 } else {
-    if (!$_SESSION["PROD"])
-        echo '<br>MySQL Server Connection <span class="badge rounded-pill text-bg-success">Success</span> <br>';
+    if (!$_SESSION["PROD"]) echo '<br>MySQL Server Connection <span class="badge rounded-pill text-bg-success">Success</span> <br>';
 }
 
 // Test DATABASE connection
 // Create a connection to the MySQL server
-$conn = new mysqli($servername, $username, $password, $dbname_to_check);
+$conn = new mysqli($_SESSION["db_servername"], $_SESSION["db_username"] , $_SESSION["db_password"], $_SESSION["db_name"]);
 
 // Check if the connection was successful
 if ($conn->connect_error) {
@@ -116,10 +123,9 @@ if (is_dir($folderPath)) {
         if (!$_SESSION["PROD"])
             echo "<br>Searching For: " . $searchString . ": - ";
 
-
         try {
             // Create a PDO connection to MySQL
-            $pdo = new PDO("mysql:host=$servername;dbname=$dbname_to_check", $username, $password);
+            $pdo = new PDO("mysql:host=" . $_SESSION["db_servername"] . ";dbname=" . $_SESSION["db_name"] , $_SESSION["db_username"] , $_SESSION["db_password"] );
 
             // Set PDO error mode to exception
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -151,7 +157,7 @@ if (is_dir($folderPath)) {
                 $sqlScriptFile = $folderPath . $filename; // Change this to the path of your SQL script file
 
                 // Create a connection to MySQL
-                $mysqli = new mysqli("localhost", $username, $password, $dbname_to_check);
+                $mysqli = new mysqli($_SESSION["db_servername"], $_SESSION["db_username"], $_SESSION["db_password"], $_SESSION["db_name"]);
 
                 // Check if the connection was successful
                 if ($mysqli->connect_error) {
@@ -167,8 +173,9 @@ if (is_dir($folderPath)) {
 
                     // Write this filename into table "last_executed_version"
                     try {
+                        
                         // Create a PDO connection to MySQL
-                        $pdo = new PDO("mysql:host=$servername;dbname=$dbname_to_check", $username, $password);
+                        $pdo = new PDO("mysql:host=" . $_SESSION["db_servername"] . ";dbname=" . $_SESSION["db_name"], $_SESSION["db_username"], $_SESSION["db_password"]);
 
                         // Set PDO error mode to exception
                         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

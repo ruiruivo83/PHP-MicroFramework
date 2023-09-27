@@ -20,19 +20,19 @@ class Config_prod
    * Database name
    * @var string
    */
-  const PROD_DB_NAME = 'php_microframework_db';
+  const PROD_DB_NAME = 'tickettickle_db';
 
   /**
    * Database user
    * @var string
    */
-  const PROD_DB_USER = 'php_microframework_user';
+  const PROD_DB_USER = 'tickettickle-user';
 
   /**
    * Database password
    * @var string
    */
-  const PROD_DB_PASSWORD = 'secret';
+  const PROD_DB_PASSWORD = '+v6Dl^b5KRiE';
 
   /**
    * Secret key for hashing

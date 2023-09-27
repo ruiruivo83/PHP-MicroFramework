@@ -6,7 +6,8 @@
 CANNOT RUN "COMPOSER UPDATE" ON SERVER
 
 
-#### DATABASE Instructions 
+#### DATABASE Instructions
+- Run "composer update" on local dev machine
 - Create Database name from file config or config_prod in your PHPmyAdmin.
 
 - MUST create table "_database_updates" manually:

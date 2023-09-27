@@ -68,7 +68,7 @@ class Timezones extends Authenticated
         $userModel = new UserModel();
         $userModel->setTimeZone();
 
-        $this->redirect('/profile/show');
+        $this->redirect('/profile/index');
 
     }
 

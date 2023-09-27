@@ -25,8 +25,8 @@ abstract class Model
 
         if ($pdo === null) {
 
-            $dsn = 'mysql:host=' . Config::DB_HOST . ';dbname=' . Config::DB_NAME . ';charset=utf8';
-            $pdo = new PDO($dsn, Config::DB_USER, Config::DB_PASSWORD);
+            $dsn = 'mysql:host=' . $_SESSION["db_servername"] . ';dbname=' . $_SESSION["db_name"] . ';charset=utf8';
+            $pdo = new PDO($dsn, $_SESSION["db_username"], $_SESSION["db_password"]);
             //Throw an exception when an error occurs
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
            
