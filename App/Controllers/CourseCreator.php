@@ -310,11 +310,6 @@ public function updateSection() {
 
     }
 
-
-
-
-
-
 /**
  * updateChapter
  * 
