@@ -36,7 +36,7 @@ class Signup extends \Core\Controller
 
         if ($userModel->save()) {
 
-            $userModel->sendActivationEmail();
+            $userModel->sendUserActivationEmail();
 
             $this->redirect('/signup/success');
 

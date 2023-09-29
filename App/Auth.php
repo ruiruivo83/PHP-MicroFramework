@@ -103,7 +103,7 @@ class Auth
     {
         if (isset($_SESSION['user_id'])) {
 
-            return UserModel::findByID($_SESSION['user_id']);
+            return UserModel::getUserByID($_SESSION['user_id']);
 
         } else {
 

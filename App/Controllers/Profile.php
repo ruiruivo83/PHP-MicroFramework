@@ -68,7 +68,7 @@ class Profile extends Authenticated
     {
         $user = Auth::getUser();
 
-        if ($user->updateProfile($_POST)) {
+        if ($user->updateUserProfile($_POST)) {
             Flash::addMessage('Changes saved');
             $this->redirect('/profile/index');
         } else {

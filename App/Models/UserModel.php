@@ -192,7 +192,7 @@ class UserModel extends \Core\Model
      * 
      * @return mixed User object if found, false otherwise
      */
-    public static function findByID($id)
+    public static function getUserByID($id)
     {
         $sql = 'SELECT * FROM users WHERE id = :id';
 
@@ -310,7 +310,7 @@ class UserModel extends \Core\Model
      * 
      * @return mixed User object if found and the token hasn't expired, null otherwise
      */
-    public static function findByPasswordReset($token)
+    public static function getUserByPasswordResetToken($token)
     {
         $token = new Token($token);
         $hashed_token = $token->getHash();
@@ -382,7 +382,7 @@ class UserModel extends \Core\Model
      * 
      * @return void
      */
-    public function sendActivationEmail()
+    public function sendUserActivationEmail()
     {
         $url = 'http://' . $_SERVER['HTTP_HOST'] . '/signup/activate/' . $this->activation_token;
 

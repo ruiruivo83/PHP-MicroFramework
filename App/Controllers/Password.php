@@ -47,7 +47,7 @@ class Password extends \Core\Controller
 
         $user = $this->getUserOrExit($token);
 
-        $user = UserModel::findByPasswordReset($token);
+        $user = UserModel::getUserByPasswordResetToken($token);
 
         View::renderTemplate('Password/reset.html', [
             'token' => $token
@@ -90,7 +90,7 @@ class Password extends \Core\Controller
      */
     protected function getUserOrExit($token)
     {
-        $user = UserModel::findByPasswordReset($token);
+        $user = UserModel::getUserByPasswordResetToken($token);
 
         if ($user) {
 

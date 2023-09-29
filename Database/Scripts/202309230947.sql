@@ -1,6 +1,6 @@
-CREATE TABLE Payments (
+CREATE TABLE payments (
     id INT AUTO_INCREMENT PRIMARY KEY,
     userId INT NOT NULL,
     paymentDate TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    paymentExpirationDate TIMESTAMP NOT NULL   
+    paymentExpirationDate TIMESTAMP NOT NULL    
 );

@@ -35,11 +35,16 @@ abstract class Controller
     {
         $this->route_params = $route_params;
 
-        // TIMEZONE
+      // TIMEZONE
         if (isset($_SESSION["user_id"])) {
+
+            // NEW Instance
             $userModel = new UserModel();
             $timeZone = $userModel->getUserTimeZone();
-            date_default_timezone_set($timeZone);
+
+            if (!is_null($timeZone)) {
+                date_default_timezone_set($timeZone);
+            }           
 
             if (! $_SESSION["PROD"]) {
                 $timezone = date_default_timezone_get();
@@ -47,7 +52,6 @@ abstract class Controller
             }
 
         }
-
 
     }
 
