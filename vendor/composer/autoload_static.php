@@ -156,8 +156,8 @@ class ComposerStaticInit5375a8a04358d280d8e7945b077ce044
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -242,6 +242,16 @@ class ComposerStaticInit5375a8a04358d280d8e7945b077ce044
         'App\\' => 
         array (
             0 => __DIR__ . '/../..' . '/App',
+        ),
+    );
+
+    public static $prefixesPsr0 = array (
+        'P' => 
+        array (
+            'PayPal' => 
+            array (
+                0 => __DIR__ . '/..' . '/paypal/rest-api-sdk-php/lib',
+            ),
         ),
     );
 
@@ -889,6 +899,7 @@ class ComposerStaticInit5375a8a04358d280d8e7945b077ce044
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit5375a8a04358d280d8e7945b077ce044::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit5375a8a04358d280d8e7945b077ce044::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit5375a8a04358d280d8e7945b077ce044::$prefixesPsr0;
             $loader->classMap = ComposerStaticInit5375a8a04358d280d8e7945b077ce044::$classMap;
 
         }, null, ClassLoader::class);

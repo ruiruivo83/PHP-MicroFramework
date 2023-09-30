@@ -32,12 +32,10 @@ class UserModel extends \Core\Model
      */
     public function __construct($data = [])
     {
-        // VARIABLE AUTO CREATION - Variable declaration based on the theys inside the parameters, one variables with the same name for each key.
+        // VARIABLE AUTO CREATION - Variable declaration based on the keys inside the parameters, one variables with the same name for each key.
         foreach ($data as $key => $value) {
             $this->$key = $value;
-        }
-        ;
-
+        };
     }
 
     /**
@@ -114,7 +112,6 @@ class UserModel extends \Core\Model
                 $this->errors[] = 'Passwords needs at least one number';
             }
         }
-
     }
 
     /**
@@ -135,7 +132,6 @@ class UserModel extends \Core\Model
         }
 
         return false;
-
     }
 
 
@@ -186,7 +182,7 @@ class UserModel extends \Core\Model
     }
 
     /**
-     * Find a user model by ID
+     * Get a user model by ID
      * 
      * @param string $id The user ID
      * 
@@ -234,7 +230,6 @@ class UserModel extends \Core\Model
         $stmt->bindValue(':expires_at', date('Y-m-d H:i:s', $this->expiry_timestamp), PDO::PARAM_STR);
 
         return $stmt->execute();
-
     }
 
     /**
@@ -253,9 +248,7 @@ class UserModel extends \Core\Model
             if ($user->startPasswordReset()) {
 
                 $user->sendPasswordResetEmail();
-
             }
-
         }
     }
 
@@ -284,7 +277,6 @@ class UserModel extends \Core\Model
         $stmt->bindValue(':id', $this->id, PDO::PARAM_INT);
 
         return $stmt->execute();
-
     }
 
 
@@ -334,9 +326,7 @@ class UserModel extends \Core\Model
             if (strtotime($user->password_reset_expires_at) > time()) {
 
                 return $user;
-
             }
-
         }
     }
 
@@ -347,7 +337,7 @@ class UserModel extends \Core\Model
      * 
      * @return boolean True if the password was updated successfully, false otherwise
      */
-    public function resetPassword($password, $password_confirmation)
+    public function resetUserPassword($password, $password_confirmation)
     {
         $this->password = $password;
         $this->password_confirmation = $password_confirmation;
@@ -400,7 +390,7 @@ class UserModel extends \Core\Model
      * 
      * @return void
      */
-    public static function activate($value)
+    public static function activateUserAccount($value)
     {
         $token = new Token($value);
         $hashed_token = $token->getHash();
@@ -416,7 +406,6 @@ class UserModel extends \Core\Model
         $stmt->bindValue(':hashed_token', $hashed_token, PDO::PARAM_STR);
 
         $stmt->execute();
-
     }
 
     /**
@@ -426,7 +415,7 @@ class UserModel extends \Core\Model
      * 
      * @return boolean True if the data was updated, false otherwise
      */
-    public function updateProfile($data)
+    public function updateUserProfile($data)
     {
         $this->name = $data['name'];
         $this->email = $data['email'];
@@ -468,14 +457,12 @@ class UserModel extends \Core\Model
 
 
             return $stmt->execute();
-
         }
 
         return false;
-
     }
 
-  /**
+    /**
      * Get user timezone
      * 
      * @param $user_id The current user id logged in
@@ -485,51 +472,71 @@ class UserModel extends \Core\Model
     public static function getUserTimeZone()
     {
 
-        try {            
+
+
+        try {
 
             $db = static::getDB();
 
-    // Use prepared statement to avoid SQL injection
-    $stmt = $db->prepare('SELECT time_zone FROM users WHERE id = :user_id');
-    $stmt->bindParam(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
-    $stmt->execute();
+            // Use prepared statement to avoid SQL injection
+            $stmt = $db->prepare('SELECT time_zone FROM users WHERE id = :user_id');
+            $stmt->bindParam(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
+            $stmt->execute();
 
-    // Fetch the result as an associative array
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            // Fetch the result as an associative array
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
             return $result['time_zone'];
-
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
 
             echo $e->getMessage();
-            
         }
-        
     }
 
-    
+
     /**
      * Set a specific time zone for user
      * 
      * @return void
      */
-    public static function setTimeZone() {
+    public static function setUserTimeZone()
+    {
 
         $user_id = $_SESSION['user_id'];
         $timeZone = $_GET["timezone"];
-    
+
         $sql = 'UPDATE users 
                 SET time_zone = :timezone
                 WHERE id = :user_id';
-    
+
         $db = static::getDb();
         $stmt = $db->prepare($sql);
-    
-        $stmt->bindValue(':timezone', $timeZone, PDO::PARAM_STR);    
-        $stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
-    
-        return $stmt->execute();
-    
-        }
 
+        $stmt->bindValue(':timezone', $timeZone, PDO::PARAM_STR);
+        $stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+
+        return $stmt->execute();
+    }
+
+    public static function setNewUserSubscriptionExpirationDate($expiration_date)
+    {
+        try {
+
+            //code...
+            $sql = 'UPDATE users 
+                SET `subscription_expires_at` = :expiration_date
+                WHERE id = :user_id';
+
+            $db = static::getDb();
+            $stmt = $db->prepare($sql);
+
+            $stmt->bindValue(':expiration_date', date('Y-m-d H:i:s', $expiration_date), PDO::PARAM_STR);
+            $stmt->bindValue(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
+
+            return $stmt->execute();
+        } catch (\PDOException $e) {
+
+            echo $e->getMessage();
+        }
+    }
 }

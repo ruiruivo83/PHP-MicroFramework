@@ -717,6 +717,63 @@
             "install-path": "../nyholm/psr7"
         },
         {
+            "name": "paypal/rest-api-sdk-php",
+            "version": "1.14.0",
+            "version_normalized": "1.14.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/paypal/PayPal-PHP-SDK.git",
+                "reference": "72e2f2466975bf128a31e02b15110180f059fc04"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/paypal/PayPal-PHP-SDK/zipball/72e2f2466975bf128a31e02b15110180f059fc04",
+                "reference": "72e2f2466975bf128a31e02b15110180f059fc04",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "php": ">=5.3.0",
+                "psr/log": "^1.0.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8.35"
+            },
+            "time": "2019-01-04T20:04:25+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-0": {
+                    "PayPal": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "PayPal",
+                    "homepage": "https://github.com/paypal/rest-api-sdk-php/contributors"
+                }
+            ],
+            "description": "PayPal's PHP SDK for REST APIs",
+            "homepage": "http://paypal.github.io/PayPal-PHP-SDK/",
+            "keywords": [
+                "payments",
+                "paypal",
+                "rest",
+                "sdk"
+            ],
+            "support": {
+                "issues": "https://github.com/paypal/PayPal-PHP-SDK/issues",
+                "source": "https://github.com/paypal/PayPal-PHP-SDK/tree/master"
+            },
+            "abandoned": true,
+            "install-path": "../paypal/rest-api-sdk-php"
+        },
+        {
             "name": "phar-io/manifest",
             "version": "2.0.3",
             "version_normalized": "2.0.3.0",
@@ -1392,17 +1449,17 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "9.2.28",
-            "version_normalized": "9.2.28.0",
+            "version": "9.2.29",
+            "version_normalized": "9.2.29.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "7134a5ccaaf0f1c92a4f5501a6c9f98ac4dcc0ef"
+                "reference": "6a3a87ac2bbe33b25042753df8195ba4aa534c76"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/7134a5ccaaf0f1c92a4f5501a6c9f98ac4dcc0ef",
-                "reference": "7134a5ccaaf0f1c92a4f5501a6c9f98ac4dcc0ef",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/6a3a87ac2bbe33b25042753df8195ba4aa534c76",
+                "reference": "6a3a87ac2bbe33b25042753df8195ba4aa534c76",
                 "shasum": ""
             },
             "require": {
@@ -1427,7 +1484,7 @@
                 "ext-pcov": "PHP extension that provides line coverage",
                 "ext-xdebug": "PHP extension that provides line coverage as well as branch and path coverage"
             },
-            "time": "2023-09-12T14:36:20+00:00",
+            "time": "2023-09-19T04:57:46+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1461,7 +1518,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/php-code-coverage/issues",
                 "security": "https://github.com/sebastianbergmann/php-code-coverage/security/policy",
-                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/9.2.28"
+                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/9.2.29"
             },
             "funding": [
                 {
@@ -1726,17 +1783,17 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "9.6.12",
-            "version_normalized": "9.6.12.0",
+            "version": "9.6.13",
+            "version_normalized": "9.6.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "a122c2ebd469b751d774aa0f613dc0d67697653f"
+                "reference": "f3d767f7f9e191eab4189abe41ab37797e30b1be"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/a122c2ebd469b751d774aa0f613dc0d67697653f",
-                "reference": "a122c2ebd469b751d774aa0f613dc0d67697653f",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/f3d767f7f9e191eab4189abe41ab37797e30b1be",
+                "reference": "f3d767f7f9e191eab4189abe41ab37797e30b1be",
                 "shasum": ""
             },
             "require": {
@@ -1772,7 +1829,7 @@
                 "ext-soap": "To be able to generate mocks based on WSDL files",
                 "ext-xdebug": "PHP extension that provides line coverage as well as branch and path coverage"
             },
-            "time": "2023-09-12T14:39:31+00:00",
+            "time": "2023-09-19T05:39:22+00:00",
             "bin": [
                 "phpunit"
             ],
@@ -1812,7 +1869,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.6.12"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.6.13"
             },
             "funding": [
                 {
@@ -1883,24 +1940,24 @@
         },
         {
             "name": "psr/http-client",
-            "version": "1.0.2",
-            "version_normalized": "1.0.2.0",
+            "version": "1.0.3",
+            "version_normalized": "1.0.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/http-client.git",
-                "reference": "0955afe48220520692d2d09f7ab7e0f93ffd6a31"
+                "reference": "bb5906edc1c324c9a05aa0873d40117941e5fa90"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/http-client/zipball/0955afe48220520692d2d09f7ab7e0f93ffd6a31",
-                "reference": "0955afe48220520692d2d09f7ab7e0f93ffd6a31",
+                "url": "https://api.github.com/repos/php-fig/http-client/zipball/bb5906edc1c324c9a05aa0873d40117941e5fa90",
+                "reference": "bb5906edc1c324c9a05aa0873d40117941e5fa90",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.0 || ^8.0",
                 "psr/http-message": "^1.0 || ^2.0"
             },
-            "time": "2023-04-10T20:12:12+00:00",
+            "time": "2023-09-23T14:17:50+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1932,7 +1989,7 @@
                 "psr-18"
             ],
             "support": {
-                "source": "https://github.com/php-fig/http-client/tree/1.0.2"
+                "source": "https://github.com/php-fig/http-client"
             },
             "install-path": "../psr/http-client"
         },
@@ -3234,17 +3291,17 @@
         },
         {
             "name": "symfony/http-client",
-            "version": "v5.4.26",
-            "version_normalized": "5.4.26.0",
+            "version": "v5.4.29",
+            "version_normalized": "5.4.29.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-client.git",
-                "reference": "19d48ef7f38e5057ed1789a503cd3eccef039bce"
+                "reference": "04784c66cbee613a827363ee1e65db65392893c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-client/zipball/19d48ef7f38e5057ed1789a503cd3eccef039bce",
-                "reference": "19d48ef7f38e5057ed1789a503cd3eccef039bce",
+                "url": "https://api.github.com/repos/symfony/http-client/zipball/04784c66cbee613a827363ee1e65db65392893c1",
+                "reference": "04784c66cbee613a827363ee1e65db65392893c1",
                 "shasum": ""
             },
             "require": {
@@ -3277,7 +3334,7 @@
                 "symfony/process": "^4.4|^5.0|^6.0",
                 "symfony/stopwatch": "^4.4|^5.0|^6.0"
             },
-            "time": "2023-07-03T12:14:50+00:00",
+            "time": "2023-09-14T20:49:15+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -3308,7 +3365,7 @@
                 "http"
             ],
             "support": {
-                "source": "https://github.com/symfony/http-client/tree/v5.4.26"
+                "source": "https://github.com/symfony/http-client/tree/v5.4.29"
             },
             "funding": [
                 {

@@ -118,7 +118,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `activation_hash` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `is_active` tinyint(1) NOT NULL DEFAULT '0',
   `time_zone` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `Subscription_expires_at` DATETIME NULL,
+  `subscription_expires_at` DATETIME NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `password_reset_hash` (`password_reset_hash`),
   UNIQUE KEY `activation_hash` (`activation_hash`)

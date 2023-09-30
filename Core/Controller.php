@@ -35,7 +35,7 @@ abstract class Controller
     {
         $this->route_params = $route_params;
 
-      // TIMEZONE
+        // TIMEZONE
         if (isset($_SESSION["user_id"])) {
 
             // NEW Instance
@@ -44,15 +44,13 @@ abstract class Controller
 
             if (!is_null($timeZone)) {
                 date_default_timezone_set($timeZone);
-            }           
+            }
 
-            if (! $_SESSION["PROD"]) {
+            if (!$_SESSION["PROD"]) {
                 $timezone = date_default_timezone_get();
                 echo "<br>Current Time Zone: " . $timezone;
             }
-
         }
-
     }
 
     /**
@@ -81,7 +79,7 @@ abstract class Controller
      */
     protected function Before()
     {
-       
+
         echo "<div style=\"color:#f70202; border-style: solid;\"> ACTION FILTER - (before in Core\Controller) </div>";
         // return false; // Will stop the execution
     }
@@ -117,20 +115,19 @@ abstract class Controller
      */
     public function requireLogin()
     {
-         // AUTHENTICATE - Protection d'une page
-         if (! Auth::getUser()) {
+        // AUTHENTICATE - Protection d'une page
+        if (!Auth::getUser()) {
 
             Flash::addMessage('Please login to access that page');
-            
+
             Auth::rememberRequestedPage();
 
             $this->redirect('/login');
         }
-
     }
 
 
-        /**
+    /**
      * Require the user to an active Subscription on the platforma to access this page.
      * Remember the requested page for later, then redirect to the login page.
      * 
@@ -138,16 +135,14 @@ abstract class Controller
      */
     public function requireSubscription()
     {
-         // SubscriptionS - Protection d'une page
-         if (! Subscription::hasSubscription()) {
+        // SubscriptionS - Protection d'une page
+        if (!Subscription::hasSubscription()) {
 
             Flash::addMessage('Please activate your Subscription to access this page.');
-            
+
             Auth::rememberRequestedPage();
 
             $this->redirect('/Courses/index');
         }
-
     }
-
 }

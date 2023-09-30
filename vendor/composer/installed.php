@@ -100,6 +100,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'paypal/rest-api-sdk-php' => array(
+            'pretty_version' => '1.14.0',
+            'version' => '1.14.0.0',
+            'reference' => '72e2f2466975bf128a31e02b15110180f059fc04',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../paypal/rest-api-sdk-php',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'phar-io/manifest' => array(
             'pretty_version' => '2.0.3',
             'version' => '2.0.3.0',
@@ -211,9 +220,9 @@
             'dev_requirement' => false,
         ),
         'phpunit/php-code-coverage' => array(
-            'pretty_version' => '9.2.28',
-            'version' => '9.2.28.0',
-            'reference' => '7134a5ccaaf0f1c92a4f5501a6c9f98ac4dcc0ef',
+            'pretty_version' => '9.2.29',
+            'version' => '9.2.29.0',
+            'reference' => '6a3a87ac2bbe33b25042753df8195ba4aa534c76',
             'type' => 'library',
             'install_path' => __DIR__ . '/../phpunit/php-code-coverage',
             'aliases' => array(),
@@ -256,9 +265,9 @@
             'dev_requirement' => true,
         ),
         'phpunit/phpunit' => array(
-            'pretty_version' => '9.6.12',
-            'version' => '9.6.12.0',
-            'reference' => 'a122c2ebd469b751d774aa0f613dc0d67697653f',
+            'pretty_version' => '9.6.13',
+            'version' => '9.6.13.0',
+            'reference' => 'f3d767f7f9e191eab4189abe41ab37797e30b1be',
             'type' => 'library',
             'install_path' => __DIR__ . '/../phpunit/phpunit',
             'aliases' => array(),
@@ -274,9 +283,9 @@
             'dev_requirement' => false,
         ),
         'psr/http-client' => array(
-            'pretty_version' => '1.0.2',
-            'version' => '1.0.2.0',
-            'reference' => '0955afe48220520692d2d09f7ab7e0f93ffd6a31',
+            'pretty_version' => '1.0.3',
+            'version' => '1.0.3.0',
+            'reference' => 'bb5906edc1c324c9a05aa0873d40117941e5fa90',
             'type' => 'library',
             'install_path' => __DIR__ . '/../psr/http-client',
             'aliases' => array(),
@@ -301,8 +310,8 @@
         'psr/http-factory-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '*',
-                1 => '1.0',
+                0 => '1.0',
+                1 => '*',
             ),
         ),
         'psr/http-message' => array(
@@ -317,8 +326,8 @@
         'psr/http-message-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '*',
-                1 => '1.0',
+                0 => '1.0',
+                1 => '*',
             ),
         ),
         'psr/log' => array(
@@ -493,9 +502,9 @@
             'dev_requirement' => false,
         ),
         'symfony/http-client' => array(
-            'pretty_version' => 'v5.4.26',
-            'version' => '5.4.26.0',
-            'reference' => '19d48ef7f38e5057ed1789a503cd3eccef039bce',
+            'pretty_version' => 'v5.4.29',
+            'version' => '5.4.29.0',
+            'reference' => '04784c66cbee613a827363ee1e65db65392893c1',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/http-client',
             'aliases' => array(),

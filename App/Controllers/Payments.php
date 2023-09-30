@@ -2,17 +2,36 @@
 
 namespace App\Controllers;
 
-use \Core\View;
-use \App\Models\PaymentsModel;
-use \Core\Authenticated;
-use \App\Auth;
+use App\Models\PaymentsModel;
+use App\Models\UserModel;
+
+use Core\View;
+use Core\Authenticated;
+
+use App\Auth;
+use App\Flash;
+
+use PayPal\Api\Amount;
+use PayPal\Api\Payer;
+use PayPal\Api\Payment;
+use PayPal\Api\PaymentExecution;
+use PayPal\Api\RedirectUrls;
+use PayPal\Api\Transaction;
+use PayPal\Exception\PayPalConnectionException;
+
+use PayPal\Rest\ApiContext;
+use PayPal\Auth\OAuthTokenCredential;
 
 /**
  * Posts Controller
  * 
  * PHP version 7.4
  */
-class Payments extends Authenticated{
+class Payments extends Authenticated
+{
+
+    public $ClientID =      'AUX4tfT1N4gT663UMCQwlOilWqyniR7F_yardreMUMUHI4xI-xQJvsA-Vpmvml6cQIOSNNWinJ-PBl7Z';
+    public $ClientSecret =  'EFojir1fiQCVEZociZYAxsH_VnLaqXVr72GLtCAzqRkO2Cw0PqJuBec0q2R816k08esqTWkGFtH9zGz9';
 
 
     /**
@@ -53,23 +72,117 @@ class Payments extends Authenticated{
         $userId = $user->id;  // Get the ID of the authenticated user
 
         $PaymentsModel = new PaymentsModel();
-        $Payments = $PaymentsModel -> getPaymentsByUserId($userId);
+        $Payments = $PaymentsModel->getPaymentsByUserId($userId);
 
         View::renderTemplate('Payments/index.html', [
             'Payments' => $Payments
         ]);
     }
 
-    /** Shos the payment Page
+    /** Shows the payment Page
      * 
      */
-    public function newPaymentAction() {
-
+    public function newPaymentAction()
+    {
         View::renderTemplate('Payments/newPayment.html');
-
     }
 
 
+    /**
+     * Create Payment
+     */
+    public function createPaymentAction()
+    {
+        // Import API context
+        $apiContext = new ApiContext(
+            new OAuthTokenCredential(
+                $this->ClientID,     // ClientID
+                $this->ClientSecret // ClientSecret
+            )
+        );
+
+        $payer = new Payer();
+        $payer->setPaymentMethod('paypal');
+
+        $amount = new Amount();
+        $amount->setTotal('1') // Amount
+            ->setCurrency('EUR');
+
+        $transaction = new Transaction();
+        $transaction->setAmount($amount);
+
+        $redirectUrls = new RedirectUrls();
+        $redirectUrls->setReturnUrl('http://jonfenmusic.com/payments/executePayment') // URL to redirect after successful payment
+            ->setCancelUrl('http://jonfenmusic.com/payments/cancel'); // URL to redirect after the user cancels the payment
+
+        $payment = new Payment();
+        $payment->setIntent('sale')
+            ->setPayer($payer)
+            ->setTransactions([$transaction])
+            ->setRedirectUrls($redirectUrls);
+
+        try {
+            $payment->create($apiContext);
+            $approvalUrl = $payment->getApprovalLink();
+
+            header("Location: $approvalUrl");
+            exit;
+        } catch (PayPalConnectionException $ex) {
+            // Handle error
+            echo "<pre>";
+            echo $ex->getData();
+            echo "</pre>";
+
+            die($ex);
+        }
+    }
 
 
+    /**
+     * If payment success is successful
+     */
+    public function executePaymentAction()
+    {
+        // Import API context
+        $apiContext = new ApiContext(
+            new OAuthTokenCredential(
+                $this->ClientID,     // ClientID
+                $this->ClientSecret  // ClientSecret
+            )
+        );
+
+
+        if (isset($_GET['paymentId']) && isset($_GET['PayerID'])) {
+            $paymentId = $_GET['paymentId'];
+            $payerId = $_GET['PayerID'];
+
+            $payment = Payment::get($paymentId, $apiContext);
+
+            $execute = new PaymentExecution();
+            $execute->setPayerId($payerId);
+
+            try {
+                $result = $payment->execute($execute, $apiContext);
+                // Payment was successful, you can now process the order
+
+                $expiration_date = time() + 60 * 60 * 24 * 30; // 30 days from now
+
+
+                $userModel = new UserModel();
+                $userModel->setNewUserSubscriptionExpirationDate($expiration_date);
+
+
+                // TODO send to payments index
+
+
+            } catch (PayPalConnectionException $ex) {
+                // Handle error
+                echo $ex->getData();
+                die($ex);
+            }
+        } else {
+            // The payment was not successful, you can return an error here
+            Flash::addMessage('Payment error, please try again', Flash::WARNING);
+        }
+    }
 }

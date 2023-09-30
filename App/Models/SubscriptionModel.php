@@ -25,12 +25,14 @@ class SubscriptionModel extends \Core\Model
     public function testForActiveSubscription()
     {
 
-        $user = Auth::getUser();        
+        $user = Auth::getUser();
         $db = static::getDB();
 
-        $stmt = $db->query('SELECT Subscription_expires_at FROM `users` WHERE id = ' . $user->id);
+        $stmt = $db->query('SELECT subscription_expires_at FROM `users` WHERE id = ' . $user->id);
 
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $strTime = strtotime($result[0]["subscription_expires_at"]);
 
         // If current time > Subscription_expires_at return false
 
@@ -38,13 +40,11 @@ class SubscriptionModel extends \Core\Model
         if ($result = NULL) {
             return false;
         } else {
-           if (time() > $result) {
-            false;
-           } else {
-            return true;
-           }
+            if (time() > $strTime) {
+                return false;
+            } else {
+                return true;
+            }
         }
     }
-
-
 }
