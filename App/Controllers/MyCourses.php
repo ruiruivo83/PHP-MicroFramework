@@ -2,9 +2,10 @@
 
 namespace App\Controllers;
 
-use \Core\View;
-use \Core\SubscriptionControl;
-use \App\Auth;
+use App\Auth;
+use Core\Control\SubscriptionControl;
+use Core\View;
+use App\Models\CourseModel;
 
 /**
  * Items controller (example)
@@ -15,13 +16,39 @@ class MyCourses extends SubscriptionControl
 {
 
     /**
-     * Items index
+     *  index
      * 
      * @return void
      */
     public function indexAction()
     {
-        View::renderTemplate('MyCourses/index.html');
+
+        $courseModel = new CourseModel();
+        $myCourses = $courseModel->getAllCourses(); // This gets all courses because when we pay we get access to all courses
+
+        View::renderTemplate('MyCourses/index.html',[
+             'userModel' => Auth::getUser(),
+             'myCourses' => $myCourses
+        ]);
+    }
+
+    /**
+     *
+     * @return void
+     */
+    public function courseWatcherAction()
+    {
+
+        $courseModel = new CourseModel();
+        $courseDetails = $courseModel->getCourseDetails($_GET["course_id"]); // This gets all courses because when we pay we get access to all courses
+        $SectionsAndChapters = $courseModel->getCourseSectionsAndChapters($_GET['course_id']);
+
+        View::renderTemplate('MyCourses/courseWatcher.html',[
+            'userModel' => Auth::getUser(),
+            'courseDetails' => $courseDetails,
+            'SectionsAndChapters' => $SectionsAndChapters
+        ]);
+
     }
 
 }

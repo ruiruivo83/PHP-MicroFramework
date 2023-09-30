@@ -26,7 +26,7 @@ SET time_zone = "+00:00";
 --
 -- Structure de la table `groups`
 --
-CREATE TABLE IF NOT EXISTS `groups` (
+CREATE TABLE `groups` (
   `id` int NOT NULL AUTO_INCREMENT,
   `group_admin_id` int NOT NULL,
   `creation_date` datetime NOT NULL,
@@ -50,32 +50,32 @@ INSERT INTO `groups` (`id`, `group_admin_id`, `creation_date`, `group_name`, `gr
 --
 -- Structure de la table `group_members`
 --
-CREATE TABLE IF NOT EXISTS `group_members` (
+CREATE TABLE `group_members` (
   `id` int NOT NULL AUTO_INCREMENT,
   `user_id` int DEFAULT NULL,
   `group_id` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
 -- Structure de la table `invitations`
 --
-CREATE TABLE IF NOT EXISTS `invitations` (
+CREATE TABLE `invitations` (
   `id` int NOT NULL,
   `invitation_from_user_id` int NOT NULL,
   `invitation_to_user_id` int NOT NULL,
   `invitation_for_group_id` int NOT NULL,
   `invitation_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
 -- Structure de la table `remembered_logins`
 --
-CREATE TABLE IF NOT EXISTS `remembered_logins` (
+CREATE TABLE `remembered_logins` (
   `token_hash` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `user_id` int NOT NULL,
   `expires_at` datetime NOT NULL,
@@ -88,14 +88,14 @@ CREATE TABLE IF NOT EXISTS `remembered_logins` (
 --
 -- Structure de la table `tickets`
 --
-CREATE TABLE IF NOT EXISTS `tickets` (
+CREATE TABLE `tickets` (
   `id` int NOT NULL AUTO_INCREMENT,
   `ticket_admin_id` int NOT NULL,
   `creation_date` datetime NOT NULL,
   `ticket_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `ticket_description` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `tickets`
@@ -108,20 +108,20 @@ INSERT INTO `tickets` (`id`, `ticket_admin_id`, `creation_date`, `ticket_name`, 
 -- --------------------------------------------------------
 
 -- Structure de la table `users`
-CREATE TABLE IF NOT EXISTS `users` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `password_hash` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `password_reset_hash` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `password_reset_expires_at` datetime DEFAULT NULL,
-  `activation_hash` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `is_active` tinyint(1) NOT NULL DEFAULT '0',
-  `time_zone` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `subscription_expires_at` DATETIME NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `password_reset_hash` (`password_reset_hash`),
-  UNIQUE KEY `activation_hash` (`activation_hash`)
+CREATE TABLE `users` (
+ `id` int NOT NULL AUTO_INCREMENT,
+ `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+ `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+ `password_hash` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+ `password_reset_hash` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+ `password_reset_expires_at` datetime DEFAULT NULL,
+ `activation_hash` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+ `is_active` tinyint(1) NOT NULL DEFAULT '0',
+ `is_sys_admin` tinyint(1) NOT NULL DEFAULT '0',  -- New column
+ `time_zone` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+ PRIMARY KEY (`id`),
+ UNIQUE KEY `password_reset_hash` (`password_reset_hash`),
+ UNIQUE KEY `activation_hash` (`activation_hash`)
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Déchargement des données de la table `users`
@@ -130,22 +130,4 @@ INSERT INTO `users` (`id`, `name`, `email`, `password_hash`, `password_reset_has
 (20, 'Rui', 'ruivo.rui83@outlook.com', '$2y$10$WvfojWDfbbBPzuGS5LS1WO3Gh2bHY7Lr6qfjNMu5.gRWBeOHRUWNK', NULL, NULL, NULL, 1, 'Europe/Paris');
 
 
---
--- Contraintes pour les tables déchargées
---
 
---
--- Contraintes pour la table `groups`
---
-ALTER TABLE `groups`
-  ADD CONSTRAINT `groups_ibfk_1` FOREIGN KEY (`group_admin_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-COMMIT;
-
-
-
-
-
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

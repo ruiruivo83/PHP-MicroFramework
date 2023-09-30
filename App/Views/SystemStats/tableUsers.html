@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block title %}
+My Courses
+{% endblock %}
+
+{% block body %}
+
+
+<!-- MAIN ALIGNMENT -->
+<div class="p-5">
+
+    <!-- ERRORS -->
+    {% if userModel.errors is not empty %}
+    <div class="card m-3">
+        <div class="card-body">
+            <h5 class="card-title text-bg-danger p-1">Errors</h5>
+            <ul>
+                {% for error in userModel.errors %}
+                <li class="alert alert-danger" role="alert">{{ error }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- MAIN CARD -->
+    <div class="card shadow-lg p-3 mb-5  bg-body-tertiary rounded">
+        <div class="card-body">
+            <h5 class="card-title">System Stats - Table Users</h5><!-- CARD TITLE -->
+            <h6 class="card-subtitle mb-2 text-body-secondary"></h6><!-- CARD SECOND -->
+            <br>
+            <!-- MAIN CONTENT -->
+
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Password Hash</th>
+                    <th>Password Reset Hash</th>
+                    <th>Password Reset Expires At</th>
+                    <th>Activation Hash</th>
+                    <th>Is Active</th>
+                    <th>Time Zone</th>
+                    <th>Subscription Expires At</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.password_hash }}</td>
+                    <td>{{ user.password_reset_hash }}</td>
+                    <td>{{ user.password_reset_expires_at }}</td>
+                    <td>{{ user.activation_hash }}</td>
+                    <td>{{ user.is_active }}</td>
+                    <td>{{ user.time_zone }}</td>
+                    <td>{{ user.subscription_expires_at }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+            <!-- END MAIN CONTENT -->
+
+        </div> <!-- CARD BODY -->
+    </div><!-- END MAIN CARD -->
+</div><!-- END MAIN ALIGNMENT -->
+
+<br /><br /><br /><br />
+{% endblock %}

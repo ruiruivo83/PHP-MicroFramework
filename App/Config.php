@@ -20,7 +20,7 @@ class Config
      * Database name
      * @var string
      */
-    const DB_NAME = 'microframework_db';
+    const DB_NAME = 'php-jonfenmusic-ocean_db';
 
     /**
      * Database user

@@ -502,9 +502,9 @@
             'dev_requirement' => false,
         ),
         'symfony/http-client' => array(
-            'pretty_version' => 'v5.4.29',
-            'version' => '5.4.29.0',
-            'reference' => '04784c66cbee613a827363ee1e65db65392893c1',
+            'pretty_version' => 'v5.4.26',
+            'version' => '5.4.26.0',
+            'reference' => '19d48ef7f38e5057ed1789a503cd3eccef039bce',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/http-client',
             'aliases' => array(),

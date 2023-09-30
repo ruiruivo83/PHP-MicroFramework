@@ -2,7 +2,6 @@
 
 namespace Core;
 
-use App\Config;
 use PDO;
 use PDOException;
 
@@ -21,6 +20,7 @@ abstract class Model
      */
     protected static function getDB()
     {
+
         static $pdo = null;
 
         if ($pdo === null) {

@@ -6,7 +6,7 @@
         "nyholm/psr7": "^1.5",
         "php-http/guzzle6-adapter": "^2.0",
         "phpmailer/phpmailer": "^6.8",
-        "ext-mysqli": "*",
+      "ext-mysqli": "*",
         "paypal/rest-api-sdk-php": "^1.14"
     },
     "require-dev": {

@@ -3,16 +3,15 @@
 namespace App\Controllers;
 
 use App\Auth;
-use App\Flash;
+use Core\Control\AuthenticateControl;
 use Core\View;
-use Core\Authenticated;
 
 /**
  * Profile controller
  * 
  * PHP version 7.4
  */
-class CourseWatcher extends Authenticated
+class CourseWatcher extends AuthenticateControl
 {
 
     /**

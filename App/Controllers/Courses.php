@@ -2,9 +2,9 @@
 
 namespace App\Controllers;
 
-use \Core\View;
-use \Core\Controller;
-use \App\Auth;
+use Core\View;
+use Core\Controller;
+use App\Auth;
 
 use App\Models\CourseModel;
 
@@ -21,7 +21,7 @@ class Courses extends Controller
      * 
      * @return void
      */
-    public function indexAction()
+    public function indexAction(): void
     {
         // Create an instance of the model
         $courseModel = new CourseModel();
@@ -31,20 +31,21 @@ class Courses extends Controller
 
         // Render the view and pass the courses to the template
         View::renderTemplate('Courses/index.html', [
+            'userModel' => Auth::getUser(),
             'courses' => $courses
         ]);
     }
 
 
-    public function detailsAction() {
+    public function detailsAction(): void
+    {
         // Assuming you have a way to get the courseId from request parameters or elsewhere
-        $courseId = $_GET['id']; // Replace with the correct way to get the courseId in your implementation
+        // Replace with the correct way to get the courseId in your implementation
     
         // Get an instance of your model
         $courseModel = new CourseModel();
         $courseDetails = $courseModel->getCourseDetails($_GET['id']);
         $SectionsAndChapters = $courseModel->getCourseSectionsAndChapters($_GET['id']);
-
 
         View::renderTemplate('Courses/details.html', [
             'userModel' => Auth::getUser(),
@@ -54,8 +55,5 @@ class Courses extends Controller
 
     }
     
-
-
-
 
 }

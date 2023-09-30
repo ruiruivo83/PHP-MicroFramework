@@ -27,9 +27,6 @@
             <h5 class="card-title">Payments</h5>
 
 
-
-
-
             {% set showButton = false %} {# Initial flag to not show the button #}
 
             {% for Payment in Payments %}
@@ -46,8 +43,6 @@
             {% endif %}
 
 
-
-
             <!-- MAIN CONTENT -->
 
 
@@ -61,12 +56,12 @@
                 </thead>
                 <tbody>
 
-                    {% for Payment in Payments %}
+                    {% for payment in payments %}
 
                     <tr>
-                        <td>{{ Payment.PaymentDate }}</th>
-                        <td>{{ Payment.PaymentExpirationDate }}</td>
-                        <td>{{ Payment.isActive }}</td>
+                        <td>{{ payment.payment_date }}</th>
+                        <td>{{ payment.payment_expiration_date }}</td>
+                        <td>{{ payment.isActive }}</td>
                     </tr>
 
                     {% endfor %}

@@ -7,6 +7,7 @@ use App\Subscription;
 use App\Flash;
 
 use App\Models\UserModel;
+use App\SysAdmin;
 
 
 /**
@@ -79,9 +80,8 @@ abstract class Controller
      */
     protected function Before()
     {
-
-        echo "<div style=\"color:#f70202; border-style: solid;\"> ACTION FILTER - (before in Core\Controller) </div>";
-        // return false; // Will stop the execution
+        if (!$_SESSION["PROD"]) echo "<div style=\"color:#f70202; border-style: solid;\"> ACTION FILTER - (before in Core\Controller) </div>";
+        // return false; // Will stop the execution           
     }
 
     /**
@@ -91,7 +91,7 @@ abstract class Controller
      */
     protected function After()
     {
-        echo "<div style=\"color:#f70202; border-style: solid;\"> ACTION FILTER - (after in Core\Controller) </div>";
+        if (!$_SESSION["PROD"]) echo "<div style=\"color:#f70202; border-style: solid;\"> ACTION FILTER - (after in Core\Controller) </div>";
     }
 
     /**
@@ -135,7 +135,8 @@ abstract class Controller
      */
     public function requireSubscription()
     {
-        // SubscriptionS - Protection d'une page
+        // Subscription - Protection d'une page
+
         if (!Subscription::hasSubscription()) {
 
             Flash::addMessage('Please activate your Subscription to access this page.');
@@ -143,6 +144,26 @@ abstract class Controller
             Auth::rememberRequestedPage();
 
             $this->redirect('/Courses/index');
+        }
+    }
+
+    /**
+     * Require the user to an active Subscription on the platforma to access this page.
+     * Remember the requested page for later, then redirect to the login page.
+     *
+     * @return void
+     */
+    public function requireSysAdmin()
+    {
+
+        // If the user is not SYS Admin
+        if (!SysAdmin::isSysAdmin()) {
+
+            Flash::addMessage('Unauthorized access.', Flash::WARNING);
+
+            Auth::rememberRequestedPage();
+
+            $this->redirect('/index');
         }
     }
 }

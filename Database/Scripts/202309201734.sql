@@ -8,5 +8,5 @@ CREATE TABLE chapters (
     FileURL VARCHAR(512),   -- Added FileURL column
     FOREIGN KEY (course_id) REFERENCES courses(id),
     FOREIGN KEY (section_id) REFERENCES sections(id)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 

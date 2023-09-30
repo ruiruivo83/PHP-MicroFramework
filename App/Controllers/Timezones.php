@@ -2,10 +2,10 @@
 
 namespace App\Controllers;
 
-use Core\Authenticated;
-use \Core\View;
-use App\Models\UserModel;
 use App\Models\TimeZoneModel;
+use App\Models\UserModel;
+use Core\Control\AuthenticateControl;
+use Core\View;
 
 
 /**
@@ -13,7 +13,7 @@ use App\Models\TimeZoneModel;
  * 
  * PHP version 7.4
  */
-class Timezones extends Authenticated
+class Timezones extends AuthenticateControl
 {
 
 
@@ -54,6 +54,7 @@ class Timezones extends Authenticated
         $timezones = TimeZoneModel::getAllTimeZones();
 
         View::renderTemplate('Timezones/edit.html', [
+            'userModel' => Auth::getUser(),
             'timezones' => $timezones
         ]);
     }
@@ -66,7 +67,7 @@ class Timezones extends Authenticated
     public function makeactiveAction() {
         
         $userModel = new UserModel();
-        $userModel->setTimeZone();
+        $userModel->setUserTimeZone();
 
         $this->redirect('/profile/index');
 

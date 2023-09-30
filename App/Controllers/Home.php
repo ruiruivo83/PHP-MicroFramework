@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Auth;
+use \App\Auth;
 use \Core\View;
 
 /**

@@ -1,8 +1,8 @@
 -- Create the 'timezones' table if it doesn't exist
-CREATE TABLE IF NOT EXISTS timezones (
+CREATE TABLE `timezones` (
     id INT AUTO_INCREMENT PRIMARY KEY,
     timezone VARCHAR(100) NOT NULL
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Insert the timezones into the 'timezones' table
 INSERT INTO timezones (timezone) VALUES

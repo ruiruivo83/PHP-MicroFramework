@@ -3,14 +3,14 @@
 namespace App\Controllers;
 
 use App\Auth;
-use \Core\View;
+use Core\View;
 
 /**
  * Home Controller
  * 
  * PHP version 7.4
  */
-class Home extends \Core\Authenticated
+class Home extends \Core\Control\AuthenticateControl
 {
 
     /**

@@ -14,25 +14,25 @@ class Config_prod
    * Database host
    * @var string
    */
-  const PROD_DB_HOST = 'localhost';
+  const PROD_DB_HOST = 'jonfenmutr123.mysql.db';
 
   /**
    * Database name
    * @var string
    */
-  const PROD_DB_NAME = 'tickettickle_db';
+  const PROD_DB_NAME = 'jonfenmutr123';
 
   /**
    * Database user
    * @var string
    */
-  const PROD_DB_USER = 'tickettickle-user';
+  const PROD_DB_USER = 'jonfenmutr123';
 
   /**
    * Database password
    * @var string
    */
-  const PROD_DB_PASSWORD = '+v6Dl^b5KRiE';
+  const PROD_DB_PASSWORD = 'm7jxvs92EH4QLcGBqqyr';
 
   /**
    * Secret key for hashing

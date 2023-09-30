@@ -3,18 +3,15 @@
 namespace App\Controllers;
 
 use App\Auth;
-use App\Flash;
+use Core\Control\AuthenticateControl;
 use Core\View;
-use Core\Authenticated;
-
-use App\Models\TimeZoneModel;
 
 /**
  * Profile controller
  * 
  * PHP version 7.4
  */
-class Profile extends Authenticated
+class Messages extends AuthenticateControl
 {
 
     /**
@@ -26,9 +23,9 @@ class Profile extends Authenticated
     {
 
         View::renderTemplate('Messages/index.html', [
-            'userModel' => Auth::getUser()]);
-            
-    }
+            'userModel' => Auth::getUser()
+        ]);
 
+    }
 
 }

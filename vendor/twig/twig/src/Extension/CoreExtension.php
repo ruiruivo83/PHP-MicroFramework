@@ -110,7 +110,7 @@ final class CoreExtension extends AbstractExtension
      *
      * @param \DateTimeZone|string $timezone The default timezone string or a \DateTimeZone object
      */
-    public function setTimezone($timezone)
+    public function setUserTimeZone($timezone)
     {
         $this->timezone = $timezone instanceof \DateTimeZone ? $timezone : new \DateTimeZone($timezone);
     }
@@ -485,13 +485,13 @@ function twig_date_converter(Environment $env, $date = null, $timezone = null)
 
     // immutable dates
     if ($date instanceof \DateTimeImmutable) {
-        return false !== $timezone ? $date->setTimezone($timezone) : $date;
+        return false !== $timezone ? $date->setUserTimeZone($timezone) : $date;
     }
 
     if ($date instanceof \DateTimeInterface) {
         $date = clone $date;
         if (false !== $timezone) {
-            $date->setTimezone($timezone);
+            $date->setUserTimeZone($timezone);
         }
 
         return $date;
@@ -513,7 +513,7 @@ function twig_date_converter(Environment $env, $date = null, $timezone = null)
     }
 
     if (false !== $timezone) {
-        $date->setTimezone($timezone);
+        $date->setUserTimeZone($timezone);
     }
 
     return $date;

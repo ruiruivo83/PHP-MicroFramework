@@ -33,6 +33,7 @@ $router->dispatch($_SERVER['QUERY_STRING']);
 function setEnvironment() {
     // Test if the string contains a specific string inside the host name
     $_SESSION["PROD"] = (strpos(gethostname(), "hosting.ovh.net") !== false);
+
     echo '<span class="badge bg-danger">In Development - DO NOT USE</span>';
 }
 

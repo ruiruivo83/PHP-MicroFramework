@@ -12,7 +12,7 @@ use App\Models\PaymentsModel;
  * 
  * PHP version 7.4
  */
-class Subscription
+class SysAdmin
 {
 
     
@@ -22,17 +22,19 @@ class Subscription
 
      * @return boolean  Return true if Subscription for current user is active, false otherwise.
      */
-    public static function hasSubscription()
+    public static function isSysAdmin()
     {
        
         if (isset($_SESSION['user_id'])) {
 
-            $paymentsModel = new PaymentsModel();
+            $userModel = new UserModel();
 
-            if ($paymentsModel->testForActivePayment($_SESSION['user_id'])) {
-               return true;
+            $userModel = $userModel->testIfUserIsSysAdmin();
+
+            if ($userModel[0]->is_sys_admin == 0) {
+               return false;
             } else {
-              return false;
+              return true;
             }
 
         } else {

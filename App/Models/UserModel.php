@@ -186,7 +186,7 @@ class UserModel extends \Core\Model
      * 
      * @param string $id The user ID
      * 
-     * @return mixed User object if found, false otherwise
+     * @return mixed User object if found, null otherwise
      */
     public static function getUserByID($id)
     {
@@ -196,15 +196,23 @@ class UserModel extends \Core\Model
         $stmt = $db->prepare($sql);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
 
-        // Return an object based on the model called, in this case the 'get_called_class()' will automaticly detect the self class, in this case UserModel, 
-        // and fill it with the values returned from the database in the construct, when the class is runed the construct creates variables of the data as
-        // parameters with the names from the keys and its values, from the value..
+        // Return an object based on the model called, in this case the 'get_called_class()' will automatically detect the self class, in this case UserModel, 
+        // and fill it with the values returned from the database in the construct, when the class is run the construct creates variables of the data as
+        // parameters with the names from the keys and its values, from the value.
         $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
 
         $stmt->execute();
 
-        return $stmt->fetch();
+        $result = $stmt->fetch();
+        
+        // Check if $result is false and return null if so.
+        if ($result === false) {
+            return null;
+        }
+
+        return $result;
     }
+
 
     /**
      * Remember the login by inserting a new unique token into the remembered_logins table
@@ -472,8 +480,6 @@ class UserModel extends \Core\Model
     public static function getUserTimeZone()
     {
 
-
-
         try {
 
             $db = static::getDB();
@@ -485,8 +491,14 @@ class UserModel extends \Core\Model
 
             // Fetch the result as an associative array
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
-
-            return $result['time_zone'];
+            
+            // Check if $result is an array and has 'time_zone' key
+            if (is_array($result) && array_key_exists('time_zone', $result)) {
+                return $result['time_zone'];
+            } else {
+                return null;  // Return null if no timezone is found
+            }
+            
         } catch (\PDOException $e) {
 
             echo $e->getMessage();
@@ -518,20 +530,20 @@ class UserModel extends \Core\Model
         return $stmt->execute();
     }
 
-    public static function setNewUserSubscriptionExpirationDate($expiration_date)
+    /**
+     * 
+     */
+    public static function createNewUserPayment($expiration_date)
     {
         try {
-
-            //code...
-            $sql = 'UPDATE users 
-                SET `subscription_expires_at` = :expiration_date
-                WHERE id = :user_id';
+            $sql = 'INSERT INTO payments (user_id, payment_date, payment_expiration_date) VALUES (:user_id, :payment_date, :payment_expiration_date)';  // Corrected here
 
             $db = static::getDb();
             $stmt = $db->prepare($sql);
 
-            $stmt->bindValue(':expiration_date', date('Y-m-d H:i:s', $expiration_date), PDO::PARAM_STR);
             $stmt->bindValue(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
+            $stmt->bindValue(':payment_date', date('Y-m-d H:i:s', time()), PDO::PARAM_STR);
+            $stmt->bindValue(':payment_expiration_date', date('Y-m-d H:i:s', $expiration_date), PDO::PARAM_STR);  // Corrected here
 
             return $stmt->execute();
         } catch (\PDOException $e) {
@@ -539,4 +551,74 @@ class UserModel extends \Core\Model
             echo $e->getMessage();
         }
     }
+
+
+    /**
+     * Get all payments for current user
+     */
+    public function getAllPaymentsForCurrentUser()
+    {
+
+        $sql = 'SELECT * FROM payments WHERE user_id = :user_id';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':user_id', $_SESSION['user_id'], PDO::PARAM_INT); // Notice that we bind user_id instead of id
+
+        // Set the fetch mode to class. This way, each row returned from the database will be converted into an object of the calling class.
+        $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+
+        $stmt->execute();
+
+        return $stmt->fetchAll(); // Using fetchAll() instead of fetch() to get all records
+
+    }
+
+
+
+
+
+
+
+
+    /**
+     * Test if user is Sys Admin
+     */
+    public function testIfUserIsSysAdmin()
+    {
+
+        $sql = 'SELECT is_sys_admin FROM users WHERE id = :user_id';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':user_id', $_SESSION['user_id'], PDO::PARAM_INT); // Notice that we bind user_id instead of id
+
+        // Set the fetch mode to class. This way, each row returned from the database will be converted into an object of the calling class.
+        $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+
+        $stmt->execute();
+
+        return $stmt->fetchAll(); // Using fetchAll() instead of fetch() to get all records
+
+    }
+
+    /**
+     * @return void
+     */
+    public function getAllUsers()
+    {
+        $sql = 'SELECT * FROM users';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+
+        // Set the fetch mode to class. This way, each row returned from the database will be converted into an object of the calling class.
+        $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+
+        $stmt->execute();
+
+        return $stmt->fetchAll(); // Using fetchAll() instead of fetch() to get all records
+    }
+
+
 }

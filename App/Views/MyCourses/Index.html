@@ -27,33 +27,26 @@ My Courses
   <!-- MAIN CARD -->
   <div class="card shadow-lg p-3 mb-5  bg-body-tertiary rounded">
     <div class="card-body">
-      <h5 class="card-title">Course Creator</h5><!-- CARD TITLE -->
+      <h5 class="card-title">My Courses</h5><!-- CARD TITLE -->
       <h6 class="card-subtitle mb-2 text-body-secondary"></h6><!-- CARD SECOND -->
       <br>
       <!-- MAIN CONTENT -->
-      <a href="/coursecreator/new">New Course</a>
-      <br>
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Title</th>
-            <th scope="col">Description</th>
-            <th scope="col"></th>
-          </tr>
-        </thead>
-        <tbody>
 
-          {% for course in courses %}
-          <tr>
-            <td>{{ course.title }}</td>
-            <td>{{ course.description }}</td>
-            <td><a href="/coursecreator/details?course_id={{ course.id }}">Details</a></td>
-          </tr>
-          {% endfor %}
+      <div class="container">
 
+        {% for course in myCourses %}
+        <div class="card" style="width: 18rem;">
+          <img src="{{ course.image }}" class="card-img-top" alt="{{ course.title }}">
+          <div class="card-body">
+            <h5 class="card-title">{{ course.title }}</h5>
+            <p class="card-text">{{ course.description }}</p>
+            <a href="/MyCourses/CourseWatcher?course_id={{ course.id }}" class="btn btn-primary">Watch</a>
+          </div>
+        </div>
+        {% endfor %}
 
-        </tbody>
-      </table>
+      </div>
+
 
       <!-- END MAIN CONTENT -->
 

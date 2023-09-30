@@ -2,10 +2,8 @@
 
 namespace App\Controllers;
 
-use App\Auth;
-use App\Flash;
+use Core\Control\AuthenticateControl;
 use Core\View;
-use Core\Authenticated;
 
 
 /**
@@ -13,7 +11,7 @@ use Core\Authenticated;
  * 
  * PHP version 7.4
  */
-class FileUpload extends Authenticated 
+class FileUpload extends AuthenticateControl
 {
 
     /** New file upload
@@ -96,7 +94,9 @@ class FileUpload extends Authenticated
 
         echo "Error description: " . $phpFileUploadErrors[$_FILES['userfile']['error']]."<br>";
 
-        View::renderTemplate('coursecreator/newchapter.html');
+        View::renderTemplate('coursecreator/newChapter.html', [
+            'userModel' => Auth::getUser()
+        ]);
 
     }
 

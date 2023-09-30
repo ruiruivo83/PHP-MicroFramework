@@ -51,6 +51,7 @@ class Posts extends \Core\Controller
         $posts = PostModel::getAll();
 
         View::renderTemplate('Posts/index.html', [
+            'userModel' => Auth::getUser(),
             'posts' => $posts
         ]);
     }

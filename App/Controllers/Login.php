@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use \App\Auth;
-use App\Flash;
+use \App\Flash;
 use \App\Models\UserModel;
 use \Core\View;
 

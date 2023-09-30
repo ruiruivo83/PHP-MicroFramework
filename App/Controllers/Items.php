@@ -2,15 +2,14 @@
 
 namespace App\Controllers;
 
-use \Core\View;
-use \App\Auth;
+use Core\View;
 
 /**
  * Items controller (example)
  * 
  * PHP version 7.4
  */
-class Items extends \Core\Authenticated
+class Items extends \Core\Control\AuthenticateControl
 {
 
     /**
