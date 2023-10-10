@@ -2,6 +2,8 @@
 
 namespace Core;
 
+use App\Models\UserModel;
+
 /**
  * View
  *
@@ -63,8 +65,12 @@ class View
             $twig = new \Twig\Environment($loader);
             $twig->addGlobal('current_user', \App\Auth::getUser());
             $twig->addGlobal('flash_messages', \App\Flash::getMessages());
-            $twig->addGlobal('breadcrums', \App\Breadcrums::getCurPageURL());
+            $twig->addGlobal('breadcrumbs', \App\Breadcrumbs::getCurPageURL());
         }
+
+        // TODO - Save BreadCrumb to user History
+        $userModel = new UserModel();
+        $userModel->save_breadcrumb_to_history($_SERVER['REQUEST_URI']);
 
         return $twig->render($template, $args);
     }

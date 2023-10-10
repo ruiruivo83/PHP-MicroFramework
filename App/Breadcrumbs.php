@@ -10,7 +10,7 @@ use App\Models\UserModel;
  * 
  * PHP version 7.4
  */
-class Breadcrums
+class Breadcrumbs
 {
 
     public static function getCurPageURL() {        

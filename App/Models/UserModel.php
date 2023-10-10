@@ -620,5 +620,25 @@ class UserModel extends \Core\Model
         return $stmt->fetchAll(); // Using fetchAll() instead of fetch() to get all records
     }
 
+    /**
+     * Remember the user breadcrumb to user_history by inserting every breadcrumb into history    
+     * 
+     * @return boolean True if successful, false otherwise
+    */
+    public function save_breadcrumb_to_history($breadcrumb)
+    {
+
+        $sql = 'INSERT INTO user_history (user_id, `date`, breadcrumb) VALUES (:user_id, :date, :breadcrumb)';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+
+        $stmt->bindValue(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
+        $stmt->bindValue(':date', date('Y-m-d H:i:s', time()), PDO::PARAM_STR);
+        $stmt->bindValue(':breadcrumb', $breadcrumb, PDO::PARAM_STR);
+
+        return $stmt->execute();
+    }
+
 
 }
