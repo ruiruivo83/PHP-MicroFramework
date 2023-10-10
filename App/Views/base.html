@@ -65,15 +65,32 @@
 
           <!-- USER PROFILE MENU -->
           {% if current_user %}
+          <h6>
+            <a href="#"
+              class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">New
+              Payments</a>
+
+            &nbsp;<span class="badge bg-primary">(3)</span>&nbsp;
+          </h6>
+          <h6>
+
+            <a href="#"
+              class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Messages</a>
+
+            &nbsp;<span class="badge bg-primary">(5)</span>&nbsp;
+          </h6>
           <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
               aria-expanded="false">
               {{ current_user.email }}
             </button>
             <ul class="dropdown-menu">
+
               <li><a class="dropdown-item" href="/profile/index">Profile</a></li>
               <li><a class="dropdown-item" href="/Settings/index">Settings</a></li>
+              {% if userModel.is_sys_admin == '0' %} <!-- Check if user is sys_admin -->
               <li><a class="dropdown-item" href="/Payments/index">Payments</a></li>
+              {% endif %}
               <li><a class="dropdown-item" href="/MyCourses/index">My Courses</a></li>
               {% if userModel.is_sys_admin == '1' %} <!-- Check if user is sys_admin -->
               <li>
@@ -83,15 +100,15 @@
               <li><a class="dropdown-item" href="/SystemStats/tableUsers">Table Users</a></li>
               <li><a class="dropdown-item" href="/SystemStats/tablePayments">Table Payments</a></li>
               {% endif %}
-
               <li>
                 <hr class="dropdown-divider">
               </li>
-              <li><a class="dropdown-item" href="/Messages/index">Messages</a></li>
+              <li><a class="dropdown-item" href="/Messages/received">Messages</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>
               <li><a class="dropdown-item" href="/Logout">Logout</a></li>
+
             </ul>
           </div>
           {% endif %}
@@ -124,6 +141,10 @@
   </header>
 
   <main>
+
+    <!-- BREADCRUMS -->
+    {{ breadcrums|raw }}
+
     {% block body %}
 
     {% endblock %}

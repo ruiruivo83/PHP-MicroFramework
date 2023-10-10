@@ -44,8 +44,10 @@ class View
         echo static::getTemplate($template, $args);
     }
 
+
+
     /**
-     * Return a view template using Twig - FOR MAIL PURPOSE
+     * Return a view template using Twig - FOR MAIL PURPOSE - GLOBAL stuff
      * 
      * @param string $template The template file
      * @param array $args Associative array of data to display in the view (optional)
@@ -61,6 +63,7 @@ class View
             $twig = new \Twig\Environment($loader);
             $twig->addGlobal('current_user', \App\Auth::getUser());
             $twig->addGlobal('flash_messages', \App\Flash::getMessages());
+            $twig->addGlobal('breadcrums', \App\Breadcrums::getCurPageURL());
         }
 
         return $twig->render($template, $args);
