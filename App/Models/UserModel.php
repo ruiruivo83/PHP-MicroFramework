@@ -51,12 +51,14 @@ class UserModel extends \Core\Model
 
             $password_hash = password_hash($this->password, PASSWORD_DEFAULT);
 
+            $activation_expiration_date =   time() + 60 * 60 * 24 ; // 24 houres
+
             $token = new Token();
             $hashed_token = $token->gethash();
             $this->activation_token = $token->getValue();
 
-            $sql = 'INSERT INTO users (name, email, password_hash, activation_hash)
-                    VALUES (:name, :email, :password_hash, :activation_hash)';
+            $sql = 'INSERT INTO users (name, email, password_hash, activation_hash, activation_expiration_date)
+                    VALUES (:name, :email, :password_hash, :activation_hash, :activation_expiration_date)';
 
             $pdo = static::getDB();
 
@@ -66,6 +68,7 @@ class UserModel extends \Core\Model
             $stmt->bindValue(':email', $this->email, PDO::PARAM_STR);
             $stmt->bindValue(':password_hash', $password_hash, PDO::PARAM_STR);
             $stmt->bindValue(':activation_hash', $hashed_token, PDO::PARAM_STR);
+            $stmt->bindValue(':activation_expiration_date', date('Y-m-d H:i:s', $activation_expiration_date), PDO::PARAM_STR);
 
             return $stmt->execute();
         }
