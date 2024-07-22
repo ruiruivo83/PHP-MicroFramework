@@ -631,16 +631,21 @@ class UserModel extends \Core\Model
     public function save_breadcrumb_to_history($breadcrumb)
     {
 
-        $sql = 'INSERT INTO user_history (user_id, `date`, breadcrumb) VALUES (:user_id, :date, :breadcrumb)';
+        if (isset($_SESSION['user_id'])) {
+            $sql = 'INSERT INTO user_history (user_id, `date`, breadcrumb) VALUES (:user_id, :date, :breadcrumb)';
 
-        $db = static::getDB();
-        $stmt = $db->prepare($sql);
+            $db = static::getDB();
+            $stmt = $db->prepare($sql);
+    
+            $stmt->bindValue(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
+            $stmt->bindValue(':date', date('Y-m-d H:i:s', time()), PDO::PARAM_STR);
+            $stmt->bindValue(':breadcrumb', $breadcrumb, PDO::PARAM_STR);
+            return $stmt->execute();
+        }
 
-        $stmt->bindValue(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
-        $stmt->bindValue(':date', date('Y-m-d H:i:s', time()), PDO::PARAM_STR);
-        $stmt->bindValue(':breadcrumb', $breadcrumb, PDO::PARAM_STR);
+       
 
-        return $stmt->execute();
+     
     }
 
 
