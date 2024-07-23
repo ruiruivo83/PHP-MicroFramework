@@ -32,38 +32,39 @@ My Courses
             <br>
             <!-- MAIN CONTENT -->
 
-            <table>
+            <table style="border: 1px solid black; border-collapse: collapse;">
                 <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Password Hash</th>
-                    <th>Password Reset Hash</th>
-                    <th>Password Reset Expires At</th>
-                    <th>Activation Hash</th>
-                    <th>Is Active</th>
-                    <th>Time Zone</th>
-                    <th>Subscription Expires At</th>
-                </tr>
+                    <tr>
+                        <th style="border: 1px solid black;">ID</th>
+                        <th style="border: 1px solid black;">Name</th>
+                        <th style="border: 1px solid black;">Email</th>
+                        <th style="border: 1px solid black;">Password Hash</th>
+                        <th style="border: 1px solid black;">Password Reset Hash</th>
+                        <th style="border: 1px solid black;">Password Reset Expires At</th>
+                        <th style="border: 1px solid black;">Activation Hash</th>
+                        <th style="border: 1px solid black;">Is Active</th>
+                        <th style="border: 1px solid black;">Time Zone</th>
+                        <th style="border: 1px solid black;">Subscription Expires At</th>
+                    </tr>
                 </thead>
                 <tbody>
-                {% for user in users %}
-                <tr>
-                    <td>{{ user.id }}</td>
-                    <td>{{ user.name }}</td>
-                    <td>{{ user.email }}</td>
-                    <td>{{ user.password_hash }}</td>
-                    <td>{{ user.password_reset_hash }}</td>
-                    <td>{{ user.password_reset_expires_at }}</td>
-                    <td>{{ user.activation_hash }}</td>
-                    <td>{{ user.is_active }}</td>
-                    <td>{{ user.time_zone }}</td>
-                    <td>{{ user.subscription_expires_at }}</td>
-                </tr>
-                {% endfor %}
+                    {% for user in users %}
+                    <tr>
+                        <td style="border: 1px solid black;">{{ user.id }}</td>
+                        <td style="border: 1px solid black;">{{ user.name }}</td>
+                        <td style="border: 1px solid black;">{{ user.email }}</td>
+                        <td style="border: 1px solid black;">{{ user.password_hash }}</td>
+                        <td style="border: 1px solid black;">{{ user.password_reset_hash }}</td>
+                        <td style="border: 1px solid black;">{{ user.password_reset_expires_at }}</td>
+                        <td style="border: 1px solid black;">{{ user.activation_hash}}</td>
+                        <td style="border: 1px solid black;">{{ user.is_active }}</td>
+                        <td style="border: 1px solid black;">{{ user.time_zone }}</td>
+                        <td style="border: 1px solid black;">{{ user.subscription_expires_at }}</td>
+                    </tr>
+                    {% endfor %}
                 </tbody>
             </table>
+
 
             <!-- END MAIN CONTENT -->
 

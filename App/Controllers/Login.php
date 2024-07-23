@@ -32,6 +32,7 @@ class Login extends \Core\Controller
      */
     public function createAction()
     {
+
         $user = UserModel::authenticate($_POST['email'], $_POST['password']);
 
         $remember_me = isset($_POST['remember_me']);
@@ -46,7 +47,6 @@ class Login extends \Core\Controller
             Flash::addMessage('Login successful', Flash::SUCCESS);
 
             $this->redirect(Auth::getReturnToPage());
-
         } else {
 
             Flash::addMessage('Login unsuccessful, please try again', Flash::WARNING);
@@ -55,7 +55,6 @@ class Login extends \Core\Controller
                 'email' => $_POST['email'],
                 'remember_me' => $remember_me
             ]);
-
         }
     }
 
@@ -70,7 +69,6 @@ class Login extends \Core\Controller
         Auth::logout();
 
         $this->redirect('/login/show-logout-message');
-
     }
 
     /**
@@ -88,7 +86,5 @@ class Login extends \Core\Controller
         Flash::addMessage('You are logged out');
 
         $this->redirect('/');
-
     }
-
 }

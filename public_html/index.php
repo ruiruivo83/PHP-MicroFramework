@@ -65,16 +65,6 @@ function establishConnection()
         echo '<br>MySQL Server Connection <span class="badge rounded-pill text-bg-success">Success</span> <br>';
     }
 
-    // Test DATABASE connection
-    /*
-    $conn = new mysqli($_SESSION["db_servername"], $_SESSION["db_username"], $_SESSION["db_password"], $_SESSION["db_name"]);
-    if ($conn->connect_error) {
-        die("Database Connection failed: " . $conn->connect_error . "<br>");
-    } elseif (!$_SESSION["PROD"]) { // Show info - only if not in prod
-        echo 'Database Connection <span class="badge rounded-pill text-bg-success">Success</span> <br>';
-    }
-    */
-
     // Check if database exists
     $db_selected = mysqli_select_db($conn, $_SESSION["db_name"]);
 
@@ -109,7 +99,6 @@ function establishConnection()
     // Close the MySQL connection
     $conn->close();
 }
-
 
 function checkAndRunDatabaseUpdates($folderPath)
 {
@@ -157,7 +146,6 @@ function checkAndRunDatabaseUpdates($folderPath)
         echo " <br>The specified folder does not exist.";
     }
 }
-
 
 function setRoutes($router)
 {

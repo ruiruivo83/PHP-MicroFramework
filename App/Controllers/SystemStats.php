@@ -59,5 +59,4 @@ class SystemStats extends SysAdminControl
             'payments' => $payments
         ]);
     }
-
 }
