@@ -30,14 +30,16 @@ $router = new Core\Router();
 setRoutes($router);
 $router->dispatch($_SERVER['QUERY_STRING']);
 
-function setEnvironment() {
+function setEnvironment()
+{
     // Test if the string contains a specific string inside the host name
     $_SESSION["PROD"] = (strpos(gethostname(), "hosting.ovh.net") !== false);
 
     echo '<span class="badge bg-danger">In Development - DO NOT USE</span>';
 }
 
-function setDatabaseConfig() {
+function setDatabaseConfig()
+{
     if ($_SESSION["PROD"]) {
         $_SESSION["db_servername"] = Config_prod::PROD_DB_HOST;
         $_SESSION["db_username"] = Config_prod::PROD_DB_USER;
@@ -51,30 +53,70 @@ function setDatabaseConfig() {
     }
 }
 
-function establishConnection() {
+function establishConnection()
+{
+
     // Test SERVER connection
-    $conn = new mysqli($_SESSION["db_servername"] , $_SESSION["db_username"], $_SESSION["db_password"]);
+    $conn = new mysqli($_SESSION["db_servername"], $_SESSION["db_username"], $_SESSION["db_password"]);
 
     if ($conn->connect_error) {
         die("<br>MySQL Server Connection failed: " . $conn->connect_error);
-    } elseif (!$_SESSION["PROD"]) {
+    } elseif (!$_SESSION["PROD"]) { // Show info - only if not in prod
         echo '<br>MySQL Server Connection <span class="badge rounded-pill text-bg-success">Success</span> <br>';
     }
 
     // Test DATABASE connection
+    /*
     $conn = new mysqli($_SESSION["db_servername"], $_SESSION["db_username"], $_SESSION["db_password"], $_SESSION["db_name"]);
     if ($conn->connect_error) {
         die("Database Connection failed: " . $conn->connect_error . "<br>");
-    } elseif (!$_SESSION["PROD"]) {
+    } elseif (!$_SESSION["PROD"]) { // Show info - only if not in prod
         echo 'Database Connection <span class="badge rounded-pill text-bg-success">Success</span> <br>';
     }
+        */
+
+    // Check if database exists
+    $db_selected = mysqli_select_db($conn, $_SESSION["db_name"]);
+
+    if (!$db_selected) {
+        // Database does not exist, so create it
+
+        // QUERY - Create database and 
+        $sql = "CREATE DATABASE " .  $_SESSION["db_name"] . ";";
+
+
+        if ($conn->query($sql) === TRUE) {
+            echo "Database created successfully";
+            // Select the created database
+            $conn->select_db($_SESSION["db_name"]);
+        } else {
+            die("Error creating database: " . $conn->error);
+        }
+
+        $sql = "CREATE TABLE _database_updates (id INT AUTO_INCREMENT PRIMARY KEY, last_executed_version CHAR(255) );";
+
+        if ($conn->query($sql) === TRUE) {
+            echo "AutoUpdate table created successfully";
+            // Select the created database
+            $conn->select_db($_SESSION["db_name"]);
+        } else {
+            die("Error AutoUpdate table: " . $conn->error);
+        }
+    } else {
+        echo "Database exists";
+    }
+
+
+
+
 
     // Close the MySQL connection
     $conn->close();
 }
 
 
-function checkAndRunDatabaseUpdates($folderPath) {
+function checkAndRunDatabaseUpdates($folderPath)
+{
     if (is_dir($folderPath)) {
         $files = scandir($folderPath);
         $files = array_diff($files, ['.', '..']);
@@ -82,9 +124,11 @@ function checkAndRunDatabaseUpdates($folderPath) {
 
         foreach ($files as $filename) {
             try {
-                $pdo = new PDO("mysql:host=" . $_SESSION["db_servername"] . ";dbname=" . $_SESSION["db_name"],
-                               $_SESSION["db_username"],
-                               $_SESSION["db_password"]);
+                $pdo = new PDO(
+                    "mysql:host=" . $_SESSION["db_servername"] . ";dbname=" . $_SESSION["db_name"],
+                    $_SESSION["db_username"],
+                    $_SESSION["db_password"]
+                );
                 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
                 $sql = "SELECT COUNT(*) as count FROM _database_updates WHERE last_executed_version = :searchString";
@@ -119,7 +163,8 @@ function checkAndRunDatabaseUpdates($folderPath) {
 }
 
 
-function setRoutes($router) {
+function setRoutes($router)
+{
     $router->add('', ['controller' => 'Home', 'action' => 'index']);
     $router->add('login', ['controller' => 'Login', 'action' => 'new']);
     $router->add('logout', ['controller' => 'Login', 'action' => 'destroy']);
