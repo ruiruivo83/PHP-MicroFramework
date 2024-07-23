@@ -18,6 +18,16 @@ Composer require packageName - Adds package and updates composer.json
 );
 
 #################################################################
+###################  DATABASE - User Access  ####################
+#################################################################
+
+user: adminusertest
+pass: adminusertest123
+
+user: usertest
+pass: test123
+
+#################################################################
 ###################### ARCHITECTURE LOGIC #######################
 #################################################################
 1 - FRONT CONTROLLER (/public/index.php)
@@ -68,12 +78,3 @@ For example if the user is not logged in.
 Add path to Environment Variables in Windows System
 C:\Sources\RapidFire-PHP-MicroFramework\vendor\bi
 
-#################################################################
-########################  User Access  ##########################
-#################################################################
-
-user: adminusertest
-pass: adminusertest123
-
-user: usertest
-pass: test123

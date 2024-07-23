@@ -61,7 +61,7 @@ function establishConnection()
 
     if ($conn->connect_error) {
         die("<br>MySQL Server Connection failed: " . $conn->connect_error);
-    } elseif (!$_SESSION["PROD"]) { // Show info - only if not in prod
+    } elseif (!$_SESSION["PROD"]) { // Show info - Only if not in prod
         echo '<br>MySQL Server Connection <span class="badge rounded-pill text-bg-success">Success</span> <br>';
     }
 
@@ -73,7 +73,7 @@ function establishConnection()
     } elseif (!$_SESSION["PROD"]) { // Show info - only if not in prod
         echo 'Database Connection <span class="badge rounded-pill text-bg-success">Success</span> <br>';
     }
-        */
+    */
 
     // Check if database exists
     $db_selected = mysqli_select_db($conn, $_SESSION["db_name"]);
@@ -81,9 +81,8 @@ function establishConnection()
     if (!$db_selected) {
         // Database does not exist, so create it
 
-        // QUERY - Create database and 
+        // QUERY - Create database
         $sql = "CREATE DATABASE " .  $_SESSION["db_name"] . ";";
-
 
         if ($conn->query($sql) === TRUE) {
             echo "Database created successfully";
@@ -93,6 +92,7 @@ function establishConnection()
             die("Error creating database: " . $conn->error);
         }
 
+        // QUERY - Create AutoUpdate table
         $sql = "CREATE TABLE _database_updates (id INT AUTO_INCREMENT PRIMARY KEY, last_executed_version CHAR(255) );";
 
         if ($conn->query($sql) === TRUE) {
@@ -105,10 +105,6 @@ function establishConnection()
     } else {
         echo "Database exists";
     }
-
-
-
-
 
     // Close the MySQL connection
     $conn->close();
