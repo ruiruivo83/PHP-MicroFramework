@@ -10,7 +10,7 @@ OK - Implement Subscription/Payment CONTROL class to extend.
 - Implement SysAdmin CONTROL. (For the main user who wants to create a course or access inside stats).
 - Implement System Admin CONTROL. (For DEV PURPOSES - STATS PROTECTION AND STUFF).
 
-- Implement Prformance System STATS.
+OK - Implement Performance System STATS.
 - Implement System STATS.
 
 - Implement DEBUG BAR.
