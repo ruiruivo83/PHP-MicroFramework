@@ -35,7 +35,7 @@ pass: test123
 2 - ROUTER (/core/router.php) - with routing table ("public function add")
 3 - CONTROLLER CLASS or any other
 4 - MODEL for data
-5 - Reteurn VIEW with DATA in it, replaced with TWIG engine
+5 - Return VIEW with DATA in it, replaced with TWIG engine
 
 #################################################################
 ######################## File Sequence  #########################

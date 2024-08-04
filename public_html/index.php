@@ -102,12 +102,15 @@ function establishConnection()
 
 function checkAndRunDatabaseUpdates($folderPath)
 {
+
+
     if (is_dir($folderPath)) {
         $files = scandir($folderPath);
         $files = array_diff($files, ['.', '..']);
         sort($files);
 
         foreach ($files as $filename) {
+
             try {
                 $pdo = new PDO(
                     "mysql:host=" . $_SESSION["db_servername"] . ";dbname=" . $_SESSION["db_name"],
