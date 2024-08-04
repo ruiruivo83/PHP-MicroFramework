@@ -12,8 +12,9 @@ use PDO;
 /**
  * Example user model
  * 
- * PHP version 7.4
+ * PHP version 7.4 / 8.2
  */
+#[\AllowDynamicProperties] // FOR PHP 8.2
 class SubscriptionModel extends \Core\Model
 {
 
