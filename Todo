@@ -7,22 +7,33 @@ OK - Implement Course Creator.
 OK - Implement Paypal.
 OK - Implement Subscription/Payment CONTROL class to extend.
 
+OK - Implement Performance System STATS.
+OK - Implement Fil d'Ariane (breadcrumb)
+
+
+
+
+
+- Implement Messages from users to admin.
+- Implement New Payments since last login.
+
+
+
+
+
+
 - Implement SysAdmin CONTROL. (For the main user who wants to create a course or access inside stats).
 - Implement System Admin CONTROL. (For DEV PURPOSES - STATS PROTECTION AND STUFF).
 
-OK - Implement Performance System STATS.
 - Implement System STATS.
-
 - Implement DEBUG BAR.
 
-OK - Implement Fil d'Ariane (breadcrumb)
 
-- Implement Message to other users.
 
-- Implement Adult_free CONTROL
-- Implement Adult_login CONTROL
-- Implement Adult_Subscription CONTROL
+- Implement Adult_free CONTROL.
+- Implement Adult_login CONTROL.
+- Implement Adult_Subscription CONTROL.
 
-- Modify to 
+- Modify to ??? maeby not
     - Subscription courses.
     - ADD - Purchased courses.
