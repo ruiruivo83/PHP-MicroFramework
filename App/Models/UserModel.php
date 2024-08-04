@@ -13,6 +13,7 @@ use PDO;
  * 
  * PHP version 7.4
  */
+#[\AllowDynamicProperties]
 class UserModel extends \Core\Model
 {
 
