@@ -4,7 +4,7 @@ OK - Implement courses.
 OK - Implement My courses.
 OK - Implement Course Creator.
 
-- Implement Paypal.
+OK - Implement Paypal.
 - Implement Subscription/Payment CONTROL class to extend.
 
 - Implement SysAdmin CONTROL. (For the main user who wants to create a course or access inside stats).
