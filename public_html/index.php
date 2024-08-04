@@ -8,6 +8,10 @@ use App\Config_prod;
  *
  * PHP version 7.4
  */
+
+ $milliseconds_start = 0;
+ $milliseconds_start = startMillisecondTimer($milliseconds_start);
+
 ini_set('session.cookie_lifetime', '864000');
 
 require '../vendor/autoload.php';
@@ -30,12 +34,33 @@ $router = new Core\Router();
 setRoutes($router);
 $router->dispatch($_SERVER['QUERY_STRING']);
 
+echoElapsedTimeInMilliseconds($milliseconds_start);
+
+function startMillisecondTimer($milliseconds_start) {
+    $milliseconds_start = floor(microtime(true) * 1000);
+    return $milliseconds_start;
+}
+
+function echoElapsedTimeInMilliseconds($milliseconds_start)
+{
+    if (!$_SESSION["PROD"] ) {
+
+        // Time of execution
+     echo "<br>";
+     echo "<br>";
+     $milliseconds_finish = floor(microtime(true) * 1000);
+     echo '<span style="color:grey;">Time of execution: ' . $milliseconds_finish - $milliseconds_start . ' ms</span>';
+     
+     }
+}
+
 function setEnvironment()
 {
     // Test if the string contains a specific string inside the host name
     $_SESSION["PROD"] = (strpos(gethostname(), "hosting.ovh.net") !== false);
 
-    echo '<span class="badge bg-danger">In Development - DO NOT USE</span>';
+
+
 }
 
 function setDatabaseConfig()

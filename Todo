@@ -5,18 +5,15 @@ OK - Implement My courses.
 OK - Implement Course Creator.
 
 OK - Implement Paypal.
-- Implement Subscription/Payment CONTROL class to extend.
+OK - Implement Subscription/Payment CONTROL class to extend.
 
 - Implement SysAdmin CONTROL. (For the main user who wants to create a course or access inside stats).
 - Implement System Admin CONTROL. (For DEV PURPOSES - STATS PROTECTION AND STUFF).
 
+- Implement Prformance System STATS.
 - Implement System STATS.
 
-
-
 - Implement DEBUG BAR.
-
-
 
 - Implement Fil d'Ariane (breadcrumb)
 
