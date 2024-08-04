@@ -4,6 +4,7 @@
 composer.json - Lists all dependencies in one file
 [Commands]
 composer dump-autoload - after updating composer.json for updating the autoload
+
 Composer update - Install all dependencies from composer.json
 Composer require packageName - Adds package and updates composer.json
 
