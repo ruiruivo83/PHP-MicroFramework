@@ -1,4 +1,4 @@
-PHP version 7.4 / NEVER CHANGE THIS
+PHP version 8.2
 
 
 #################################################################
@@ -30,6 +30,8 @@ pass: adminusertest123
 
 user: usertest
 pass: test123
+
+#### IMPORTANT - in local dev must activate is_admin and is_active in database
 
 #################################################################
 ###################### ARCHITECTURE LOGIC #######################

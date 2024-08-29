@@ -1,4 +1,4 @@
-# PHP version 7.4 / NEVER CHANGE THIS
+# PHP version 8.2
 
 # PHP-MicroFramework
 
