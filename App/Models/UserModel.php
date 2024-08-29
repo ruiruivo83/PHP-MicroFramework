@@ -36,7 +36,8 @@ class UserModel extends \Core\Model
         // VARIABLE AUTO CREATION - Variable declaration based on the keys inside the parameters, one variables with the same name for each key.
         foreach ($data as $key => $value) {
             $this->$key = $value;
-        };
+        }
+        ;
     }
 
     /**
@@ -52,7 +53,7 @@ class UserModel extends \Core\Model
 
             $password_hash = password_hash($this->password, PASSWORD_DEFAULT);
 
-            $activation_expiration_date =   time() + 60 * 60 * 24 ; // 24 houres
+            $activation_expiration_date = time() + 60 * 60 * 24; // 24 houres
 
             $token = new Token();
             $hashed_token = $token->gethash();
@@ -208,7 +209,7 @@ class UserModel extends \Core\Model
         $stmt->execute();
 
         $result = $stmt->fetch();
-        
+
         // Check if $result is false and return null if so.
         if ($result === false) {
             return null;
@@ -495,14 +496,14 @@ class UserModel extends \Core\Model
 
             // Fetch the result as an associative array
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
-            
+
             // Check if $result is an array and has 'time_zone' key
             if (is_array($result) && array_key_exists('time_zone', $result)) {
                 return $result['time_zone'];
             } else {
                 return null;  // Return null if no timezone is found
             }
-            
+
         } catch (\PDOException $e) {
 
             echo $e->getMessage();
@@ -628,7 +629,7 @@ class UserModel extends \Core\Model
      * Remember the user breadcrumb to user_history by inserting every breadcrumb into history    
      * 
      * @return boolean True if successful, false otherwise
-    */
+     */
     public function save_breadcrumb_to_history($breadcrumb)
     {
 
@@ -637,16 +638,16 @@ class UserModel extends \Core\Model
 
             $db = static::getDB();
             $stmt = $db->prepare($sql);
-    
+
             $stmt->bindValue(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
             $stmt->bindValue(':date', date('Y-m-d H:i:s', time()), PDO::PARAM_STR);
             $stmt->bindValue(':breadcrumb', $breadcrumb, PDO::PARAM_STR);
             return $stmt->execute();
         }
 
-       
 
-     
+
+
     }
 
 

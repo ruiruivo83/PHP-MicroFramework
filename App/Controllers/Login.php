@@ -35,8 +35,10 @@ class Login extends \Core\Controller
 
         $user = UserModel::authenticate($_POST['email'], $_POST['password']);
 
+        // IMPORTANT - in local dev must activate is_admin and is_active in database
+
         $remember_me = isset($_POST['remember_me']);
-      
+
 
         if ($user) {
 
