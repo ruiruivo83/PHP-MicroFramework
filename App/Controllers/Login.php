@@ -36,6 +36,7 @@ class Login extends \Core\Controller
         $user = UserModel::authenticate($_POST['email'], $_POST['password']);
 
         $remember_me = isset($_POST['remember_me']);
+      
 
         if ($user) {
 
@@ -49,7 +50,7 @@ class Login extends \Core\Controller
             $this->redirect(Auth::getReturnToPage());
         } else {
 
-            Flash::addMessage('Login unsuccessful, please try again', Flash::WARNING);
+            Flash::addMessage('Missing Email or Password', Flash::WARNING);
 
             View::renderTemplate('Login/index.html', [
                 'email' => $_POST['email'],

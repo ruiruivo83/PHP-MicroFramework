@@ -24,7 +24,7 @@ abstract class CallExpression extends AbstractExpression
     {
         $callable = $this->getAttribute('callable');
 
-        if (\is_string($callable) && !str_contains($callable, '::')) {
+        if (\is_string($callable) && false === strpos($callable, '::')) {
             $compiler->raw($callable);
         } else {
             [$r, $callable] = $this->reflectCallable($callable);
@@ -55,21 +55,13 @@ abstract class CallExpression extends AbstractExpression
         $this->compileArguments($compiler);
     }
 
-    protected function compileArguments(Compiler $compiler, $isArray = false): void
+    protected function compileArguments(Compiler $compiler, $isArray = false)
     {
         $compiler->raw($isArray ? '[' : '(');
 
         $first = true;
 
-        if ($this->hasAttribute('needs_charset') && $this->getAttribute('needs_charset')) {
-            $compiler->raw('$this->env->getCharset()');
-            $first = false;
-        }
-
         if ($this->hasAttribute('needs_environment') && $this->getAttribute('needs_environment')) {
-            if (!$first) {
-                $compiler->raw(', ');
-            }
             $compiler->raw('$this->env');
             $first = false;
         }
@@ -148,7 +140,7 @@ abstract class CallExpression extends AbstractExpression
             throw new \LogicException($message);
         }
 
-        [$callableParameters, $isPhpVariadic] = $this->getCallableParameters($callable, $isVariadic);
+        list($callableParameters, $isPhpVariadic) = $this->getCallableParameters($callable, $isVariadic);
         $arguments = [];
         $names = [];
         $missingArguments = [];
@@ -240,7 +232,7 @@ abstract class CallExpression extends AbstractExpression
         return $arguments;
     }
 
-    protected function normalizeName(string $name): string
+    protected function normalizeName($name)
     {
         return strtolower(preg_replace(['/([A-Z]+)([A-Z][a-z])/', '/([a-z\d])([A-Z])/'], ['\\1_\\2', '\\1_\\2'], $name));
     }
@@ -251,9 +243,6 @@ abstract class CallExpression extends AbstractExpression
 
         $parameters = $r->getParameters();
         if ($this->hasNode('node')) {
-            array_shift($parameters);
-        }
-        if ($this->hasAttribute('needs_charset') && $this->getAttribute('needs_charset')) {
             array_shift($parameters);
         }
         if ($this->hasAttribute('needs_environment') && $this->getAttribute('needs_environment')) {
@@ -308,13 +297,13 @@ abstract class CallExpression extends AbstractExpression
         }
         $r = new \ReflectionFunction($closure);
 
-        if (str_contains($r->name, '{closure')) {
+        if (false !== strpos($r->name, '{closure}')) {
             return $this->reflector = [$r, $callable, 'Closure'];
         }
 
         if ($object = $r->getClosureThis()) {
             $callable = [$object, $r->name];
-            $callableName = get_debug_type($object).'::'.$r->name;
+            $callableName = (\function_exists('get_debug_type') ? get_debug_type($object) : \get_class($object)).'::'.$r->name;
         } elseif (\PHP_VERSION_ID >= 80111 && $class = $r->getClosureCalledClass()) {
             $callableName = $class->name.'::'.$r->name;
         } elseif (\PHP_VERSION_ID < 80111 && $class = $r->getClosureScopeClass()) {
@@ -330,3 +319,5 @@ abstract class CallExpression extends AbstractExpression
         return $this->reflector = [$r, $callable, $callableName];
     }
 }
+
+class_alias('Twig\Node\Expression\CallExpression', 'Twig_Node_Expression_Call');

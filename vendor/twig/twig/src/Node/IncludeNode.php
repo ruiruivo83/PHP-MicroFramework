@@ -12,7 +12,6 @@
 
 namespace Twig\Node;
 
-use Twig\Attribute\YieldReady;
 use Twig\Compiler;
 use Twig\Node\Expression\AbstractExpression;
 
@@ -21,20 +20,19 @@ use Twig\Node\Expression\AbstractExpression;
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-#[YieldReady]
 class IncludeNode extends Node implements NodeOutputInterface
 {
-    public function __construct(AbstractExpression $expr, ?AbstractExpression $variables, bool $only, bool $ignoreMissing, int $lineno, ?string $tag = null)
+    public function __construct(AbstractExpression $expr, ?AbstractExpression $variables, bool $only, bool $ignoreMissing, int $lineno, string $tag = null)
     {
         $nodes = ['expr' => $expr];
         if (null !== $variables) {
             $nodes['variables'] = $variables;
         }
 
-        parent::__construct($nodes, ['only' => $only, 'ignore_missing' => $ignoreMissing], $lineno, $tag);
+        parent::__construct($nodes, ['only' => (bool) $only, 'ignore_missing' => (bool) $ignoreMissing], $lineno, $tag);
     }
 
-    public function compile(Compiler $compiler): void
+    public function compile(Compiler $compiler)
     {
         $compiler->addDebugInfo($this);
 
@@ -60,9 +58,8 @@ class IncludeNode extends Node implements NodeOutputInterface
                 ->write("}\n")
                 ->write(sprintf("if ($%s) {\n", $template))
                 ->indent()
-                ->write(sprintf('yield from $%s->unwrap()->yield(', $template))
+                ->write(sprintf('$%s->display(', $template))
             ;
-
             $this->addTemplateArguments($compiler);
             $compiler
                 ->raw(");\n")
@@ -70,9 +67,8 @@ class IncludeNode extends Node implements NodeOutputInterface
                 ->write("}\n")
             ;
         } else {
-            $compiler->write('yield from ');
             $this->addGetTemplate($compiler);
-            $compiler->raw('->unwrap()->yield(');
+            $compiler->raw('->display(');
             $this->addTemplateArguments($compiler);
             $compiler->raw(");\n");
         }
@@ -97,14 +93,16 @@ class IncludeNode extends Node implements NodeOutputInterface
             $compiler->raw(false === $this->getAttribute('only') ? '$context' : '[]');
         } elseif (false === $this->getAttribute('only')) {
             $compiler
-                ->raw('CoreExtension::merge($context, ')
+                ->raw('twig_array_merge($context, ')
                 ->subcompile($this->getNode('variables'))
                 ->raw(')')
             ;
         } else {
-            $compiler->raw('CoreExtension::toArray(');
+            $compiler->raw('twig_to_array(');
             $compiler->subcompile($this->getNode('variables'));
             $compiler->raw(')');
         }
     }
 }
+
+class_alias('Twig\Node\IncludeNode', 'Twig_Node_Include');

@@ -1,12 +1,12 @@
 {
     "require": {
-        "twig/twig": "^3.0",
+        "twig/twig": "^2.9",
         "mailgun/mailgun-php": "^3.5",
         "symfony/http-client": "^5.4",
         "nyholm/psr7": "^1.5",
         "php-http/guzzle6-adapter": "^2.0",
         "phpmailer/phpmailer": "^6.8",
-      "ext-mysqli": "*",
+        "ext-mysqli": "*",
         "paypal/rest-api-sdk-php": "^1.14"
     },
     "require-dev": {
@@ -19,8 +19,12 @@
         }
     },
     "config": {
+        "platform": {
+            "php": "7.4"
+        },
         "allow-plugins": {
-            "php-http/discovery": true
+            "php-http/discovery": true,
+            "composer/package-versions-deprecated": true
         }
     }
 }

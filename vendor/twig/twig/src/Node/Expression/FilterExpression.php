@@ -17,19 +17,18 @@ use Twig\Node\Node;
 
 class FilterExpression extends CallExpression
 {
-    public function __construct(Node $node, ConstantExpression $filterName, Node $arguments, int $lineno, ?string $tag = null)
+    public function __construct(Node $node, ConstantExpression $filterName, Node $arguments, int $lineno, string $tag = null)
     {
         parent::__construct(['node' => $node, 'filter' => $filterName, 'arguments' => $arguments], [], $lineno, $tag);
     }
 
-    public function compile(Compiler $compiler): void
+    public function compile(Compiler $compiler)
     {
         $name = $this->getNode('filter')->getAttribute('value');
         $filter = $compiler->getEnvironment()->getFilter($name);
 
         $this->setAttribute('name', $name);
         $this->setAttribute('type', 'filter');
-        $this->setAttribute('needs_charset', $filter->needsCharset());
         $this->setAttribute('needs_environment', $filter->needsEnvironment());
         $this->setAttribute('needs_context', $filter->needsContext());
         $this->setAttribute('arguments', $filter->getArguments());
@@ -39,3 +38,5 @@ class FilterExpression extends CallExpression
         $this->compileCallable($compiler);
     }
 }
+
+class_alias('Twig\Node\Expression\FilterExpression', 'Twig_Node_Expression_Filter');
