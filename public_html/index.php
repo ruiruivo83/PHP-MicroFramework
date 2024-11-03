@@ -58,9 +58,6 @@ function setEnvironment()
 {
     // Test if the string contains a specific string inside the host name
     $_SESSION["PROD"] = (strpos(gethostname(), "hosting.ovh.net") !== false);
-
-
-
 }
 
 function setDatabaseConfig()

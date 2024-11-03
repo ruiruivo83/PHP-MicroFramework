@@ -1,6 +1,5 @@
 PHP version 8.2
 
-
 #################################################################
 ################### NEW INSTALL with COMPOSER ###################
 #################################################################
@@ -15,7 +14,9 @@ Composer require packageName - Adds package and updates composer.json
 #########################  DATABASE #############################
 #################################################################
 
-# QUERY FOR - Create table for auto updates
+### CREATE DATABASE MANUALLY, and then
+
+### Create table for auto updates
  CREATE TABLE _database_updates (
     id INT AUTO_INCREMENT PRIMARY KEY,
     last_executed_version CHAR(255)
@@ -32,6 +33,28 @@ user: usertest
 pass: test123
 
 #### IMPORTANT - in local dev must activate is_admin and is_active in database
+
+#################################################################
+################  REMOTE DATABASE - User Access  ################
+#################################################################
+
+???
+
+Serveur: ???
+
+Utilisateur: ???
+Mot de passe: ???
+
+#################################################################
+#######################  First Sign-up  #########################
+#################################################################
+
+admin
+ruivo.rui@gmail.com
+password: inside 1Password for: https://www.jonfenmusic.com/signup/new
+
+
+## Access Database and modify "is_admin" and "is_active"
 
 #################################################################
 ###################### ARCHITECTURE LOGIC #######################
